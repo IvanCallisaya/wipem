@@ -22,7 +22,7 @@
       <!-- Left navbar links -->
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+          <a class="nav-link" data-widget="pushmenu" href="" role="button"><i class="fas fa-bars"></i></a>
         </li>
       </ul>
     </nav>
@@ -57,7 +57,6 @@
             <li class="nav-item">
               <router-link to="/ongs" class="nav-link">
                 <i class="nav-icon fas fa-hands-helping"></i>
-
                 <p>
                   ONGS
                 </p>
@@ -91,7 +90,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="" class="nav-link">
                 <i class="nav-icon fas fa-hands-helping"></i>
                 <p>
                   Sponsors
@@ -99,16 +98,20 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="pages/mailbox/mailbox.html" class="nav-link">
+                  <router-link :to="{
+                    name: 'empresa',
+                  }" class="nav-link">
                     <i class="fas fa-building nav-icon"></i>
                     <p>Empresas</p>
-                  </a>
+                  </router-link>
                 </li>
                 <li class="nav-item">
-                  <a href="pages/mailbox/compose.html" class="nav-link">
+                  <router-link :to="{
+                    name: 'influencer',
+                  }" class="nav-link">
                     <i class="fas fa-users nav-icon"></i>
                     <p>Influencers</p>
-                  </a>
+                  </router-link>
                 </li>
               </ul>
             </li>

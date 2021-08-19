@@ -22,6 +22,9 @@ let routes = [
 
     { path: '/categoria', component: require('./components/Categoria/Categoria.vue').default },
     { path: '/categoria', component: require('./components/Categoria/Categoria.vue').default },
+    { name: 'categoria', path: '/categoria/:id', component: require('./components/Categoria/SubCategoria.vue').default },
+    { name: 'influencer', path: '/sponsor/influencer', component: require('./components/Sponsor/Influencer.vue').default },
+    { name: 'empresa', path: '/sponsor/empresa', component: require('./components/Sponsor/Empresa.vue').default },
     { path: '/ongs', component: require('./components/Ong/Ong.vue').default },
 ]
 

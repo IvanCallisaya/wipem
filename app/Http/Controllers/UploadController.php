@@ -14,4 +14,8 @@ class UploadController extends Controller
         $pathToFile = $request->file('image')->store('ongs','public');
         return $pathToFile;
     }
+    public function sponsor(Request $request) {
+        $pathToFile = $request->file('image')->store('sponsor','public');
+        return $pathToFile;
+    }
 }

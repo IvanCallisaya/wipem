@@ -375,6 +375,7 @@ export default {
         this.tituloModal = "Modificar ong";
         this.ong.nombre = data.nombre;
         this.ong.ciudad = data.ciudad;
+        this.ong.nit = data.nit;
         this.ong.direccion = data.direccion;
         this.ong.telefono = data.telefono;
         this.ong.correo_institucional = data.correo_institucional;
@@ -389,6 +390,7 @@ export default {
         this.tituloModal = "Crear ong";
         this.ong.nombre = "";
         this.ong.ciudad = "";
+        this.ong.nit = "";
         this.ong.direccion = "";
         this.ong.telefono = 0;
         this.ong.correo_institucional = "";

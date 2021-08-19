@@ -101,12 +101,19 @@
                     >
                       <i class="fas fa-edit"> </i>
                     </button>
+
                     <button @click="eliminar(categoria)" class="btn btn-danger">
                       <i class="fas fa-trash"> </i>
                     </button>
-                    <button @click="subcategoria()" class="btn btn-danger">
+                    <router-link
+                      :to="{
+                        name: 'categoria',
+                        params: { id: categoria.id },
+                      }"
+                      class="btn btn-success"
+                    >
                       <i class="fas fa-info-circle"> </i>
-                    </button>
+                    </router-link>
                   </td>
                 </tr>
               </tbody>
@@ -128,8 +135,8 @@ export default {
     return {
       categoria: {
         id: 0,
-        nombre: "yy",
-        descripcion: "yuu",
+        nombre: "",
+        descripcion: "",
         logo: "",
       },
       id: 0,

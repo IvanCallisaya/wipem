@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Categoria;
+use App\Models\Subcategoria;
+
 
 use App\Http\Requests\CategoriaRequest;
 use App\Http\Controllers\Controller;
@@ -34,9 +36,11 @@ class CategoriaController extends Controller
     }
 
 
-    public function show($categoria)
+    public function show($id)
     {
-        return Categoria::findOrFail($categoria);
+        $categoria =Categoria::findOrFail($id);
+        $categoria->load('subcategorias');
+        return $categoria;
         
     }
 
