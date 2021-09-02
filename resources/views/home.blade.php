@@ -1,26 +1,45 @@
-@extends('layouts.app')
-
-
+@extends('master')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+<div id="app">
+  <div class="container-fluid">
+    <imagenes />
+  </div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+  <div class="clearfix"></div>
+  <div class="features">
 
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
-        </div>
+    <div class="container">
+      <categorias />
     </div>
-    <example/>
-</div>
-@endsection
+
+    <div class="container">
+
+      <div class="clearfix"></div>
+      <div class="container">
+        <div class="heading-3 gap-50">
+          <div class="row sectionTitle text-center">
+            <h3>CAUSAS DESTACADAS</h3>
+
+            <causa-carrusel />
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="container-fluid mt-20">
+        <div class="heading-3 gap-50">
+          <h5 class="text-center">Empresas Aliadas</h5>
+        </div>
+        <empresa-carrusel />
+      </div>
+      <influencer />
+
+
+    </div>
+
+
+  </div>
+
+  @endsection

@@ -15,7 +15,10 @@ class SponsorController extends Controller
 
     public static function index($data)
     {
-      return Sponsor::where('tipo',$data)->get();
+        if ($data=='empresa' || $data=='influencer') {
+            return Sponsor::where('tipo',$data)->get();
+        }
+        return Sponsor::get();
     }
     
 

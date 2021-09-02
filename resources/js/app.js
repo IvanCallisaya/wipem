@@ -7,26 +7,54 @@
 require('./bootstrap');
 require('admin-lte');
 
+
 import datatable from "datatables.net-responsive-bs4";
 import swal from "sweetalert";
+//Import Froala Editor 
+import 'froala-editor/js/plugins.pkgd.min.js';
+//Import third party plugins
+import 'froala-editor/js/third_party/embedly.min';
+import 'froala-editor/js/third_party/font_awesome.min';
+import LoadScript from 'vue-plugin-load-script';
+// Import Froala Editor css files.
+import 'froala-editor/css/froala_editor.pkgd.min.css';
+
+
+// Import and use Vue Froala lib.
+import VueFroala from 'vue-froala-wysiwyg'
+
 
 window.Vue = require('vue').default;
 
 import VueRouter from 'vue-router'
+
+
 Vue.use(VueRouter)
+Vue.use(VueFroala)
+Vue.use(LoadScript);
+// Vue.loadScript('/js/main.js');
+
 
 let routes = [
-    { path: '/dashboard', component: require('./components/Dashboard.vue').default },
-    { path: '/profile', component: require('./components/Profile.vue').default },
-    { path: '/plan', component: require('./components/Plan.vue').default },
+    { path: '/principal', component: require('./imagenes/Principal.vue').default },
 
-    { path: '/categoria', component: require('./components/Categoria/Categoria.vue').default },
-    { path: '/categoria', component: require('./components/Categoria/Categoria.vue').default },
-    { name: 'categoria', path: '/categoria/:id', component: require('./components/Categoria/SubCategoria.vue').default },
-    { name: 'influencer', path: '/sponsor/influencer', component: require('./components/Sponsor/Influencer.vue').default },
-    { name: 'empresa', path: '/sponsor/empresa', component: require('./components/Sponsor/Empresa.vue').default },
-    { path: '/ongs', component: require('./components/Ong/Ong.vue').default },
+    { path: '/plan', component: require('./admin/Plan/Plan.vue').default },
+    { path: '/categoria', component: require('./admin/Categoria/Categoria.vue').default },
+    { name: 'categoria', path: '/categoria/:id', component: require('./admin/Categoria/SubCategoria.vue').default },
+    { name: 'influencer', path: '/sponsor/influencer', component: require('./admin/Sponsor/Influencer.vue').default },
+    { path: '/proyecto/nuevo', component: require('./admin/Proyecto/Nuevo.vue').default },
+    { name: 'empresa', path: '/sponsor/empresa', component: require('./admin/Sponsor/Empresa.vue').default },
+    { path: '/ongs', component: require('./admin/Ong/Ong.vue').default },
 ]
+
+Vue.component('imagenes', require('./components/ImagenesIndex.vue').default);
+Vue.component('causa-carrusel', require('./components/CausasCarousel.vue').default);
+Vue.component('empresa-carrusel', require('./components/EmpresasCarrusel.vue').default);
+Vue.component('categorias', require('./components/Categorias.vue').default);
+Vue.component('causas', require('./components/Causas.vue').default);
+Vue.component('proyecto', require('./components/Proyecto.vue').default);
+Vue.component('influencer', require('./components/Influencer.vue').default);
+
 
 const router = new VueRouter({
     routes

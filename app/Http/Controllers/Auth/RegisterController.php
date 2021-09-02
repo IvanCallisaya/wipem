@@ -68,6 +68,14 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'type' => 1,
         ]);
     }
+    protected function redirectTo()
+{
+    if (auth()->user()->role_id == 0) {
+        return '/admin';
+    }
+    return '/';
+}
 }

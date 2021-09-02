@@ -10,7 +10,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <link rel="stylesheet" href="../css/app.css" </head>
+  <link rel="stylesheet" href="../css/app.css">
+</head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper" id="app">
@@ -30,7 +31,7 @@
 
     <aside class="main-sidebar sidebar-light-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="index3.html" class="brand-link">
+      <a href="/" class="brand-link">
         <img src="/img/logo.png" alt="Wipem Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">Wipem</span>
       </a>
@@ -44,11 +45,10 @@
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <li class="nav-item menu-open">
-              <router-link to="/dashboard" class="nav-link active">
+              <router-link to="/" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   Dashboard
-                  <i class="right fas fa-angle-left"></i>
                 </p>
               </router-link>
             </li>
@@ -63,12 +63,12 @@
               </router-link>
             </li>
             <li class="nav-item">
-              <a href="pages/gallery.html" class="nav-link">
+              <router-link to="/proyecto/nuevo" class="nav-link">
                 <i class="nav-icon fas fa-align-justify"></i>
                 <p>
                   Proyectos
                 </p>
-              </a>
+              </router-link>
             </li>
             <li class="nav-item">
               <router-link to="/categoria" class="nav-link">
@@ -115,6 +115,39 @@
                 </li>
               </ul>
             </li>
+
+            <li class="nav-item">
+              <a href="" class="nav-link">
+                <i class="nav-icon fas fa-images"></i>
+                <p>
+                  Imagenes
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <router-link to="/principal" class="nav-link">
+                    <i class="fas fa-images nav-icon"></i>
+                    <p>Principal</p>
+                  </router-link>
+                </li>
+                <li class="nav-item">
+                  <router-link :to="{
+                    name: 'influencer',
+                  }" class="nav-link">
+                    <i class="fas fa-images nav-icon"></i>
+                    <p>Causas</p>
+                  </router-link>
+                </li>
+                <li class="nav-item">
+                  <router-link :to="{
+                    name: 'influencer',
+                  }" class="nav-link">
+                    <i class="fas fa-images nav-icon"></i>
+                    <p>Proyecto</p>
+                  </router-link>
+                </li>
+              </ul>
+            </li>
             <li class="nav-item">
               <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();
                           document.getElementById('logout-form').submit();">
@@ -134,8 +167,6 @@
       <!-- /.sidebar -->
     </aside>
 
-
-
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
 
@@ -144,6 +175,7 @@
       <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
+
           <router-view></router-view>
         </div><!-- /.container-fluid -->
       </section>

@@ -19,7 +19,9 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        return Categoria::get();
+        $categorias= Categoria::get();
+        $categorias->load('subcategorias');
+        return $categorias;
     }
     
 

@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\CategoriaController;
 use App\Http\Controllers\Admin\SubcategoriaController;
 use App\Http\Controllers\Admin\SponsorController;
+use App\Http\Controllers\Admin\ProyectoController;
+use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\UploadController;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,13 +25,14 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
-Route::get('/home', [HomController::class, 'index'])->name('home');
+Route::get('/', [HomController::class, 'index'])->name('home');
+Route::get('causas/{id}', [HomController::class, 'causas']);
+Route::get('/home', [HomController::class, 'home']);
+Route::get('proyecto/{id}',[ProyectoController::class, 'ver'])->name('proyecto');;
+
 
 
 Route::namespace('')->prefix('admin')
@@ -41,6 +44,8 @@ Route::namespace('')->prefix('admin')
     Route::apiResource('/categorias', CategoriaController::class );
     Route::apiResource('/ongs', OngController::class );
     Route::apiResource('/subcategorias', SubcategoriaController::class );
+    Route::apiResource('/proyectos', ProyectoController::class );
+    Route::apiResource('/imagenes', ImagesController::class );
 
     Route::group(['prefix' => 'sponsor'], function () {
       Route::get('/{tipo}', [SponsorController::class, 'index']);
@@ -56,6 +61,15 @@ Route::namespace('')->prefix('admin')
   Route::post('uploadCategoria', [UploadController::class, 'handle']);
   Route::post('uploadOng', [UploadController::class, 'ong']);
   Route::post('uploadSponsor', [UploadController::class, 'sponsor']);
+  Route::get('causa/{id}',[ProyectoController::class, 'obtenerPaginado']);
+  Route::get('destacados',[ProyectoController::class, 'destacados']);
+  Route::get('proyectos/{id}',[ProyectoController::class, 'show']);
+  
+  
+  Route::get('imagenes', [ImagesController::class, 'index']);
+  Route::get('sponsor/{tipo}', [SponsorController::class, 'index']);
+  Route::get('categorias', [CategoriaController::class, 'index']);
+  Route::get('proyecto/ongs/{id}', [OngController::class, 'show']);
   
   
   
