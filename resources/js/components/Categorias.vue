@@ -10,7 +10,13 @@
         >
           <div class="item_header">
             <div class="icon">
-              <img class="image_headers" :src="categoria.logo" alt="" />
+              <img
+                class="image_headers"
+                :src="
+                  'https://wipem.sfo3.digitaloceanspaces.com/' + categoria.logo
+                "
+                alt=""
+              />
             </div>
             <div class="f-inner">
               <a> {{ categoria.nombre }} </a>
@@ -28,7 +34,12 @@
       >
         <div class="item">
           <div class="icon">
-            <img :src="subcategoria.logo" alt="" />
+            <img
+              :src="
+                'https://wipem.sfo3.digitaloceanspaces.com/' + subcategoria.logo
+              "
+              alt=""
+            />
           </div>
           <div class="f-inner">
             <a @click="causas(subcategoria.id)"> {{ subcategoria.nombre }} </a>

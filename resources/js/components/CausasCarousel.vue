@@ -4,7 +4,10 @@
       <div v-for="(proyecto, index) in proyectos" :key="index">
         <div class="card">
           <img
-            :src="'http://localhost:8000/storage/' + proyecto.foto_principal"
+            :src="
+              'https://wipem.sfo3.digitaloceanspaces.com/' +
+              proyecto.foto_principal
+            "
             class="card-img-top"
             alt="..."
           />

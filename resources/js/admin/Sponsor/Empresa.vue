@@ -73,7 +73,14 @@
               <tbody>
                 <tr v-for="sponsor in sponsors" :key="sponsor.id">
                   <td>
-                    <img v-bind:src="sponsor.logo" width="50" height="50" />
+                    <img
+                      v-bind:src="
+                        'https://wipem.sfo3.digitaloceanspaces.com/' +
+                        sponsor.logo
+                      "
+                      width="50"
+                      height="50"
+                    />
                   </td>
                   <td>{{ sponsor.nombre }}</td>
                   <td>
@@ -149,7 +156,7 @@ export default {
       formData.set("image", this.image);
       console.log(formData);
       axios.post("/uploadSponsor", formData).then((res) => {
-        this.sponsor.logo = "http://localhost:8000/storage/" + res.data;
+        this.sponsor.logo = res.data;
         this.guardar();
         $("#formId")[0].reset();
       });

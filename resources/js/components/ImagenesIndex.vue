@@ -30,7 +30,7 @@
       <div v-for="(url, index) in imagenes" :key="index">
         <img
           class="imagen-index"
-          :src="'http://localhost:8000/storage/' + url"
+          :src="'https://wipem.sfo3.digitaloceanspaces.com/' + url"
         />
       </div>
     </Slick>

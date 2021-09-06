@@ -20,7 +20,10 @@
       <div v-for="(proyecto, index) in proyectos.data" :key="index">
         <div class="card">
           <img
-            :src="'http://localhost:8000/storage/' + proyecto.foto_principal"
+            :src="
+              'https://wipem.sfo3.digitaloceanspaces.com/' +
+              proyecto.foto_principal
+            "
             class="card-img-top"
             alt="..."
           />
@@ -52,46 +55,45 @@
         </div>
       </div>
       <div class="row item-pie">
-
-        
-          <ul class="gallery-pagination list-unstyled">
-                <div>
-          Pagina: {{ pagination.current_page }} - {{ pagination.last_page }} Total:
-          {{ pagination.total_page }}
-        </div>
-            <li :class="{ disabled: !pagination.first_link }" class="prev">
-              <a @click="getProyectos(id, pagination.first_link)" href="#"
-                >&laquo;</a
-              >
-            </li>
-            <li :class="{ disabled: !pagination.prev_link }" class="page-no last-no">
-              <a @click="getProyectos(id, pagination.prev_link)" href="#"
-                >&lt;</a
-              >
-            </li>
-            <li
-              v-for="n in pagination.last_page"
-              :key="n"
-              :class="{ active: pagination.current_page == n }"
-              class="page-no first-no "
+        <ul class="gallery-pagination list-unstyled">
+          <div>
+            Pagina: {{ pagination.current_page }} -
+            {{ pagination.last_page }} Total:
+            {{ pagination.total_page }}
+          </div>
+          <li :class="{ disabled: !pagination.first_link }" class="prev">
+            <a @click="getProyectos(id, pagination.first_link)" href="#"
+              >&laquo;</a
             >
-              <a @click="getProyectos(id, pagination.path_page + n)" href="#" >
-                {{ n }}
-              </a>
-            </li>
-            <li :class="{ disabled: !pagination.next_link }" class="page-no last-no">
-              <a @click="getProyectos(id, pagination.next_link)" href="#"
-                >&gt;</a
-              >
-            </li>
-            <li :class="{ disabled: !pagination.last_link }" class="prev" > 
-              <a @click="getProyectos(id, pagination.last_link)" href="#"
-                >&raquo;</a
-              >
-            </li>
-          </ul>
-        
-          
+          </li>
+          <li
+            :class="{ disabled: !pagination.prev_link }"
+            class="page-no last-no"
+          >
+            <a @click="getProyectos(id, pagination.prev_link)" href="#">&lt;</a>
+          </li>
+          <li
+            v-for="n in pagination.last_page"
+            :key="n"
+            :class="{ active: pagination.current_page == n }"
+            class="page-no first-no"
+          >
+            <a @click="getProyectos(id, pagination.path_page + n)" href="#">
+              {{ n }}
+            </a>
+          </li>
+          <li
+            :class="{ disabled: !pagination.next_link }"
+            class="page-no last-no"
+          >
+            <a @click="getProyectos(id, pagination.next_link)" href="#">&gt;</a>
+          </li>
+          <li :class="{ disabled: !pagination.last_link }" class="prev">
+            <a @click="getProyectos(id, pagination.last_link)" href="#"
+              >&raquo;</a
+            >
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -104,7 +106,7 @@ export default {
   components: {},
   data() {
     return {
-      active_el:0,
+      active_el: 0,
       componentKey: 0,
       proyectos: [],
       porcentaje: 50,
@@ -142,7 +144,6 @@ export default {
           next_link: res.data.next_page_url,
           last_link: res.data.last_page_url,
         };
-        
       });
     },
     getCategorias: function () {
@@ -178,8 +179,6 @@ export default {
   mounted() {
     this.getProyectos(this.id);
     this.getCategorias();
-
-    
   },
 };
 </script>

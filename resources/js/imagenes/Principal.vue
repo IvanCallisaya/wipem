@@ -20,10 +20,6 @@
     </div> -->
 
     <form id="formId" @submit.prevent="guardar">
-      <div class="my-2">
-        <label class="mr-4" for="imagen">Seleccion imagen del influencer</label>
-        <input @change="handleOnChange" type="file" id="imagen" />
-      </div>
       <div>
         <label class="mr-4" for="imagenes">Imagenes</label>
         <input
@@ -40,7 +36,6 @@
           {{ image.name }}
         </p>
       </div>
-
       <button class="btn btn-success">Guardar</button>
       <button class="btn btn-secondary">Cancelar</button>
     </form>
@@ -56,13 +51,8 @@
 export default {
   data: () => ({
     imagenes: [],
-    imagen: "",
   }),
   methods: {
-    handleOnChange(e) {
-      this.imagen = e.target.files[0];
-      console.log(this.image);
-    },
     imageChange() {
       for (let i = 0; i < this.$refs.files.files.length; i++) {
         this.imagenes.push(this.$refs.files.files[i]);
@@ -76,12 +66,10 @@ export default {
         let file = self.imagenes[i];
         formData.append("files[" + i + "]", file);
       }
-      formData.set("imagen", this.imagen);
       console.log(formData);
       const config = {
         header: { "content-type": "multipart/form-data" },
       };
-
       axios
         .post("admin/imagenes", formData, config)
         .then((response) => {

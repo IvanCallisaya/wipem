@@ -1,50 +1,105 @@
 <template>
-  <div class="container influencer_container">
-    <div class="heading-3 gap-50">
-      <h5 class="text-center">Influencers</h5>
-    </div>
-    <div class="influencer-slider">
-      <div
-        class="imagen-influencer"
-        v-bind:style="{
-          backgroundImage: 'url(http://localhost:8000/storage/' + imagen + ')',
-        }"
-        style="no-repeat center 0"
-      ></div>
-    </div>
+  <div>
+    <!-- <div class="row" >
+      <div v-for="(empresa, index) in empresas" :key="index" class="col-sm-3">
+        <div class="empresas">
+          <img :src="empresa.logo" alt="" />
+        </div>
+      </div>
+    </div> -->
+
+    <Slick ref="slick" :options="slickOptions" v-if="empresas.length > 0">
+      <div class="empresas" v-for="(empresa, index) in empresas" :key="index">
+        <img
+          :src="'https://wipem.sfo3.digitaloceanspaces.com/' + empresa.logo"
+        />
+      </div>
+    </Slick>
   </div>
 </template>
-
 <script>
+import Slick from "vue-slick";
+import "slick-carousel/slick/slick.css";
 import $ from "jquery";
 export default {
+  components: { Slick },
   data() {
     return {
-      imagen: "",
-      errores: {},
+      empresas: [],
       slickOptions: {
-        arrows: false,
+        prevArrow:
+          "<button type='button' class='slick-prev pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
+        nextArrow:
+          "<button type='button' class='slick-next pull-left'><i class='fa fa-angle-right' aria-hidden='true'></i></button>",
         infinite: true,
-        slidesToShow: 1,
+        slidesToShow: 5,
         slidesToScroll: 1,
-        dots: true,
-        autoplay: true,
-        autoplaySpeed: 4000,
-        // Any other options that can be got from plugin documentation
+        responsive: [
+          {
+            breakpoint: 1100,
+            settings: {
+              slidesToShow: 4,
+              slidesToScroll: 1,
+              infinite: true,
+            },
+          },
+          {
+            breakpoint: 900,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 1,
+            },
+          },
+          {
+            breakpoint: 670,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 2,
+            },
+          },
+          // You can unslick at a given breakpoint now by adding:
+          // settings: "unslick"
+          // instead of a settings object
+        ],
       },
     };
   },
   methods: {
-    getImagenes: function () {
-      var url = "/imagenes";
+    getEmpresas: function () {
+      var url = "/sponsor/influencer";
       axios.get(url).then((res) => {
-        this.imagen = res.data.images[0].imagen;
-        console.log(res.data.images[0].imagen);
+        this.empresas = res.data;
       });
     },
   },
-  created() {
-    this.getImagenes();
+  mounted() {
+    this.getEmpresas();
   },
 };
 </script>
+
+<style>
+.features .empresas {
+  margin: 10px 0px 10px;
+  position: relative;
+  display: table;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 2px 2px 2px 2px #ccc;
+  height: 150px;
+  max-width: 200px;
+}
+
+.empresas img {
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  width: 120px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.slick-slide {
+  width: 270px;
+}
+</style>

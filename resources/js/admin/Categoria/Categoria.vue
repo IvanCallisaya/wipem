@@ -87,7 +87,14 @@
               <tbody>
                 <tr v-for="categoria in categorias" :key="categoria.id">
                   <td>
-                    <img v-bind:src="categoria.logo" width="50" height="50" />
+                    <img
+                      v-bind:src="
+                        'https://wipem.sfo3.digitaloceanspaces.com/' +
+                        categoria.logo
+                      "
+                      width="50"
+                      height="50"
+                    />
                   </td>
                   <td>{{ categoria.nombre }}</td>
                   <td>{{ categoria.descripcion }}</td>
@@ -164,7 +171,7 @@ export default {
       formData.set("image", this.image);
       console.log(formData);
       axios.post("/uploadCategoria", formData).then((res) => {
-        this.categoria.logo = "http://localhost:8000/storage/" + res.data;
+        this.categoria.logo = res.data;
         this.guardar();
         $("#formId")[0].reset();
       });

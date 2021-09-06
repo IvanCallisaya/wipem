@@ -219,7 +219,13 @@
               <tbody>
                 <tr v-for="ong in ongs" :key="ong.id">
                   <td>
-                    <img v-bind:src="ong.logo" width="50" height="50" />
+                    <img
+                      v-bind:src="
+                        'https://wipem.sfo3.digitaloceanspaces.com/' + ong.logo
+                      "
+                      width="50"
+                      height="50"
+                    />
                   </td>
                   <td>{{ ong.nombre }}</td>
                   <td>{{ ong.ciudad }}</td>
@@ -300,7 +306,7 @@ export default {
       formData.set("image", this.image);
       console.log(formData);
       axios.post("/uploadOng", formData).then((res) => {
-        this.ong.logo = "http://localhost:8000/storage/" + res.data;
+        this.ong.logo = res.data;
         this.guardar();
         $("#formId")[0].reset();
       });

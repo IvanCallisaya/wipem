@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Images;
+use Illuminate\Support\Facades\Storage;
 
 class ImagesController extends Controller
 {
@@ -39,17 +40,21 @@ class ImagesController extends Controller
      */
     public function store(Request $request)
     {
-        $ruta = $request->file('imagen')->store('sponsor', 'public');
+        // $ruta = $request->file('imagen')->store('index', 'do', 'public');
+        
+         
         if($request->hasFile('files')) {
             $pictures = [];
             foreach ($request->file('files') as $file) {
-                $pathToFile = $file->store('proyectos','public');
-                $pictures[] =$pathToFile;
-
+                $rutas= Storage::disk('do')->put('index', $file , 'public');
+                
+                $pictures[] =$rutas;
+                
+                // $pictures =Storage::disk('do')->put('file', 'proyectos');
+    
             }
             Images::create([
                 'images' => json_encode($pictures),
-                'imagen'=> $ruta,
             ]);
             return response()->json(['message' => 'image added']);
         }

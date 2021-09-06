@@ -7,6 +7,8 @@ use App\Models\ProyectoSponsor;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProyectoRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
+
 
 
 class ProyectoController extends Controller
@@ -30,13 +32,14 @@ class ProyectoController extends Controller
      */
     public function store(ProyectoRequest $request)
     {
-        $ruta = $request->file('foto_principal')->store('proyectos', 'public');
+        $ruta= Storage::disk('do')->put('proyectos', $request->file('foto_principal') , 'public');
+        
 
         if ($request->hasFile('files')) {
             $pictures = [];
             foreach ($request->file('files') as $file) {
-                $pathToFile = $file->store('proyectos', 'public');
-                $pictures[] = $pathToFile;
+                $rutas= Storage::disk('do')->put('proyectos', $file , 'public');
+                $pictures[] = $rutas;
             }
             $proyecto = Proyecto::create([
                 'fotos' => json_encode($pictures),

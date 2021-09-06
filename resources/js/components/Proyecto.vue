@@ -41,7 +41,13 @@
                   </div>
                 </div>
 
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 sidebar cause-sidebar">
+                <div
+                  class="
+                    col-lg-3 col-md-3 col-sm-3 col-xs-3
+                    sidebar
+                    cause-sidebar
+                  "
+                >
                   <div class="row m0 widget widget-category">
                     <a href="#donate_box" class="btn-primary_cause"
                       >DONE AHORA</a
@@ -96,7 +102,7 @@
             class="hs-inner-galeria"
             v-bind:style="{
               backgroundImage:
-                'url(http://localhost:8000/storage/' + imagen + ')',
+                'url(https://wipem.sfo3.digitaloceanspaces.com/' + imagen + ')',
             }"
           ></div>
         </div>
@@ -202,7 +208,7 @@ export default {
         this.ong = res.data;
       });
     },
-   
+
     // getImagenes: function (imagenes) {
     //   for (let i = 0; i < imagenes.length; i++) {
     //     this.imagenes.push(categorias[i].subcategorias[j]);
@@ -211,7 +217,6 @@ export default {
   },
   mounted() {
     this.getEmpresas();
-
   },
 };
 </script>

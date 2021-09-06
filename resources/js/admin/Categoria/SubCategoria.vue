@@ -91,7 +91,10 @@
                 >
                   <td>
                     <img
-                      v-bind:src="subcategoria.logo"
+                      v-bind:src="
+                        'https://wipem.sfo3.digitaloceanspaces.com/' +
+                        subcategoria.logo
+                      "
                       width="50"
                       height="50"
                     />
@@ -166,7 +169,7 @@ export default {
       formData.set("image", this.image);
       console.log(formData);
       axios.post("/uploadCategoria", formData).then((res) => {
-        this.categoria.logo = "http://localhost:8000/storage/" + res.data;
+        this.categoria.logo = res.data;
         this.guardar();
         $("#formId")[0].reset();
       });
