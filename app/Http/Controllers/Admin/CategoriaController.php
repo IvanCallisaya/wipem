@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Categoria;
 use App\Models\Subcategoria;
+use Illuminate\Support\Facades\Storage;
+        
+
 
 
 use App\Http\Requests\CategoriaRequest;
@@ -56,6 +59,7 @@ class CategoriaController extends Controller
     public function update(CategoriaRequest $request,  $data)
     {   
         $categoria = Categoria::find($data);
+        Storage::disk('do')->delete($categoria->logo);
         $categoria->nombre = $request['nombre'];
         $categoria->descripcion = $request['descripcion'];
         $categoria->logo = $request['logo'];
@@ -74,6 +78,7 @@ class CategoriaController extends Controller
     public function destroy( $data)
     {
         $categoria = Categoria::find($data);
+        Storage::disk('do')->delete($categoria->logo);
         $categoria->delete();
     }
 }

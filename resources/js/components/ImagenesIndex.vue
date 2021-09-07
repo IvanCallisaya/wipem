@@ -1,31 +1,5 @@
 <template>
   <div>
-    <!-- <div v-for="(imagen, index) in imagenes" :key="index">
-      <Slick
-        v-for="(url, index) in imagen.images"
-        :key="index"
-        v-bind:style="{
-          backgroundImage: 'url(http://localhost:8000/storage/' + url + ')',
-        }"
-        style="no-repeat center 0"
-      >
-      </Slick>
-    </div> -->
-    <!-- <table class="table-auto">
-      <thead>
-        <tr>
-          Imagenes
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(imagen, index) in imagenes" :key="index">
-          <td v-for="(url, index) in imagen.images" :key="index">
-            <img :src="'http://localhost:8000/storage/' + url" />
-          </td>
-        </tr>
-      </tbody>
-    </table> -->
-
     <Slick ref="slick" :options="slickOptions" v-if="imagenes.length > 0">
       <div v-for="(url, index) in imagenes" :key="index">
         <img
@@ -54,7 +28,6 @@ export default {
         dots: true,
         autoplay: true,
         autoplaySpeed: 4000,
-        // Any other options that can be got from plugin documentation
       },
     };
   },

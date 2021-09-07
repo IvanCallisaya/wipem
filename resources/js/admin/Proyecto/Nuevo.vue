@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <h5>Crear Nuevo Proyecto</h5>
     <form id="formId" @submit.prevent="guardar">
       <div class="my-2">
         <label for="ong_id">Ong</label>
@@ -254,6 +255,7 @@ export default {
         let file = self.imagenes[i];
         formData.append("files[" + i + "]", file);
       }
+      console.log(this.proyecto.sponsor_ids.length);
       for (let i = 0; i < this.proyecto.sponsor_ids.length; i++) {
         formData.append("sponsor_ids[" + i + "]", this.proyecto.sponsor_ids[i]);
       }

@@ -5,7 +5,7 @@
 <div id="app">
   <div class="home-slider-1">
     <div class="home-slider">
-      <imagenes />
+      <imagenes-causas />
     </div>
   </div>
   <section class="gallery-content">

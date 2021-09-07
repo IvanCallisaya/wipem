@@ -11,6 +11,8 @@ use App\Http\Controllers\Admin\SubcategoriaController;
 use App\Http\Controllers\Admin\SponsorController;
 use App\Http\Controllers\Admin\ProyectoController;
 use App\Http\Controllers\ImagesController;
+use App\Http\Controllers\Admin\ImagesCausasController;
+use App\Http\Controllers\Admin\ImagesProyectoController;
 use App\Http\Controllers\UploadController;
 use Illuminate\Support\Facades\Auth;
 
@@ -46,6 +48,9 @@ Route::namespace('')->prefix('admin')
     Route::apiResource('/subcategorias', SubcategoriaController::class );
     Route::apiResource('/proyectos', ProyectoController::class );
     Route::apiResource('/imagenes', ImagesController::class );
+    Route::apiResource('/imagenesCausas', ImagesCausasController::class );
+    Route::apiResource('/imagenesProyecto', ImagesProyectoController::class );
+    Route::post('proyectoUpdate/{tipo}', [ProyectoController::class, 'actualizar']);
 
     Route::group(['prefix' => 'sponsor'], function () {
       Route::get('/{tipo}', [SponsorController::class, 'index']);
@@ -67,6 +72,8 @@ Route::namespace('')->prefix('admin')
   
   
   Route::get('imagenes', [ImagesController::class, 'index']);
+  Route::get('imagenesCausas', [ImagesCausasController::class, 'index']);
+  Route::get('imagenesProyecto', [ImagesProyectoController::class, 'index']);
   Route::get('sponsor/{tipo}', [SponsorController::class, 'index']);
   Route::get('categorias', [CategoriaController::class, 'index']);
   Route::get('proyecto/ongs/{id}', [OngController::class, 'show']);

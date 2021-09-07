@@ -244,7 +244,7 @@
                     <button @click="eliminar(ong)" class="btn btn-danger">
                       <i class="fas fa-trash"> </i>
                     </button>
-                    <button @click="subong()" class="btn btn-danger">
+                    <button @click="subong()" class="btn btn-success">
                       <i class="fas fa-info-circle"> </i>
                     </button>
                   </td>

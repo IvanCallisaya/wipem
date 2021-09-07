@@ -32,22 +32,28 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 Vue.use(VueFroala)
 Vue.use(LoadScript);
-// Vue.loadScript('/js/main.js');
 
 
 let routes = [
-    { path: '/principal', component: require('./imagenes/Principal.vue').default },
+    { path: '/principal', component: require('./admin/imagenes/Principal.vue').default },
+    { path: '/causas', component: require('./admin/imagenes/Causas.vue').default },
+    { path: '/proyectoImages', component: require('./admin/imagenes/ProyectoImagenes.vue').default },
 
     { path: '/plan', component: require('./admin/Plan/Plan.vue').default },
     { path: '/categoria', component: require('./admin/Categoria/Categoria.vue').default },
     { name: 'categoria', path: '/categoria/:id', component: require('./admin/Categoria/SubCategoria.vue').default },
     { name: 'influencer', path: '/sponsor/influencer', component: require('./admin/Sponsor/Influencer.vue').default },
+    { path: '/proyectos', component: require('./admin/Proyecto/Proyecto.vue').default },
     { path: '/proyecto/nuevo', component: require('./admin/Proyecto/Nuevo.vue').default },
+    { name: 'proyectoEdit', path: '/proyecto/:id', component: require('./admin/Proyecto/Edit.vue').default },
+    { name: 'proyectoDetalle', path: '/proyecto/:id', component: require('./admin/Proyecto/Detalle.vue').default },
     { name: 'empresa', path: '/sponsor/empresa', component: require('./admin/Sponsor/Empresa.vue').default },
     { path: '/ongs', component: require('./admin/Ong/Ong.vue').default },
 ]
 
 Vue.component('imagenes', require('./components/ImagenesIndex.vue').default);
+Vue.component('imagenes-causas', require('./components/ImagenesCausas.vue').default);
+Vue.component('imagenes-proyecto', require('./components/ImagenesProyecto.vue').default);
 Vue.component('causa-carrusel', require('./components/CausasCarousel.vue').default);
 Vue.component('empresa-carrusel', require('./components/EmpresasCarrusel.vue').default);
 Vue.component('categorias', require('./components/Categorias.vue').default);

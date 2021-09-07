@@ -77,14 +77,14 @@
     <footer class="footer">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-3 col-sm-3">
+          <div class="col-md-4 col-sm-4">
             <div class="widget about">
               <a href="/"><img class="f-logo img-responsive" src="{{asset('images/logo-oficial.png')}}" alt=""></a>
               <p>Rem iplsum dolor amet, consectetuer adipisc gelit diam nonummy nib euismod tincidu laoreet dolore naaliquam erat volutpat euimod To understand bo how we work and see an pages. ....
               </p>
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-3 col-sm-3">
             <div class="gap-30"></div>
             <div class="f-contact">
               <div class="fc-icon">
@@ -105,7 +105,7 @@
               <p>websroad@gmail.com</p>
             </div>
           </div>
-          <div class="col-md-3 col-sm-3">
+          <div class="col-md-1 col-sm-1">
             <div class="what-we-do">
               <ul>
                 <li>

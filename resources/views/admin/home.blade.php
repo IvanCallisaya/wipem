@@ -63,7 +63,7 @@
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/proyecto/nuevo" class="nav-link">
+              <router-link to="/proyectos" class="nav-link">
                 <i class="nav-icon fas fa-align-justify"></i>
                 <p>
                   Proyectos
@@ -131,17 +131,13 @@
                   </router-link>
                 </li>
                 <li class="nav-item">
-                  <router-link :to="{
-                    name: 'influencer',
-                  }" class="nav-link">
+                  <router-link to="/causas" class="nav-link">
                     <i class="fas fa-images nav-icon"></i>
                     <p>Causas</p>
                   </router-link>
                 </li>
                 <li class="nav-item">
-                  <router-link :to="{
-                    name: 'influencer',
-                  }" class="nav-link">
+                  <router-link to="/proyectoImages" class="nav-link">
                     <i class="fas fa-images nav-icon"></i>
                     <p>Proyecto</p>
                   </router-link>

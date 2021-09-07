@@ -4,7 +4,7 @@
 
 <div id="app">
   <div class="container-fluid">
-    <imagenes />
+    <imagenes-proyecto />
   </div>
   <proyecto :proyecto="{{json_encode($proyecto)}}" />
 

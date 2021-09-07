@@ -518,11 +518,6 @@ body p {
 
 /*--------------------------------------------------------------------------------------------*/
 
-.footer {
-  background: #52cee6;
-  background-color: rgba(82, 206, 230, 0.7);
-}
-
 .footer_sidebar h5.widget-title {
   color: #fff;
 }

@@ -140,6 +140,7 @@ import $ from "jquery";
 export default {
   data() {
     return {
+      url: "",
       categoria: {
         id: 0,
         nombre: "",

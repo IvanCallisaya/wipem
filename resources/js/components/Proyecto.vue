@@ -1,6 +1,26 @@
 <template>
   <div>
     <div class="container">
+      <!-- Buttons, Copy this to your Page Article -->
+      <div class="heading-3 gap-30">
+        <div class="share-buttons-row">
+          <h5 class="text-center text-uppercase">Compartir:</h5>
+          <!--Facebook's Button -->
+          <div @click="compartirFacebook()" class="share-fb"></div>
+          <!--Twitter's Button -->
+          <div @click="compartirTwitter()" class="share-twitter"></div>
+          <!--Facebook's Button -->
+          <div @click="compartirWhatsapp()" class="share-whatsapp">
+            <img src="/images/whatsapp.png" />
+          </div>
+
+          <!--Linkedin's Button -->
+          <div @click="compartirLinkedin()" class="share-linkedin"></div>
+          <!--Tumblr's Button -->
+          <div @click="compartirTumblr()" class="share-tumblr"></div>
+        </div>
+      </div>
+
       <div class="heading-3 gap-50">
         <h5 class="text-center text-uppercase">{{ proyecto.nombre }}</h5>
       </div>
@@ -199,6 +219,7 @@ export default {
       empresas: [],
       ong: {},
       imagenes: [],
+      article: encodeURIComponent(window.location.href),
     };
   },
   methods: {
@@ -208,12 +229,49 @@ export default {
         this.ong = res.data;
       });
     },
-
-    // getImagenes: function (imagenes) {
-    //   for (let i = 0; i < imagenes.length; i++) {
-    //     this.imagenes.push(categorias[i].subcategorias[j]);
-    //   }
-    // },
+    compartirFacebook: function () {
+      this.open_window(
+        "http://www.facebook.com/sharer/sharer.php?u=" + this.article,
+        "facebook_share"
+      );
+    },
+    compartirTwitter: function () {
+      window.open(
+        "http://twitter.com/share?url=" + this.article,
+        "twitter_share"
+      );
+    },
+    compartirLinkedin: function () {
+      this.open_window(
+        "https://www.linkedin.com/shareArticle?mini=true&url=" +
+          this.article +
+          "&title=" +
+          this.proyecto.nombre +
+          "&summary=&source=",
+        "linkedin_share"
+      );
+    },
+    compartirTumblr: function () {
+      this.open_window(
+        "http://www.tumblr.com/share/link?url=" +
+          this.article +
+          "&name=" +
+          this.proyecto.nombre +
+          "&description=" +
+          this.proyecto.resumen_principal,
+        "tumblr_share"
+      );
+    },
+    compartirWhatsapp: function () {
+      this.open_window("https://api.whatsapp.com/send?text=" + this.article);
+    },
+    open_window: function (url, name) {
+      window.open(
+        url,
+        name,
+        "height=320, width=640, toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, directories=no, status=no"
+      );
+    },
   },
   mounted() {
     this.getEmpresas();

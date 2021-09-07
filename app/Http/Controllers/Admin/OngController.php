@@ -6,6 +6,7 @@ use App\Models\Ong;
 use Illuminate\Http\Request;
 use App\Http\Requests\OngRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 
 class OngController extends Controller
@@ -50,6 +51,7 @@ class OngController extends Controller
     public function update(OngRequest $request,  $data)
     {   
         $ong = Ong::find($data);
+        Storage::disk('do')->delete($ong->logo);
         $ong->nombre = $request['nombre'];
         $ong->nit = $request['nit'];
         $ong->ciudad = $request['ciudad'];
@@ -65,7 +67,6 @@ class OngController extends Controller
         if(!$ong->update())
             new \Exception('No se ha podido modificar la Carrera en la base de datos. Identificador Nº '.$data);
         return $ong;
-        
     }
 
     /**
