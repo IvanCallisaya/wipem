@@ -41,6 +41,9 @@ class ProyectoController extends Controller
                 $rutas= Storage::disk('do')->put('proyectos', $file , 'public');
                 $pictures[] = $rutas;
             }
+            if ($request->plan_id ==0) {
+                $request->plan_id =null;
+            }
             $proyecto = Proyecto::create([
                 'fotos' => json_encode($pictures),
                 'foto_principal' => $ruta,
@@ -51,16 +54,22 @@ class ProyectoController extends Controller
                 'fecha_final' => $request->fecha_final,
                 'resumen_principal' => $request->resumen_principal,
                 'subcategoria_id' => $request->subcategoria_id,
-                'plan_id' => $request->plan_id,
+                'plan_id' => $request->plan_id ,
                 'ong_id' => $request->ong_id,
                 'destacado' => $request->destacado,
 
             ]);
-            foreach ($request['sponsor_ids'] as $sponsor_id) {
-                ProyectoSponsor::create([
-                    'sponsor_id' => $sponsor_id,
-                    'proyecto_id' => $proyecto->id,
-                ]);
+            if($request->sponsor_ids<>0){
+                foreach ($proyecto->proyecto_sponsor as $sponsor) {
+                    $sponsorAntiguo = ProyectoSponsor::find($sponsor->id);
+                    $sponsorAntiguo->delete();
+                }
+                foreach ($request->sponsor_ids as $sponsor_id) {
+                    ProyectoSponsor::create([
+                        'sponsor_id' => $sponsor_id,
+                        'proyecto_id' => $proyecto->id,
+                    ]);
+                }
             }
         }
     }
@@ -109,7 +118,9 @@ class ProyectoController extends Controller
                 $rutas= Storage::disk('do')->put('proyectos', $file , 'public');
                 $pictures[] = $rutas;
             }
-        
+            if ($request->plan_id ==0) {
+                $request->plan_id =null;
+            }
         $proyecto->nombre = $request->nombre;
         $proyecto->plan_id = $request->plan_id;
         $proyecto->subcategoria_id = $request->subcategoria_id;

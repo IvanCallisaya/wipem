@@ -255,9 +255,16 @@ export default {
         let file = self.imagenes[i];
         formData.append("files[" + i + "]", file);
       }
-      console.log(this.proyecto.sponsor_ids.length);
-      for (let i = 0; i < this.proyecto.sponsor_ids.length; i++) {
-        formData.append("sponsor_ids[" + i + "]", this.proyecto.sponsor_ids[i]);
+
+      if (this.proyecto.sponsor_ids.length == 0) {
+        formData.append("sponsor_ids", 0);
+      } else {
+        for (let i = 0; i < this.proyecto.sponsor_ids.length; i++) {
+          formData.append(
+            "sponsor_ids[" + i + "]",
+            this.proyecto.sponsor_ids[i]
+          );
+        }
       }
 
       formData.set("foto_principal", this.image);
