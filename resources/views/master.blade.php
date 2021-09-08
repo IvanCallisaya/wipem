@@ -9,7 +9,7 @@
   <meta name="author" content="" />
 
   <title>WIPEM</title>
-
+  <link rel="shortcut icon" type="image/jpg" href="{{asset('images/logo-oficial.png')}}"/>
   <!-- <link rel="stylesheet" href="{{asset('css/all.css') }}" /> -->
 
   <link rel="stylesheet" href="{{asset('css/bootstrap.min.css') }}" />
@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="{{asset('css/bootstrap-theme.min.css') }}">
   <link rel="stylesheet" href="{{asset('vendors/magnific-popup/magnific-popup.css') }}">
   <link rel="stylesheet" href="{{asset('css/theme.css') }}">
+  <link href="//db.onlinewebfonts.com/c/98bc871859421aac64683fbbb7e9f181?family=Eight+One" rel="stylesheet" type="text/css" />
 
 
 <body>
@@ -29,7 +30,7 @@
       <div class="top-bar">
         <div class="container">
           <div class="row">
-            <div class="col-sm-30 hidden-xs">
+            <div class="col-sm-30">
               <a class="navbar-brand" href="./index.html"><img src="{{asset('images/logo-oficial.png')}}" class="img-responsive" alt="" /></a>
             </div>
             <div class="col-sm-30">
@@ -80,7 +81,11 @@
           <div class="col-md-4 col-sm-4">
             <div class="widget about">
               <a href="/"><img class="f-logo img-responsive" src="{{asset('images/logo-oficial.png')}}" alt=""></a>
-              <p>Rem iplsum dolor amet, consectetuer adipisc gelit diam nonummy nib euismod tincidu laoreet dolore naaliquam erat volutpat euimod To understand bo how we work and see an pages. ....
+              <p>¡WIPEM es una plataforma que te conecta con causas y proyectos de todo tipo!<br> <br>
+
+                Identifica la causa o proyecto que más te motive y y tengas la posibilidad de apoyar<br> <br>
+
+                ¡Cada boliviano cuenta!<br> <br>
               </p>
             </div>
           </div>
@@ -90,19 +95,19 @@
               <div class="fc-icon">
                 <i class="fa fa-map-marker"></i>
               </div>
-              <p>210 Street . Belgium from the US, Europe</p>
+              <p>Tercer Anillo Interno, Pasaje Landivar Edif. Palma de Mallorca Dpto.</p>
             </div>
             <div class="f-contact">
               <div class="fc-icon">
                 <i class="fa fa-phone"></i>
               </div>
-              <p>0203 006 1180 &nbsp; / &nbsp; 0203 006 1180</p>
+              <p>78046687 / 69128218 / 770337370</p>
             </div>
             <div class="f-contact">
               <div class="fc-icon">
                 <i class="fa fa-envelope"></i>
               </div>
-              <p>websroad@gmail.com</p>
+              <p>wipembolivia@gmail.com</p>
             </div>
           </div>
           <div class="col-md-1 col-sm-1">

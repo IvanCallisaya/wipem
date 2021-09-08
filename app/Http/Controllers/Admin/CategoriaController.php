@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Categoria;
-use App\Models\Subcategoria;
 use Illuminate\Support\Facades\Storage;
         
 
@@ -59,10 +58,12 @@ class CategoriaController extends Controller
     public function update(CategoriaRequest $request,  $data)
     {   
         $categoria = Categoria::find($data);
-        Storage::disk('do')->delete($categoria->logo);
+        if ($request->logo <>"") {
+            Storage::disk('do')->delete($categoria->logo);
+            $categoria->logo = $request['logo'];
+        }
         $categoria->nombre = $request['nombre'];
         $categoria->descripcion = $request['descripcion'];
-        $categoria->logo = $request['logo'];
         if(!$categoria->update())
             new \Exception('No se ha podido modificar la Carrera en la base de datos. Identificador Nº '.$data);
         return $categoria;

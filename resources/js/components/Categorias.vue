@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container">
-      <h5 class="text-center">GATEGORÍAS</h5>
+      <h5 class="text-center">CATEGORÍAS</h5>
       <div class="row categorias_header">
         <div
           class="col-sm-12 col-md-6 col-lg-6"
@@ -80,7 +80,7 @@ export default {
       }
     },
     causas(id) {
-      window.open("/causas/" + id, "_blank");
+      window.open("/causas/" + id,"_self");
     },
   },
   mounted() {

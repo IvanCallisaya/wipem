@@ -141,7 +141,12 @@ class ProyectoController extends Controller
     {
         $proyecto = Proyecto::find($data);
         $proyecto->load('proyecto_sponsor');
-        Storage::disk('do')->delete($proyecto->foto_principal);
+        if ($request->foto_principal <>"") {
+            Storage::disk('do')->delete($proyecto->foto_principal);
+            $ruta= Storage::disk('do')->put('proyectos', $request->file('foto_principal') , 'public');
+            $proyecto->foto_principal = $ruta;
+        }
+        
         $proyecto->fotos = json_decode($proyecto->fotos);
         foreach ($proyecto->fotos as $file) {
             Storage::disk('do')->delete($file);
@@ -159,14 +164,13 @@ class ProyectoController extends Controller
             }
         }
 
-        $ruta= Storage::disk('do')->put('proyectos', $request->file('foto_principal') , 'public');
+        
         if ($request->hasFile('files')) {
             $pictures = [];
             foreach ($request->file('files') as $file) {
                 $rutas= Storage::disk('do')->put('proyectos', $file , 'public');
                 $pictures[] = $rutas;
             }
-        
         $proyecto->nombre = $request->nombre;
         $proyecto->plan_id = $request->plan_id;
         $proyecto->subcategoria_id = $request->subcategoria_id;
@@ -176,7 +180,6 @@ class ProyectoController extends Controller
         $proyecto->fecha_final = $request->fecha_final;
         $proyecto->resumen_principal = $request->resumen_principal;
         $proyecto->destacado = $request['destacado'];
-        $proyecto->foto_principal = $ruta;
         $proyecto->fotos = json_encode($pictures);
         }
         if(!$proyecto->update())

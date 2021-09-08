@@ -156,7 +156,11 @@ export default {
       formData.set("image", this.image);
       console.log(formData);
       axios.post("/uploadSponsor", formData).then((res) => {
-        this.sponsor.logo = res.data;
+        if (res.data ==1) {
+          this.sponsor.logo =="";
+        }else {
+          this.sponsor.logo = res.data;
+        }
         this.guardar();
         $("#formId")[0].reset();
       });

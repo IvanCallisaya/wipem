@@ -1337,9 +1337,7 @@ blockquote.style2 {
 }
 
 /*--------------------------------------------------------------------------------------------*/
-.sidebar .widget {
-  background: rgb(230, 227, 227);
-}
+
 .sidebar .widget.widget-search .form-control {
   border-color: #fff;
 }

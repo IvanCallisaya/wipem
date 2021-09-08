@@ -51,7 +51,11 @@ class OngController extends Controller
     public function update(OngRequest $request,  $data)
     {   
         $ong = Ong::find($data);
-        Storage::disk('do')->delete($ong->logo);
+        if ($request->logo <>"") {
+            Storage::disk('do')->delete($ong->logo);
+            $ong->logo = $request['logo'];
+        }
+        
         $ong->nombre = $request['nombre'];
         $ong->nit = $request['nit'];
         $ong->ciudad = $request['ciudad'];
@@ -62,11 +66,10 @@ class OngController extends Controller
         $ong->correo_representante = $request['correo_representante'];
         $ong->mision = $request['mision'];
         $ong->vision = $request['vision'];
-        $ong->logo = $request['logo'];
         $ong->cuenta_banco = $request['cuenta_banco'];
         if(!$ong->update())
             new \Exception('No se ha podido modificar la Carrera en la base de datos. Identificador Nº '.$data);
-        return $ong;
+        return $request;
     }
 
     /**

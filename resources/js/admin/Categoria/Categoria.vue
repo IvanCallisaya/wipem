@@ -37,7 +37,7 @@
 
                   <!-- Modal body -->
                   <div class="modal-body">
-                    <form id="formId" @submit.prevent="upload">
+                    <form id="formId">
                       <input @change="handleOnChange" type="file" />
 
                       <div class="my-4">
@@ -66,7 +66,7 @@
                           {{ errores.descripcion[0] }}
                         </span>
                       </div>
-                      <button class="btn btn-success">Guardar</button>
+                      <button @click="upload()" class="btn btn-success">Guardar</button>
                       <button @click="cerrarModal()" class="btn btn-secondary">
                         Cancelar
                       </button>
@@ -108,7 +108,6 @@
                     >
                       <i class="fas fa-edit"> </i>
                     </button>
-
                     <button @click="eliminar(categoria)" class="btn btn-danger">
                       <i class="fas fa-trash"> </i>
                     </button>
@@ -172,7 +171,11 @@ export default {
       formData.set("image", this.image);
       console.log(formData);
       axios.post("/uploadCategoria", formData).then((res) => {
-        this.categoria.logo = res.data;
+        if (res.data ==1) {
+          this.categoria.logo =="";
+        }else {
+          this.categoria.logo = res.data;
+        }
         this.guardar();
         $("#formId")[0].reset();
       });
@@ -222,7 +225,6 @@ export default {
             swal("Exito!", "Usuario editado correctamente", "success");
           })
           .catch((e) => {
-            this.errores = e.response.data.errors;
           });
       } else {
         let url = "/admin/categorias/";

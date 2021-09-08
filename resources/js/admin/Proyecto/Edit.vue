@@ -188,7 +188,7 @@ export default {
         foto_principal: "",
         resumen_principal: "",
         fotos: "",
-        imagen_principal: "",
+        foto_principal: "",
         imagenes: [],
         sponsor_ids: [],
         subcategoria_id: 0,
@@ -237,13 +237,16 @@ export default {
     guardar() {
       var self = this;
       let formData = new FormData();
-
       this.proyecto.sponsor_ids = Array.from(
         $("#js-multiple").select2("data")
       ).map((option) => option.id);
-      for (let i = 0; i < this.imagenes.length; i++) {
-        let file = self.imagenes[i];
-        formData.append("files[" + i + "]", file);
+      if(this.imagenes.length==0){
+        formData.append("files", 0);
+      }else{
+        for (let i = 0; i < this.imagenes.length; i++) {
+          let file = self.imagenes[i];
+          formData.append("files[" + i + "]", file);
+        }
       }
       console.log(this.proyecto.sponsor_ids.length);
       if (this.proyecto.sponsor_ids.length == 0) {
@@ -256,7 +259,13 @@ export default {
           );
         }
       }
-      formData.set("foto_principal", this.image);
+      if(this.image ==null){
+
+        formData.set("foto_principal", "");
+      }else{
+        formData.set("foto_principal", this.image);
+      }
+      
       formData.set("nombre", this.proyecto.nombre);
       formData.set("video", this.proyecto.video);
       formData.set("objetivo", this.proyecto.objetivo);
@@ -283,6 +292,8 @@ export default {
           console.log(response);
           self.$refs.files.value = "";
           self.imagenes = [];
+          swal("Exito!", "Proyecto editado correctamente", "success");
+          window.open("/admin#/proyectos","_self");
         })
         .catch((err) => {
           console.log(err);

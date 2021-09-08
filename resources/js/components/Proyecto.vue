@@ -1,25 +1,7 @@
 <template>
   <div>
     <div class="container">
-      <!-- Buttons, Copy this to your Page Article -->
-      <div class="heading-3 gap-30">
-        <div class="share-buttons-row">
-          <h5 class="text-center text-uppercase">Compartir:</h5>
-          <!--Facebook's Button -->
-          <div @click="compartirFacebook()" class="share-fb"></div>
-          <!--Twitter's Button -->
-          <div @click="compartirTwitter()" class="share-twitter"></div>
-          <!--Facebook's Button -->
-          <div @click="compartirWhatsapp()" class="share-whatsapp">
-            <img src="/images/whatsapp.png" />
-          </div>
 
-          <!--Linkedin's Button -->
-          <div @click="compartirLinkedin()" class="share-linkedin"></div>
-          <!--Tumblr's Button -->
-          <div @click="compartirTumblr()" class="share-tumblr"></div>
-        </div>
-      </div>
 
       <div class="heading-3 gap-50">
         <h5 class="text-center text-uppercase">{{ proyecto.nombre }}</h5>
@@ -30,7 +12,7 @@
           <div class="donation-causes dc-single">
             <div class="col-md-7 col-lg-8 col-sm-7 col-xs-5 group">
               <div>
-                <div class="progressBarRow col-lg-7 col-md-7 col-sm-7 col-xs-6">
+                <div class="progressBarRow col-lg-8 col-md-8 col-sm-8 col-xs-7">
                   <div class="row m0">
                     <div class="progress_barBox row m0">
                       <div class="progress">
@@ -91,7 +73,7 @@
       <div class="row footer_sidebar">
         <div class="widget widget-about col-sm-6 col-md-4">
           <div class="item">
-            <img :src="ong.logo" alt="" />
+            <img :src="'https://wipem.sfo3.digitaloceanspaces.com/' +ong.logo" alt="" />
           </div>
         </div>
 
@@ -128,6 +110,26 @@
         </div>
       </div>
     </div>
+
+          <!-- Buttons, Copy this to your Page Article -->
+      <div class="heading-3 gap-30">
+        <div class="share-buttons-row">
+          <h5 class="text-center text-uppercase">Compartir:</h5>
+          <!--Facebook's Button -->
+          <div @click="compartirFacebook()" class="share-fb"></div>
+          <!--Twitter's Button -->
+          <div @click="compartirTwitter()" class="share-twitter"></div>
+          <!--Facebook's Button -->
+          <div @click="compartirWhatsapp()" class="share-whatsapp">
+            <img src="/images/whatsapp.png" />
+          </div>
+
+          <!--Linkedin's Button -->
+          <div @click="compartirLinkedin()" class="share-linkedin"></div>
+          <!--Tumblr's Button -->
+          <div @click="compartirTumblr()" class="share-tumblr"></div>
+        </div>
+      </div>
 
     <div class="inner-content">
       <div class="container">

@@ -60,10 +60,12 @@ class SubcategoriaController extends Controller
     public function update(SubcategoriaRequest $request,  $data)
     {   
         $subcategoria = Subcategoria::find($data);
-        Storage::disk('do')->delete($subcategoria->logo);
+        if ($request->logo <>"") {
+            Storage::disk('do')->delete($subcategoria->logo);
+            $subcategoria->logo = $request['logo'];
+        }
         $subcategoria->nombre = $request['nombre'];
         $subcategoria->descripcion = $request['descripcion'];
-        $subcategoria->logo = $request['logo'];
         if(!$subcategoria->update())
             new \Exception('No se ha podido modificar la Carrera en la base de datos. Identificador Nº '.$data);
         return $subcategoria;

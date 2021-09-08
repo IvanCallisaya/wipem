@@ -5,7 +5,7 @@
         <div class="card card-custom">
           <div class="card-header flex-wrap border-0 pt-6 pb-0">
             <div class="card-title">
-              <h3 class="card-label">Lista de categorias</h3>
+              <h3 class="card-label">Lista de subcategorias</h3>
             </div>
             <button
               @click="
@@ -169,7 +169,11 @@ export default {
       formData.set("image", this.image);
       console.log(formData);
       axios.post("/uploadCategoria", formData).then((res) => {
-        this.categoria.logo = res.data;
+        if (res.data ==1) {
+          this.categoria.logo =="";
+        }else {
+          this.categoria.logo = res.data;
+        }
         this.guardar();
         $("#formId")[0].reset();
       });

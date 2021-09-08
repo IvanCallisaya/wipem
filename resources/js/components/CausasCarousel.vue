@@ -88,7 +88,7 @@ export default {
       });
     },
     ir: function (id) {
-      window.open("/proyecto/" + id, "_blank");
+      window.open("/proyecto/" + id,"_self");
     },
   },
 

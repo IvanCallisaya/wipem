@@ -2,7 +2,7 @@
 
 @section('content')
 <div id="app">
-  <div class="container-fluid">
+  <div class="container-fluid gap-30">
     <imagenes />
   </div>
 
@@ -30,14 +30,14 @@
 
       <div class="container-fluid mt-20">
         <div class="heading-3 gap-50">
-          <h5 class="text-center">Empresas Aliadas</h5>
+          <h5 class="text-center">EMPRESAS ALIADAS</h5>
         </div>
         <empresa-carrusel />
       </div>
 
       <div class="container-fluid mt-20">
         <div class="heading-3 gap-50">
-          <h5 class="text-center">Influencers</h5>
+          <h5 class="text-center">INFLUENCERS</h5>
         </div>
         <influencer />
       </div>

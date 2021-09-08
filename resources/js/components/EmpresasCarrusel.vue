@@ -94,7 +94,9 @@ export default {
   display: block;
   margin: 0 auto;
   position: relative;
-  width: 120px;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
   top: 50%;
   transform: translateY(-50%);
 }

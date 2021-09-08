@@ -36,7 +36,7 @@
                   </div>
                   <!-- Modal body -->
                   <div class="modal-body">
-                    <form id="formId" @submit.prevent="upload">
+                    <form id="formId">
                       <input @change="handleOnChange" type="file" />
                       <div class="my-2">
                         <label for="nombre">Nombre</label>
@@ -196,7 +196,7 @@
                         </span>
                       </div>
 
-                      <button class="btn btn-success">Guardar</button>
+                      <button @click="upload()" class="btn btn-success">Guardar</button>
                       <button @click="cerrarModal()" class="btn btn-secondary">
                         Cancelar
                       </button>
@@ -287,6 +287,7 @@ export default {
       tituloModal: "",
       ongs: [],
       errores: {},
+      image:"",
     };
   },
   methods: {
@@ -306,7 +307,12 @@ export default {
       formData.set("image", this.image);
       console.log(formData);
       axios.post("/uploadOng", formData).then((res) => {
-        this.ong.logo = res.data;
+        console.log(res.data);
+        if (res.data ==1) {
+          this.ong.logo =="";
+        }else {
+          this.ong.logo = res.data;
+        }
         this.guardar();
         $("#formId")[0].reset();
       });

@@ -3,7 +3,7 @@
 @section('content')
 
 <div id="app">
-  <div class="home-slider-1">
+  <div class="home-slider-1 gap-30">
     <div class="home-slider">
       <imagenes-causas />
     </div>
@@ -13,8 +13,5 @@
       <causas />
     </div>
   </section>
-
-
-
 </div>
 @endsection('content')

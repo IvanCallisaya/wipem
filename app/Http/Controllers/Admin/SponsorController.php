@@ -8,6 +8,8 @@ use App\Models\Sponsor;
 
 use App\Http\Requests\SponsorRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
+        
 
 
 class SponsorController extends Controller
@@ -46,6 +48,10 @@ class SponsorController extends Controller
     public function update(SponsorRequest $request,  $id)
     {   
         $sponsor = Sponsor::find($id);
+        if ($request->logo <>"") {
+            Storage::disk('do')->delete($sponsor->logo);
+            $sponsor->logo = $request['logo'];
+        }
         $sponsor->nombre = $request['nombre'];
         $sponsor->logo = $request['logo'];
         $sponsor->tipo = $request['tipo'];
@@ -65,6 +71,7 @@ class SponsorController extends Controller
     public function destroy( $id)
     {
         $sponsor = Sponsor::find($id);
+        Storage::disk('do')->delete($sponsor->logo);
         $sponsor->delete();
     }
 }

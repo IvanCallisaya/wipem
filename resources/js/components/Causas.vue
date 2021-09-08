@@ -163,7 +163,7 @@ export default {
       }
     },
     myBook(id) {
-      window.open("/proyecto/" + id, "_blank");
+      window.open("/proyecto/" + id,"_self");
     },
   },
   created() {
