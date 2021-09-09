@@ -1,28 +1,21 @@
 <template>
   <div>
-    <div class="container">
+    <div class="row f-inner">
       <h5 class="text-center">CATEGORÍAS</h5>
-      <div class="row categorias_header">
-        <div
-          class="col-sm-12 col-md-6 col-lg-6"
-          v-for="(categoria, index) in categorias"
-          :key="index"
-        >
-          <div class="item_header">
-            <div class="icon">
-              <img
-                class="image_headers"
-                :src="
-                  'https://wipem.sfo3.digitaloceanspaces.com/' + categoria.logo
-                "
-                alt=""
-              />
-            </div>
-            <div class="f-inner">
-              <a> {{ categoria.nombre }} </a>
-            </div>
-          </div>
-        </div>
+
+      <div class="col-md-12 text-center">
+        <ul>
+          <li v-for="(categoria, index) in categorias" :key="index">
+            <img
+              class="image_headers"
+              :src="
+                'https://wipem.sfo3.digitaloceanspaces.com/' + categoria.logo
+              "
+              alt=""
+            />
+            <a class="categoria"> {{ categoria.nombre }} </a>
+          </li>
+        </ul>
       </div>
     </div>
 
@@ -42,7 +35,9 @@
             />
           </div>
           <div class="f-inner">
-            <a @click="causas(subcategoria.id)"> {{ subcategoria.nombre }} </a>
+            <a class="categoria" @click="causas(subcategoria.id)">
+              {{ subcategoria.nombre }}
+            </a>
           </div>
         </div>
       </div>
@@ -80,7 +75,7 @@ export default {
       }
     },
     causas(id) {
-      window.open("/causas/" + id,"_self");
+      window.open("/causas/" + id, "_self");
     },
   },
   mounted() {

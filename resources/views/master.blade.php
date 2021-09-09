@@ -9,18 +9,13 @@
   <meta name="author" content="" />
 
   <title>WIPEM</title>
-  <link rel="shortcut icon" type="image/jpg" href="{{asset('images/logo-oficial.png')}}"/>
-  <!-- <link rel="stylesheet" href="{{asset('css/all.css') }}" /> -->
-
+  <link rel="shortcut icon" type="image/jpg" href="{{asset('images/logo-oficial.png')}}" />
   <link rel="stylesheet" href="{{asset('css/bootstrap.min.css') }}" />
-  <link rel="stylesheet" href="{{asset('font-awesome/css/font-awesome.min.css') }}" />
-  <link rel="stylesheet" href="{{asset('css/jquery.circliful.css') }}" />
-  <link rel="stylesheet" href="{{asset('js/lity/lity.min.css') }}" />
-  <link rel="stylesheet" href="{{asset('css/style.css') }}" />
   <link rel="stylesheet" href="{{asset('css/bootstrap-theme.min.css') }}">
-  <link rel="stylesheet" href="{{asset('vendors/magnific-popup/magnific-popup.css') }}">
+  <link rel="stylesheet" href="{{asset('font-awesome/css/font-awesome.min.css') }}" />
+  <link rel="stylesheet" href="{{asset('css/style.css') }}" />
   <link rel="stylesheet" href="{{asset('css/theme.css') }}">
-  <link href="//db.onlinewebfonts.com/c/98bc871859421aac64683fbbb7e9f181?family=Eight+One" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.cdnfonts.com/css/baloo-thambi-2" rel="stylesheet">
 
 
 <body>
@@ -57,7 +52,7 @@
                 <li><a href="{{ route('login') }}">Iniciar Sesión</a></li>
 
                 @if (Route::has('register'))
-                <li><a href="{{ route('register') }}">Registrarse</a></li>
+                <li><a href="/registrarse">Registrarse</a></li>
                 @endif
                 @endauth
 
@@ -69,9 +64,6 @@
       </div>
     </header>
 
-    <div class="container">
-
-    </div>
     @yield('content')
 
 
@@ -95,7 +87,7 @@
               <div class="fc-icon">
                 <i class="fa fa-map-marker"></i>
               </div>
-              <p>Tercer Anillo Interno, Pasaje Landivar Edif. Palma de Mallorca Dpto.</p>
+              <p>Tercer Anillo Interno, Pasaje Landivar Edif. Palma de Mallorca Dpto. 1</p>
             </div>
             <div class="f-contact">
               <div class="fc-icon">
@@ -114,13 +106,13 @@
             <div class="what-we-do">
               <ul>
                 <li>
-                  <a href="https://www.facebook.com/wipembo"><img src="{{asset('images/facebook.png')}}" class="img-responsive" alt="" /></a>
+                  <a href="https://www.facebook.com/wipembo"><i class="fa fa-facebook-square"></i></a>
                 </li>
                 <li>
-                  <a href="https://www.instagram.com/wipembolivia/"><img src="{{asset('images/instagram.png')}}" class="img-responsive" alt="" /></a>
+                  <a href="https://www.instagram.com/wipembolivia/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                 </li>
-                <a href=""><img src="{{asset('images/youtube.png')}}" class="img-responsive" alt="" /></a>
                 <li>
+                  <a href=""><i class="fa fa-youtube-play"></i></a>
                 </li>
               </ul>
             </div>
@@ -130,8 +122,6 @@
               <div class="footer-video">
                 <div class="fv-inner">
                   <i class="fa fa-youtube-play"></i>
-                  <h4>We Can Create an Emotional<br>Response in the Viewer</h4>
-                  <p>Awareness or Raise Funds</p>
                 </div>
               </div>
             </a>
@@ -139,35 +129,15 @@
         </div>
       </div>
     </footer>
-
-
   </div>
 
-
-  <!-- jQuery -->
   <script type="application/javascript" src="{{asset('js/app.js') }}"></script>
-  <script src="{{asset('js/jquery.min.js') }}"></script>
   <script src="{{asset('js/bootstrap.min.js') }}"></script>
-  <script src="{{asset('js/isotope.pkgd.js') }}"></script>
-  <script src="{{asset('js/jquery.downCount.js') }}"></script>
-  <script src="{{asset('js/jquery.circliful.min.js') }}"></script>
-  <script src="{{asset('js/jflickrfeed.min.js') }}"></script>
+  <script src="{{asset('js/jquery.min.js') }}"></script>
   <script src="{{asset('js/main.js') }}"></script>
-
-  <!--Magnific Popup-->
-  <script src="{{asset('vendors/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
-  <!--Owl Carousel-->
-  <script src="{{asset('js/slick.min.js') }}"></script>
-  <script src="{{asset('vendors/owl.carousel/owl.carousel.min.js') }}"></script>
-
-  <!--CounterUp-->
-  <script src="{{asset('vendors/couterup/jquery.counterup.min.js') }}"></script>
-  <!--WayPoints-->
   <script src="{{asset('vendors/waypoint/waypoints.min.js') }}"></script>
-  <!--Theme Script-->
+  <script src="{{asset('vendors/couterup/jquery.counterup.min.js') }}"></script>
   <script src="{{asset('js/theme.js') }}"></script>
-
-
 
 </body>
 

@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\HomeController as HomController;
-use App\Http\Controllers\Admin\ArticuloController;
 use App\Http\Controllers\Admin\OngController;
 use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\CategoriaController;
@@ -32,8 +31,9 @@ Auth::routes();
 
 Route::get('/', [HomController::class, 'index'])->name('home');
 Route::get('causas/{id}', [HomController::class, 'causas']);
-Route::get('/home', [HomController::class, 'home']);
-Route::get('proyecto/{id}',[ProyectoController::class, 'ver'])->name('proyecto');;
+Route::get('registrarse', [HomController::class, 'registrar']);
+Route::get('usuario/{email}',[HomController::class, 'usuario']);
+Route::get('proyecto/{id}',[ProyectoController::class, 'ver'])->name('proyecto');
 
 
 
@@ -41,7 +41,6 @@ Route::namespace('')->prefix('admin')
   ->middleware(['auth', 'verified', 'rol.admin'])
   ->group(function () {
     Route::get('/', [HomeController::class, 'home'])->name('home');
-    Route::apiResource('/articulos', ArticuloController::class );
     Route::apiResource('/planes', PlanController::class );
     Route::apiResource('/categorias', CategoriaController::class );
     Route::apiResource('/ongs', OngController::class );
@@ -54,8 +53,8 @@ Route::namespace('')->prefix('admin')
 
     Route::group(['prefix' => 'sponsor'], function () {
       Route::get('/{tipo}', [SponsorController::class, 'index']);
-       Route::get('/{tipo}/{id}', [SponsorController::class, 'show']);
-       Route::post('/{tipo}', [SponsorController::class, 'store']);
+      Route::get('/{tipo}/{id}', [SponsorController::class, 'show']);
+      Route::post('/{tipo}', [SponsorController::class, 'store']);
       Route::put('/{id}', [SponsorController::class, 'update']);
       Route::delete('/{id}', [SponsorController::class, 'destroy']);
     });

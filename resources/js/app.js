@@ -20,6 +20,7 @@ import LoadScript from 'vue-plugin-load-script';
 import 'froala-editor/css/froala_editor.pkgd.min.css';
 
 
+
 // Import and use Vue Froala lib.
 import VueFroala from 'vue-froala-wysiwyg'
 
@@ -28,10 +29,13 @@ window.Vue = require('vue').default;
 
 import VueRouter from 'vue-router'
 
+import VueCountryCode from "vue-country-code-select";
+Vue.use(VueCountryCode);
 
 Vue.use(VueRouter)
 Vue.use(VueFroala)
 Vue.use(LoadScript);
+
 
 
 let routes = [
@@ -60,6 +64,7 @@ Vue.component('categorias', require('./components/Categorias.vue').default);
 Vue.component('causas', require('./components/Causas.vue').default);
 Vue.component('proyecto', require('./components/Proyecto.vue').default);
 Vue.component('influencer', require('./components/Influencer.vue').default);
+Vue.component('registrar', require('./components/Registrar.vue').default);
 
 
 const router = new VueRouter({

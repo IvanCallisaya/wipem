@@ -32,8 +32,7 @@ class LoginController extends Controller
         if($user->type == 0)
         {
             return '/admin';
-        }
-        if($user->type == 1)
+        }else 
         {
             return '/';
         }

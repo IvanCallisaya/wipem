@@ -72,10 +72,10 @@ class RegisterController extends Controller
         ]);
     }
     protected function redirectTo()
-{
-    if (auth()->user()->role_id == 0) {
-        return '/admin';
+    {
+        if (auth()->user()->type == 0) {
+            return '/admin';
+        }
+        return '/';
     }
-    return '/';
-}
 }
