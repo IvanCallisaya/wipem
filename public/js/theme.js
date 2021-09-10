@@ -246,31 +246,6 @@
     }
     mapBox();
     
-    function navbarAffix(){
-        if ( $('.navbar').length ){
-            var affixTop =  $('.navbar').offset().top;
-            $('.navbar').affix({
-                offset: {
-                    top: affixTop
-                }
-            })
-        }
-    }
-    navbarAffix();
-    
-    function sideNav(){
-        if ( $('.sideNav').length ){
-            $('.sideNav').affix({
-                offset: {
-                    top: 550,
-                    bottom: function () {
-                        return (this.bottom = $('footer').outerHeight(!0) + 250)
-                    }
-                }
-            })
-        }
-    }
-    sideNav();
     
     function countDownClock(){
         if ( $('.clock').length ){
@@ -316,17 +291,6 @@
     }
     smoothScroll4sideNav();
     
-    
-    /*Scroll Spy*/
-    function scrollSpy4sideNav () {
-        if ($('.sideNav').length ) {
-            $('body').scrollspy({ 
-                target: '.sideNav', 
-                offset: 70
-            })
-        }
-    }
-    scrollSpy4sideNav();
     
     function galleryItems(){
         if ( $('.gallery_container').length ){

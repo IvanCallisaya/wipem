@@ -585,7 +585,8 @@
     color: #91a1b4;
 }
 .sideNav ul li.active a {
-    color: #29af8a;
+    background: #52CEE6;
+    color: #fff;
 }
 
 .questions .question_type {

@@ -32,8 +32,8 @@ import VueRouter from 'vue-router'
 import VueCountryCode from "vue-country-code-select";
 Vue.use(VueCountryCode);
 
-Vue.use(VueRouter)
-Vue.use(VueFroala)
+Vue.use(VueRouter);
+Vue.use(VueFroala);
 Vue.use(LoadScript);
 
 
@@ -42,7 +42,6 @@ let routes = [
     { path: '/principal', component: require('./admin/imagenes/Principal.vue').default },
     { path: '/causas', component: require('./admin/imagenes/Causas.vue').default },
     { path: '/proyectoImages', component: require('./admin/imagenes/ProyectoImagenes.vue').default },
-
     { path: '/plan', component: require('./admin/Plan/Plan.vue').default },
     { path: '/categoria', component: require('./admin/Categoria/Categoria.vue').default },
     { name: 'categoria', path: '/categoria/:id', component: require('./admin/Categoria/SubCategoria.vue').default },

@@ -9,7 +9,7 @@
   <meta name="author" content="" />
 
   <title>WIPEM</title>
-  <link rel="shortcut icon" type="image/jpg" href="{{asset('images/logo-oficial.png')}}" />
+  <link rel="shortcut icon" type="image/jpg" href="{{asset('images/logo-wipem.png')}}" />
   <link rel="stylesheet" href="{{asset('css/bootstrap.min.css') }}" />
   <link rel="stylesheet" href="{{asset('css/bootstrap-theme.min.css') }}">
   <link rel="stylesheet" href="{{asset('font-awesome/css/font-awesome.min.css') }}" />
@@ -25,8 +25,8 @@
       <div class="top-bar">
         <div class="container">
           <div class="row">
-            <div class="col-sm-30">
-              <a class="navbar-brand" href="./index.html"><img src="{{asset('images/logo-oficial.png')}}" class="img-responsive" alt="" /></a>
+            <div class="col-sm-30 logo-cabecera">
+              <a class="navbar-brand" href="./index.html"><img src="{{asset('images/logo-wipem.png')}}" class="img-responsive" alt="" /></a>
             </div>
             <div class="col-sm-30">
               <ul>
@@ -130,8 +130,9 @@
       </div>
     </footer>
   </div>
+  </div>
 
-  <script type="application/javascript" src="{{asset('js/app.js') }}"></script>
+  <script src="{{ asset('js/app.js') }}"></script>
   <script src="{{asset('js/bootstrap.min.js') }}"></script>
   <script src="{{asset('js/jquery.min.js') }}"></script>
   <script src="{{asset('js/main.js') }}"></script>

@@ -171,6 +171,8 @@ class ProyectoController extends Controller
                 $rutas= Storage::disk('do')->put('proyectos', $file , 'public');
                 $pictures[] = $rutas;
             }
+            $proyecto->fotos = json_encode($pictures);
+        }
         $proyecto->nombre = $request->nombre;
         $proyecto->plan_id = $request->plan_id;
         $proyecto->subcategoria_id = $request->subcategoria_id;
@@ -180,8 +182,7 @@ class ProyectoController extends Controller
         $proyecto->fecha_final = $request->fecha_final;
         $proyecto->resumen_principal = $request->resumen_principal;
         $proyecto->destacado = $request['destacado'];
-        $proyecto->fotos = json_encode($pictures);
-        }
+        
         if(!$proyecto->update())
             new \Exception('No se ha podido modificar la Carrera en la base de datos. Identificador Nº '.$data);
         return $request;

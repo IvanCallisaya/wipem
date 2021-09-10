@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\SponsorController;
 use App\Http\Controllers\Admin\ProyectoController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\Admin\ImagesCausasController;
+use App\Http\Controllers\Admin\DonadorController;
 use App\Http\Controllers\Admin\ImagesProyectoController;
 use App\Http\Controllers\UploadController;
 use Illuminate\Support\Facades\Auth;
@@ -50,7 +51,7 @@ Route::namespace('')->prefix('admin')
     Route::apiResource('/imagenesCausas', ImagesCausasController::class );
     Route::apiResource('/imagenesProyecto', ImagesProyectoController::class );
     Route::post('proyectoUpdate/{tipo}', [ProyectoController::class, 'actualizar']);
-
+    
     Route::group(['prefix' => 'sponsor'], function () {
       Route::get('/{tipo}', [SponsorController::class, 'index']);
       Route::get('/{tipo}/{id}', [SponsorController::class, 'show']);
@@ -58,10 +59,11 @@ Route::namespace('')->prefix('admin')
       Route::put('/{id}', [SponsorController::class, 'update']);
       Route::delete('/{id}', [SponsorController::class, 'destroy']);
     });
-
+    
     
   });
   
+  Route::apiResource('/donadores', DonadorController::class );
   Route::post('uploadCategoria', [UploadController::class, 'handle']);
   Route::post('uploadOng', [UploadController::class, 'ong']);
   Route::post('uploadSponsor', [UploadController::class, 'sponsor']);

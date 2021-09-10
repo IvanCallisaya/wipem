@@ -15,14 +15,14 @@
               <form>
                 <div class="form-causes">
                   <input
-                    v-model="user.name"
+                    v-model="donador.nombre"
                     placeholder="Nombre"
                     type="text"
                   />
                   <input
                     v-model="donador.apellido"
                     placeholder="Apellido"
-                    type="email"
+                    type="text"
                   />
                   <div>
                     <div class="col-md-1 celular">
@@ -58,7 +58,7 @@
 
                   <div class="col-md-12 text-center">
                     <button
-                      @click="obtener()"
+                      @click="registrar()"
                       type="button"
                       class="btn-primary"
                     >
@@ -73,7 +73,7 @@
                   <p>¿Ya tienes una cuenta?</p>
                 </div>
                 <div class="col-md-6 text-center">
-                  <a href="">Iniciar Sesión</a>
+                  <a href="/login">Iniciar Sesión</a>
                 </div>
                 <div class="col-md-12 text-center">
                   <p>Registrarse con</p>
@@ -131,7 +131,7 @@ export default {
   },
   methods: {
     registrar() {
-        
+        this.user.name = this.donador.nombre +" "+this.donador.apellido;
         let url = "/register";
         axios
           .post(url, this.user)
@@ -147,8 +147,21 @@ export default {
             console.log(res.data.id);
             this.donador.user_id = res.data.id;
             this.donador.celular= this.codigo+ " " +this.donador.celular;
-            
+            this.guardar();
             })
+    },
+    guardar() {
+        
+        let url = "/donadores";
+        axios
+          .post(url, this.donador)
+          .then((res) => {
+          
+          window.open("/login#","_self");
+          })
+          .catch((e) => {
+            this.errores = e.response.data.errors;
+          });
     },
     onSelect({ name, iso2, dialCode }) {
       console.log(name, iso2, dialCode);

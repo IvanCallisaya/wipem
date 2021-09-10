@@ -2,10 +2,12 @@
   <div :key="componentKey">
     <div class="col-md-2 col-lg-2 sidebar cause-sidebar">
       <div class="row m0 sideNav widget-category">
-        <h4 class="widget-title">categorias</h4>
+        <h4  @click="getProyectos(0)" class="widget-title">categorias</h4>
         <ul class="nav">
-          <li v-for="(subcategoria, index) in subcategorias" :key="index">
-            <a @click="getProyectos(subcategoria.id)">
+          <li v-for="(subcategoria, index) in subcategorias" :key="index"
+          :class="{ active: actual==subcategoria.id }">
+            <a 
+             @click="getProyectos(subcategoria.id)">
               {{ subcategoria.nombre }}
             </a>
           </li>
@@ -106,7 +108,7 @@ export default {
   components: {},
   data() {
     return {
-      active_el: 0,
+      actual: 0,
       componentKey: 0,
       proyectos: [],
       porcentaje: 50,
@@ -126,7 +128,13 @@ export default {
   },
   methods: {
     getProyectos: function (id = 0, pagi, n) {
-      this.id = id;
+
+      if(id != 0) {
+        this.actual = id;
+      }else{
+        this.actual = 0;
+      }
+      
       pagi = pagi || "/causa/" + id;
 
       axios.get(pagi).then((res) => {

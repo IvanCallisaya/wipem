@@ -732,6 +732,9 @@ a.button:hover {
     background: #fff;
     line-height: 50px;
 }
+.top-bar .logo-cabecera {
+    max-width: 100px;
+}
 
 .top-bar p {
     margin: 0;
@@ -743,7 +746,7 @@ a.button:hover {
 
 .top-bar ul {
     float: left;
-    margin-left: 50px;
+    margin-left: 20%;
 }
 
 .top-bar ul li {
@@ -752,8 +755,8 @@ a.button:hover {
     font-size: 16px;
     letter-spacing: 0.04em;
     float: left;
-    margin-left: 25px;
-    margin-top: 25px;
+    margin-left: 20px;
+    margin-top: 13px;
 }
 
 .top-bar ul li::after {
@@ -772,7 +775,7 @@ a.button:hover {
 
 .top-bar ul li a {
     color: #040404;
-    font-size: 1.3rem;
+    font-size: 1.8rem;
 }
 
 .top-bar ul li a:hover {
@@ -1472,7 +1475,9 @@ blockquote {
 .widget-about img {
     max-height: 100px;
 }
-
+.widget-title:hover {
+    cursor: pointer;
+}
 .widget-contact address {
     text-align: justify;
 }
@@ -1523,12 +1528,12 @@ blockquote {
 .sideNav ul li a {
     padding: 10px;
 }
-
-.sideNav ul li a:hover,
-.sideNav ul li a:focus {
-    background: none;
+.sideNav ul li a:hover {
     cursor: pointer;
+    background: #52cee6;
+    color: #fff;
 }
+
 .sideNav.affix {
     position: fixed;
     top: 70px;
@@ -1917,7 +1922,7 @@ blockquote {
     display: flex;
     flex: 1 0 0%;
     flex-direction: column;
-    min-width: 200px;
+    min-width: 225px;
     max-width: 300px;
 }
 
@@ -1933,9 +1938,10 @@ blockquote {
 }
 
 .card h2 {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: 700;
     text-align: justify;
+    letter-spacing: 0.01em;
 }
 .card-body p {
     margin: 10px 0 0;
