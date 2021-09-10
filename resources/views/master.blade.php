@@ -118,7 +118,7 @@
             </div>
           </div>
           <div class="col-sm-4 col-md-4">
-            <a href="https://www.youtube.com/watch?v=bfAzi6D5FpM" data-lity>
+            <a href="" data-lity>
               <div class="footer-video">
                 <div class="fv-inner">
                   <i class="fa fa-youtube-play"></i>
