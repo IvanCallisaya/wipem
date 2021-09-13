@@ -71,6 +71,7 @@
         <input
           v-model="proyecto.objetivo"
           type="number"
+          step="any"
           class="form-control"
           id="objetivo"
           placeholder="objetivo de la proyecto"
@@ -240,9 +241,9 @@ export default {
       this.proyecto.sponsor_ids = Array.from(
         $("#js-multiple").select2("data")
       ).map((option) => option.id);
-      if(this.imagenes.length==0){
+      if (this.imagenes.length == 0) {
         formData.append("files", 0);
-      }else{
+      } else {
         for (let i = 0; i < this.imagenes.length; i++) {
           let file = self.imagenes[i];
           formData.append("files[" + i + "]", file);
@@ -259,13 +260,12 @@ export default {
           );
         }
       }
-      if(this.image ==null){
-
+      if (this.image == null) {
         formData.set("foto_principal", "");
-      }else{
+      } else {
         formData.set("foto_principal", this.image);
       }
-      
+
       formData.set("nombre", this.proyecto.nombre);
       formData.set("video", this.proyecto.video);
       formData.set("objetivo", this.proyecto.objetivo);
@@ -293,7 +293,7 @@ export default {
           self.$refs.files.value = "";
           self.imagenes = [];
           swal("Exito!", "Proyecto editado correctamente", "success");
-          window.open("/admin#/proyectos","_self");
+          // window.open("/admin#/proyectos", "_self");
         })
         .catch((err) => {
           console.log(err);

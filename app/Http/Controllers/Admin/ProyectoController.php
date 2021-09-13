@@ -91,50 +91,6 @@ class ProyectoController extends Controller
      */
     public function update(Request $request,  $data)
     {
-        $proyecto = Proyecto::find($data);
-        $proyecto->load('proyecto_sponsor');
-        Storage::disk('do')->delete($proyecto->foto_principal);
-        $proyecto->fotos = json_decode($proyecto->fotos);
-        foreach ($proyecto->fotos as $file) {
-            Storage::disk('do')->delete($file);
-        }
-        if($request->sponsor_ids<>0){
-            foreach ($proyecto->proyecto_sponsor as $sponsor) {
-                $sponsorAntiguo = ProyectoSponsor::find($sponsor->id);
-                $sponsorAntiguo->delete();
-            }
-            foreach ($request->sponsor_ids as $sponsor_id) {
-                ProyectoSponsor::create([
-                    'sponsor_id' => $sponsor_id,
-                    'proyecto_id' => $proyecto->id,
-                ]);
-            }
-        }
-
-        $ruta= Storage::disk('do')->put('proyectos', $request->file('foto_principal') , 'public');
-        if ($request->hasFile('files')) {
-            $pictures = [];
-            foreach ($request->file('files') as $file) {
-                $rutas= Storage::disk('do')->put('proyectos', $file , 'public');
-                $pictures[] = $rutas;
-            }
-            if ($request->plan_id ==0) {
-                $request->plan_id =null;
-            }
-        $proyecto->nombre = $request->nombre;
-        $proyecto->plan_id = $request->plan_id;
-        $proyecto->subcategoria_id = $request->subcategoria_id;
-        $proyecto->video = $request->video;
-        $proyecto->objetivo = $request->objetivo;
-        $proyecto->descripcion = $request->descripcion;
-        $proyecto->fecha_final = $request->fecha_final;
-        $proyecto->resumen_principal = $request->resumen_principal;
-        $proyecto->destacado = $request['destacado'];
-        $proyecto->foto_principal = $ruta;
-        $proyecto->fotos = json_encode($pictures);
-        }
-        if(!$proyecto->update())
-            new \Exception('No se ha podido modificar la Carrera en la base de datos. Identificador Nº '.$data);
         return $request;
     }
     public function actualizar(Request $request,  $data)
@@ -146,11 +102,6 @@ class ProyectoController extends Controller
             $ruta= Storage::disk('do')->put('proyectos', $request->file('foto_principal') , 'public');
             $proyecto->foto_principal = $ruta;
         }
-        
-        $proyecto->fotos = json_decode($proyecto->fotos);
-        foreach ($proyecto->fotos as $file) {
-            Storage::disk('do')->delete($file);
-        }
         if($request->sponsor_ids<>0){
             foreach ($proyecto->proyecto_sponsor as $sponsor) {
                 $sponsorAntiguo = ProyectoSponsor::find($sponsor->id);
@@ -163,9 +114,11 @@ class ProyectoController extends Controller
                 ]);
             }
         }
-
-        
+        $proyecto->fotos = json_decode($proyecto->fotos);
         if ($request->hasFile('files')) {
+            foreach ($proyecto->fotos as $file) {
+                Storage::disk('do')->delete($file);
+            }
             $pictures = [];
             foreach ($request->file('files') as $file) {
                 $rutas= Storage::disk('do')->put('proyectos', $file , 'public');
@@ -174,14 +127,16 @@ class ProyectoController extends Controller
             $proyecto->fotos = json_encode($pictures);
         }
         $proyecto->nombre = $request->nombre;
-        $proyecto->plan_id = $request->plan_id;
+        if ($request->plan_id <>0) {
+            $proyecto->plan_id =$request->plan_id;
+        }
         $proyecto->subcategoria_id = $request->subcategoria_id;
         $proyecto->video = $request->video;
         $proyecto->objetivo = $request->objetivo;
         $proyecto->descripcion = $request->descripcion;
         $proyecto->fecha_final = $request->fecha_final;
         $proyecto->resumen_principal = $request->resumen_principal;
-        $proyecto->destacado = $request['destacado'];
+        $proyecto->destacado = $request->destacado;
         
         if(!$proyecto->update())
             new \Exception('No se ha podido modificar la Carrera en la base de datos. Identificador Nº '.$data);
