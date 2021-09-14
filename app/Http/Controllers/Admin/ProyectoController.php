@@ -75,10 +75,10 @@ class ProyectoController extends Controller
     }
 
 
-    public function show($ong)
+    public function show($project)
     {
-        $proyecto= Proyecto::findOrFail($ong);
-        $proyecto->load('proyecto_sponsor');
+        $proyecto = Proyecto::find($project);
+        $proyecto->proyecto_sponsor= ProyectoSponsor::where('proyecto_id', $proyecto->id)->get();
         return $proyecto;
     }
 
@@ -151,7 +151,7 @@ class ProyectoController extends Controller
     public function destroy($data)
     {
         $proyecto = Proyecto::find($data);
-        $proyecto->load('proyecto_sponsor');
+        $proyecto->proyecto_sponsor= ProyectoSponsor::where('proyecto_id', $proyecto->id)->get();
         foreach ($proyecto->proyecto_sponsor as $sponsor) {
             $sponsorAntiguo = ProyectoSponsor::find($sponsor->id);
             $sponsorAntiguo->delete();
@@ -160,7 +160,7 @@ class ProyectoController extends Controller
         $proyecto->fotos = json_decode($proyecto->fotos);
         foreach ($proyecto->fotos as $file) {
             Storage::disk('do')->delete($file);
-        }
+        }        
         $proyecto->delete();
     }
 

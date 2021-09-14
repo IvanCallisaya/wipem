@@ -285,7 +285,7 @@ export default {
       const config = {
         header: { "content-type": "multipart/form-data" },
       };
-      let url = "/admin/proyectoUpdate/" + this.proyecto.id;
+      let url = "/admin/proyectoUpdate/" + this.proyecto.slug;
       axios
         .post(url, formData, config)
         .then((response) => {

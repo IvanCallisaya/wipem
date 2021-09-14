@@ -22,11 +22,19 @@ class Proyecto extends Model
         'plan_id',
         'ong_id',
         'destacado',
+        'slug',
         
     ];
+
     protected $hidden = ['created_at', 'updated_at'];
 
     public function proyecto_sponsor(){
       return $this->hasMany(ProyectoSponsor::class,'proyecto_id');
   }
+  public function getRouteKeyName()
+  {
+      return 'slug';
+  }
+  protected $primaryKey = 'slug';
+  public $incrementing = false;
 }

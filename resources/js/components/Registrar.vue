@@ -103,7 +103,6 @@
           </div>
         </div>
       </div>
-    <pre> {{ donador }} {{ codigo}}  {{ user }}  </pre>
     </div>
   </div>
 </template>
@@ -131,37 +130,35 @@ export default {
   },
   methods: {
     registrar() {
-        this.user.name = this.donador.nombre +" "+this.donador.apellido;
-        let url = "/register";
-        axios
-          .post(url, this.user)
-          .then((res) => {
-            this.obtener();
-          })
-          .catch((e) => {
-            this.errores = e.response.data.errors;
-          });
+      this.user.name = this.donador.nombre + " " + this.donador.apellido;
+      let url = "/register";
+      axios
+        .post(url, this.user)
+        .then((res) => {
+          this.obtener();
+        })
+        .catch((e) => {
+          this.errores = e.response.data.errors;
+        });
     },
     obtener() {
-            axios.get(`usuario/${this.user.email}`).then(res => {
-            console.log(res.data.id);
-            this.donador.user_id = res.data.id;
-            this.donador.celular= this.codigo+ " " +this.donador.celular;
-            this.guardar();
-            })
+      axios.get(`usuario/${this.user.email}`).then((res) => {
+        console.log(res.data.id);
+        this.donador.user_id = res.data.id;
+        this.donador.celular = this.codigo + " " + this.donador.celular;
+        this.guardar();
+      });
     },
     guardar() {
-        
-        let url = "/donadores";
-        axios
-          .post(url, this.donador)
-          .then((res) => {
-          
-          window.open("/login#","_self");
-          })
-          .catch((e) => {
-            this.errores = e.response.data.errors;
-          });
+      let url = "/donadores";
+      axios
+        .post(url, this.donador)
+        .then((res) => {
+          window.open("/login#", "_self");
+        })
+        .catch((e) => {
+          this.errores = e.response.data.errors;
+        });
     },
     onSelect({ name, iso2, dialCode }) {
       console.log(name, iso2, dialCode);

@@ -427,16 +427,6 @@ p {
     padding-top: 25px;
 }
 
-.donation-causes .group em {
-    float: left;
-    margin: 28px 0 0 0;
-    color: #1c57a1;
-    font-size: 14px;
-    font-weight: 600;
-    font-style: normal;
-    letter-spacing: 0.02em;
-}
-
 .donation-causes .text-style {
     color: #333333;
     font-weight: 500;
@@ -454,17 +444,6 @@ p {
 
 .sidebar {
     position: relative;
-}
-
-.sidebar h5 {
-    color: #222222;
-    font-size: 20px;
-    text-transform: uppercase;
-}
-
-.sidebar h5 + p {
-    margin: 5px 0 45px;
-    color: #1c57a1;
 }
 
 .sidebar .widget {
@@ -1926,8 +1905,8 @@ blockquote {
     max-width: 300px;
 }
 
-.card h2:hover {
-    color: #52cee6;
+.card:hover {
+    background-color: rgba(0, 0, 0, 0.3);
     cursor: pointer;
 }
 

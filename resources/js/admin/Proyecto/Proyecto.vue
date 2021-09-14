@@ -48,7 +48,7 @@
                   <router-link
                     :to="{
                       name: 'proyectoEdit',
-                      params: { id: proyecto.id },
+                      params: { id: proyecto.slug },
                     }"
                     class="btn btn-warning"
                   >
@@ -116,7 +116,7 @@ export default {
         dangerMode: true,
       }).then((willDelete) => {
         if (willDelete) {
-          let url = "/admin/proyectos/" + proyecto.id;
+          let url = "/admin/proyectos/" + proyecto.slug;
           axios
             .delete(url)
             .then((res) => {

@@ -36,7 +36,6 @@ export default {
       var url = "/imagenes";
       axios.get(url).then((res) => {
         this.imagenes = res.data.images[0].images;
-        console.log(res.data.images[0]);
       });
     },
   },

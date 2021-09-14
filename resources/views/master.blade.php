@@ -31,7 +31,7 @@
             <div class="col-sm-30">
               <ul>
                 <li><a href="/">Inicio</a></li>
-                <li><a href="/causas/0">Causas</a></li>
+                <li><a href="/causas/todas">Causas</a></li>
                 <li><a href="/">Contacto</a></li>
                 <li><a href="/">Sobre Nosotros</a></li>
 

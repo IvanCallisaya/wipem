@@ -1,13 +1,19 @@
 <template>
-  <div :key="componentKey">
+<div>
+<div  v-if="categorias.length > 0">
+  <div :key="componentKey" >
     <div class="col-md-2 col-lg-2 sidebar cause-sidebar">
       <div class="row m0 sideNav widget-category">
-        <h4  @click="getProyectos(0)" class="widget-title">categorias</h4>
-        <ul class="nav">
-          <li v-for="(subcategoria, index) in subcategorias" :key="index"
-          :class="{ active: actual==subcategoria.id }">
-            <a 
-             @click="getProyectos(subcategoria.id)">
+        <h4 @click="getProyectos(0)" class="widget-title">categorias</h4>
+        <ul class="nav" >
+          <li
+            v-if="subcategorias.length > 0"
+            v-for="(subcategoria, index) in subcategorias"
+            :key="index"
+            :class="{ active: actual == subcategoria.id }"
+             
+          >
+            <a @click="getProyectos(subcategoria.id, 0 , subcategoria.slug)">
               {{ subcategoria.nombre }}
             </a>
           </li>
@@ -18,9 +24,10 @@
     <div
       class="col-md-10 col-lg-10 single-project single-cause m-0"
       :key="componentKey"
+      
     >
-      <div v-for="(proyecto, index) in proyectos.data" :key="index">
-        <div class="card">
+      <div v-for="(proyecto, index) in proyectos.data" :key="index" >
+        <div @click="ir(proyecto.slug)" class="card">
           <img
             :src="
               'https://wipem.sfo3.digitaloceanspaces.com/' +
@@ -30,7 +37,7 @@
             alt="..."
           />
           <div class="card-body">
-            <h2 @click="myBook(proyecto.id)" class="card-title text-uppercase">
+            <h2 class="card-title text-uppercase">
               {{ proyecto.nombre }}
             </h2>
             <p class="card-text">{{ proyecto.resumen_principal }}</p>
@@ -99,6 +106,8 @@
       </div>
     </div>
   </div>
+  </div>
+  </div>
 </template>
 
 
@@ -108,6 +117,8 @@ export default {
   components: {},
   data() {
     return {
+      cargado: [],
+      slugAnt: '',
       actual: 0,
       componentKey: 0,
       proyectos: [],
@@ -127,17 +138,25 @@ export default {
     };
   },
   methods: {
-    getProyectos: function (id = 0, pagi, n) {
-
-      if(id != 0) {
+     getProyectos(id = 0, pagi, slug='') {
+       console.log(this.slugAnt);
+      if (id != 0) {
         this.actual = id;
-      }else{
+      } else {
         this.actual = 0;
       }
       
+      if (this.slugAnt !== '') {
+        history.pushState({}, null, '/causas/' +this.slugAnt)
+      }
+      else if (slug=='') {
+        history.pushState({}, null, '/causas/' +'todas')
+      }else {
+        history.pushState({}, null, '/causas/' + slug)
+      }
       pagi = pagi || "/causa/" + id;
-
-      axios.get(pagi).then((res) => {
+      
+       axios.get(pagi).then((res) => {
         this.proyectos = res.data;
         console.log(res.data);
         this.pagination = {
@@ -154,39 +173,57 @@ export default {
         };
       });
     },
-    getCategorias: function () {
+    async getCategorias () {
       var url = "/categorias";
-      axios.get(url).then((res) => {
+      await axios.get(url).then((res) => {
         this.categorias = res.data;
-        console.log(res.data);
+        console.log(this.categorias);
         this.getSubcategorias(res.data);
+            this.getProyectos(this.id);
         this.componentKey += 1;
       });
     },
-    getSubcategorias: function (categorias) {
-      for (let i = 0; i < categorias.length; i++) {
+     getSubcategorias (categorias) {
+       for (let i = 0; i < categorias.length; i++) {
         for (let j = 0; j < categorias[i].subcategorias.length; j++) {
           this.subcategorias.push(categorias[i].subcategorias[j]);
         }
       }
+      const newObject = {...this.subcategorias};
+      for (let i = 0; i < newObject.length; i++) {
+        // if(newObject[i].id == this.id)
+        // this.slugAnt = newObject[i].slug;
+        console.log(newObject.size)
+      }
+      for ( let prop in newObject) {
+        if (newObject[prop].id == this.id) {
+          this.slugAnt =  newObject[prop].slug;
+        }
+      }
+      
+      console.log(this.slugAnt)
+
     },
-    myBook(id) {
-      window.open("/proyecto/" + id,"_self");
+    ir(slug) {
+      window.open("/proyecto/" + slug, "_self");
     },
+
   },
   created() {
     this.id = window.location.pathname.slice(
       8,
       window.location.pathname.length
     );
+    console.log(this.id);
+
     var intval = setInterval(() => {
       if (this.percentage < this.porcentaje) this.percentage += 1;
       else clearInterval(intval);
     }, 40);
   },
   mounted() {
-    this.getProyectos(this.id);
     this.getCategorias();
+
   },
 };
 </script>

@@ -2,7 +2,7 @@
   <div>
     <Slick :options="slickOptions" v-if="proyectos.length > 0">
       <div v-for="(proyecto, index) in proyectos" :key="index">
-        <div class="card">
+        <div @click="ir(proyecto.slug)" class="card">
           <img
             :src="
               'https://wipem.sfo3.digitaloceanspaces.com/' +
@@ -12,7 +12,7 @@
             alt="..."
           />
           <div class="card-body">
-            <h2 @click="ir(proyecto.id)" class="card-title text-uppercase">
+            <h2  class="card-title text-uppercase">
               {{ proyecto.nombre }}
             </h2>
             <p class="card-text">{{ proyecto.resumen_principal }}</p>
@@ -87,8 +87,8 @@ export default {
         this.proyectos = res.data;
       });
     },
-    ir: function (id) {
-      window.open("/proyecto/" + id,"_self");
+    ir: function (slug) {
+      window.open("/proyecto/" + slug,"_self");
     },
   },
 
