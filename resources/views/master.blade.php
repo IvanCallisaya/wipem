@@ -26,7 +26,7 @@
         <div class="container">
           <div class="row">
             <div class="col-sm-30 logo-cabecera">
-              <a class="navbar-brand" href="./index.html"><img src="{{asset('images/logo-wipem.png')}}" class="img-responsive" alt="" /></a>
+              <a class="navbar-brand" href="/"><img src="{{asset('images/logo-wipem.png')}}" class="img-responsive" alt="" /></a>
             </div>
             <div class="col-sm-30">
               <ul>

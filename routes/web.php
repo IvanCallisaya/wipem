@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\ImagesCausasController;
 use App\Http\Controllers\Admin\DonadorController;
 use App\Http\Controllers\Admin\ImagesProyectoController;
 use App\Http\Controllers\UploadController;
+
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -62,6 +63,12 @@ Route::namespace('')->prefix('admin')
     
     
   });
+  // Google Login
+  Route::get('/login/google', [App\Http\Controllers\Auth\LoginController::class, 'redirectToGoogle'])->name('login.google');
+  Route::get('/login/google/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleGoogleCallback']);
+  // Facebook Login
+  Route::get('/login/facebook', [App\Http\Controllers\Auth\LoginController::class, 'redirectToFacebook'])->name('login.facebook');
+  Route::get('/login/facebook/callback', [App\Http\Auth\Controllers\LoginController::class, 'handleFacebookCallback']);
   
   Route::apiResource('/donadores', DonadorController::class );
   Route::post('uploadCategoria', [UploadController::class, 'handle']);

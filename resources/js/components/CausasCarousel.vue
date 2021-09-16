@@ -12,7 +12,7 @@
             alt="..."
           />
           <div class="card-body">
-            <h2  class="card-title text-uppercase">
+            <h2 class="card-title text-uppercase">
               {{ proyecto.nombre }}
             </h2>
             <p class="card-text">{{ proyecto.resumen_principal }}</p>
@@ -45,6 +45,12 @@
 import Slick from "vue-slick";
 import "slick-carousel/slick/slick.css";
 export default {
+  metaInfo() {
+    return {
+      title: "Inicio | Wipem",
+      meta: [],
+    };
+  },
   components: { Slick },
   data() {
     return {
@@ -88,7 +94,7 @@ export default {
       });
     },
     ir: function (slug) {
-      window.open("/proyecto/" + slug,"_self");
+      window.open("/proyecto/" + slug, "_self");
     },
   },
 

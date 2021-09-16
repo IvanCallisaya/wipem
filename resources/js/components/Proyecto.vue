@@ -143,6 +143,57 @@ import $ from "jquery";
 import Slick from "vue-slick";
 import "slick-carousel/slick/slick.css";
 export default {
+  metaInfo() {
+    return {
+      title: "Proyecto " + this.proyecto.nombre + " | Wipem",
+      meta: [
+        { name: "description", content: this.proyecto.resumen_principal },
+        { name: "author", content: this.ong.nombre },
+        { property: "og:local", content: "es_ES" },
+        { property: "og:type", content: "website" },
+        { property: "og:title", content: this.proyecto.nombre },
+        {
+          property: "og:description",
+          content: this.proyecto.resumen_principal,
+        },
+        {
+          property: "og:url",
+          content: "https://wipem.com.bo/proyecto/" + this.proyecto.slug,
+        },
+        { property: "og:site_name", content: "wipem.com.bo" },
+        {
+          property: "article:publisher",
+          content: "[https://www.facebook.com/USERNAME]",
+        },
+        {
+          property: "og:image",
+          content:
+            "https://wipem.sfo3.digitaloceanspaces.com/" +
+            this.proyecto.foto_principal,
+        },
+
+        { name: "twitter:title", content: this.proyecto.nombre },
+        {
+          name: "twitter:description",
+          content: this.proyecto.resumen_principal,
+        },
+        {
+          name: "twitter:image",
+          content:
+            "https://wipem.sfo3.digitaloceanspaces.com/" +
+            this.proyecto.foto_principal,
+        },
+        { name: "twitter:site", content: "@[TWITTER_USERNAME]" },
+        { name: "twitter:creator", content: "@[TWITTER_USERNAME]" },
+        { name: "twitter:via", content: "@[TWITTER_USERNAME]" },
+        { name: "twitter:card", content: "photo" },
+        {
+          name: "twitter:url",
+          content: "https://wipem.com.bo/proyecto/" + this.proyecto.slug,
+        },
+      ],
+    };
+  },
   components: { Slick },
   props: ["proyecto"],
 

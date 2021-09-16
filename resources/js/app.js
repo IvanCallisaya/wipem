@@ -26,7 +26,7 @@ import VueFroala from 'vue-froala-wysiwyg'
 
 
 window.Vue = require('vue').default;
-
+import VueMeta from 'vue-meta'
 import VueRouter from 'vue-router'
 
 import VueCountryCode from "vue-country-code-select";
@@ -35,7 +35,7 @@ Vue.use(VueCountryCode);
 Vue.use(VueRouter);
 Vue.use(VueFroala);
 Vue.use(LoadScript);
-
+Vue.use(VueMeta)
 
 
 let routes = [

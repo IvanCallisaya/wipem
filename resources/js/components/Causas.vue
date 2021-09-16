@@ -1,112 +1,122 @@
 <template>
-<div>
-<div  v-if="categorias.length > 0">
-  <div :key="componentKey" >
-    <div class="col-md-2 col-lg-2 sidebar cause-sidebar">
-      <div class="row m0 sideNav widget-category">
-        <h4 @click="getProyectos(0)" class="widget-title">categorias</h4>
-        <ul class="nav" >
-          <li
-            v-if="subcategorias.length > 0"
-            v-for="(subcategoria, index) in subcategorias"
-            :key="index"
-            :class="{ active: actual == subcategoria.id }"
-             
-          >
-            <a @click="getProyectos(subcategoria.id, 0 , subcategoria.slug)">
-              {{ subcategoria.nombre }}
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <div
-      class="col-md-10 col-lg-10 single-project single-cause m-0"
-      :key="componentKey"
-      
-    >
-      <div v-for="(proyecto, index) in proyectos.data" :key="index" >
-        <div @click="ir(proyecto.slug)" class="card">
-          <img
-            :src="
-              'https://wipem.sfo3.digitaloceanspaces.com/' +
-              proyecto.foto_principal
-            "
-            class="card-img-top"
-            alt="..."
-          />
-          <div class="card-body">
-            <h2 class="card-title text-uppercase">
-              {{ proyecto.nombre }}
-            </h2>
-            <p class="card-text">{{ proyecto.resumen_principal }}</p>
+  <div>
+    <div v-if="categorias.length > 0">
+      <div :key="componentKey">
+        <div class="col-md-2 col-lg-2 sidebar cause-sidebar">
+          <div class="row m0 sideNav widget-category">
+            <h4 @click="getProyectos(0)" class="widget-title">categorias</h4>
+            <ul class="nav">
+              <li
+                v-for="(subcategoria, index) in subcategorias"
+                :key="index"
+                :class="{ active: actual == subcategoria.id }"
+              >
+                <a
+                  @click="
+                    getProyectos(
+                      subcategoria.id,
+                      0,
+                      subcategoria.slug,
+                      subcategoria.nombre
+                    )
+                  "
+                >
+                  {{ subcategoria.nombre }}
+                </a>
+              </li>
+            </ul>
           </div>
-          <div class="card-footer">
-            <div class="loading-bar">
-              <div class="percentage" :style="{ width: percentage + '%' }">
-                <div class="porcentaje">
-                  <span>{{ percentage }}%</span>
+        </div>
+
+        <div
+          class="col-md-10 col-lg-10 single-project single-cause m-0"
+          :key="componentKey"
+        >
+          <div v-for="(proyecto, index) in proyectos.data" :key="index">
+            <div @click="ir(proyecto.slug)" class="card">
+              <img
+                :src="
+                  'https://wipem.sfo3.digitaloceanspaces.com/' +
+                  proyecto.foto_principal
+                "
+                class="card-img-top"
+                alt="..."
+              />
+              <div class="card-body">
+                <h2 class="card-title text-uppercase">
+                  {{ proyecto.nombre }}
+                </h2>
+                <p class="card-text">{{ proyecto.resumen_principal }}</p>
+              </div>
+              <div class="card-footer">
+                <div class="loading-bar">
+                  <div class="percentage" :style="{ width: percentage + '%' }">
+                    <div class="porcentaje">
+                      <span>{{ percentage }}%</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="">
+                  <div class="recaudado col-md-6 col-xs-6 p-0">
+                    <h6>recaudado</h6>
+                    <h4>20</h4>
+                  </div>
+                  <div class="objetivo col-md-6 col-xs-6 p-0">
+                    <h6>objetivo</h6>
+                    <h4>{{ proyecto.objetivo }}</h4>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="">
-              <div class="recaudado col-md-6 col-xs-6 p-0">
-                <h6>recaudado</h6>
-                <h4>20</h4>
+          </div>
+          <div class="row item-pie">
+            <ul class="gallery-pagination list-unstyled">
+              <div>
+                Pagina: {{ pagination.current_page }} -
+                {{ pagination.last_page }} Total:
+                {{ pagination.total_page }}
               </div>
-              <div class="objetivo col-md-6 col-xs-6 p-0">
-                <h6>objetivo</h6>
-                <h4>{{ proyecto.objetivo }}</h4>
-              </div>
-            </div>
+              <li :class="{ disabled: !pagination.first_link }" class="prev">
+                <a @click="getProyectos(id, pagination.first_link)" href="#"
+                  >&laquo;</a
+                >
+              </li>
+              <li
+                :class="{ disabled: !pagination.prev_link }"
+                class="page-no last-no"
+              >
+                <a @click="getProyectos(id, pagination.prev_link)" href="#"
+                  >&lt;</a
+                >
+              </li>
+              <li
+                v-for="n in pagination.last_page"
+                :key="n"
+                :class="{ active: pagination.current_page == n }"
+                class="page-no first-no"
+              >
+                <a @click="getProyectos(id, pagination.path_page + n)" href="#">
+                  {{ n }}
+                </a>
+              </li>
+              <li
+                :class="{ disabled: !pagination.next_link }"
+                class="page-no last-no"
+              >
+                <a @click="getProyectos(id, pagination.next_link)" href="#"
+                  >&gt;</a
+                >
+              </li>
+              <li :class="{ disabled: !pagination.last_link }" class="prev">
+                <a @click="getProyectos(id, pagination.last_link)" href="#"
+                  >&raquo;</a
+                >
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-      <div class="row item-pie">
-        <ul class="gallery-pagination list-unstyled">
-          <div>
-            Pagina: {{ pagination.current_page }} -
-            {{ pagination.last_page }} Total:
-            {{ pagination.total_page }}
-          </div>
-          <li :class="{ disabled: !pagination.first_link }" class="prev">
-            <a @click="getProyectos(id, pagination.first_link)" href="#"
-              >&laquo;</a
-            >
-          </li>
-          <li
-            :class="{ disabled: !pagination.prev_link }"
-            class="page-no last-no"
-          >
-            <a @click="getProyectos(id, pagination.prev_link)" href="#">&lt;</a>
-          </li>
-          <li
-            v-for="n in pagination.last_page"
-            :key="n"
-            :class="{ active: pagination.current_page == n }"
-            class="page-no first-no"
-          >
-            <a @click="getProyectos(id, pagination.path_page + n)" href="#">
-              {{ n }}
-            </a>
-          </li>
-          <li
-            :class="{ disabled: !pagination.next_link }"
-            class="page-no last-no"
-          >
-            <a @click="getProyectos(id, pagination.next_link)" href="#">&gt;</a>
-          </li>
-          <li :class="{ disabled: !pagination.last_link }" class="prev">
-            <a @click="getProyectos(id, pagination.last_link)" href="#"
-              >&raquo;</a
-            >
-          </li>
-        </ul>
-      </div>
     </div>
-  </div>
-  </div>
   </div>
 </template>
 
@@ -114,11 +124,17 @@
 <script>
 import $ from "jquery";
 export default {
-  components: {},
+  metaInfo() {
+    return {
+      title: "Proyectos de " + this.nombreAct + " | Wipem",
+      meta: [],
+    };
+  },
   data() {
     return {
       cargado: [],
-      slugAnt: '',
+      slugAnt: "",
+      nombreAct: "",
       actual: 0,
       componentKey: 0,
       proyectos: [],
@@ -138,25 +154,27 @@ export default {
     };
   },
   methods: {
-     getProyectos(id = 0, pagi, slug='') {
-       console.log(this.slugAnt);
+    getProyectos(id = 0, pagi, slug = "", nombre = "") {
+      console.log(this.slugAnt);
       if (id != 0) {
         this.actual = id;
       } else {
         this.actual = 0;
       }
-      
-      if (this.slugAnt !== '') {
-        history.pushState({}, null, '/causas/' +this.slugAnt)
-      }
-      else if (slug=='') {
-        history.pushState({}, null, '/causas/' +'todas')
-      }else {
-        history.pushState({}, null, '/causas/' + slug)
+      console.log(this.slugAnt + " " + slug);
+      if (this.slugAnt !== "" && this.slugAnt == slug) {
+        history.pushState({}, null, "/causas/" + this.slugAnt);
+        this.nombreAct = nombre;
+      } else if (slug == "") {
+        history.pushState({}, null, "/causas/" + "todas");
+        this.nombreAct = "todas";
+      } else {
+        history.pushState({}, null, "/causas/" + slug);
+        this.nombreAct = nombre;
       }
       pagi = pagi || "/causa/" + id;
-      
-       axios.get(pagi).then((res) => {
+
+      axios.get(pagi).then((res) => {
         this.proyectos = res.data;
         console.log(res.data);
         this.pagination = {
@@ -173,41 +191,40 @@ export default {
         };
       });
     },
-    async getCategorias () {
+    async getCategorias() {
       var url = "/categorias";
       await axios.get(url).then((res) => {
         this.categorias = res.data;
         console.log(this.categorias);
         this.getSubcategorias(res.data);
-            this.getProyectos(this.id);
+        this.getProyectos(this.id);
         this.componentKey += 1;
       });
     },
-     getSubcategorias (categorias) {
-       for (let i = 0; i < categorias.length; i++) {
+    getSubcategorias(categorias) {
+      for (let i = 0; i < categorias.length; i++) {
         for (let j = 0; j < categorias[i].subcategorias.length; j++) {
           this.subcategorias.push(categorias[i].subcategorias[j]);
         }
       }
-      const newObject = {...this.subcategorias};
+      const newObject = { ...this.subcategorias };
       for (let i = 0; i < newObject.length; i++) {
         // if(newObject[i].id == this.id)
         // this.slugAnt = newObject[i].slug;
-        console.log(newObject.size)
+        console.log(newObject.size);
       }
-      for ( let prop in newObject) {
+      for (let prop in newObject) {
         if (newObject[prop].id == this.id) {
-          this.slugAnt =  newObject[prop].slug;
+          this.slugAnt = newObject[prop].slug;
+          this.nombreAct = newObject[prop].nombre;
         }
       }
-      
-      console.log(this.slugAnt)
 
+      console.log(this.slugAnt);
     },
     ir(slug) {
       window.open("/proyecto/" + slug, "_self");
     },
-
   },
   created() {
     this.id = window.location.pathname.slice(
@@ -223,7 +240,6 @@ export default {
   },
   mounted() {
     this.getCategorias();
-
   },
 };
 </script>

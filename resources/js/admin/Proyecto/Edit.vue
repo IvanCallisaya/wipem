@@ -265,7 +265,6 @@ export default {
       } else {
         formData.set("foto_principal", this.image);
       }
-
       formData.set("nombre", this.proyecto.nombre);
       formData.set("video", this.proyecto.video);
       formData.set("objetivo", this.proyecto.objetivo);
@@ -346,9 +345,6 @@ export default {
         theme: "classic",
         width: "100%",
       });
-      // $(".js-basico").select2({
-      //   theme: "classic",
-      // });
     });
   },
 };
