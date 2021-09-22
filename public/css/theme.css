@@ -582,11 +582,10 @@
     border-top-color: #e1e5eb;
 }
 .sideNav ul li a {
-    color: #91a1b4;
+    color: #000;
 }
-.sideNav ul li.active a {
-    background: #52CEE6;
-    color: #fff;
+.sideNav ul li.active {
+    background: rgb(128, 127, 127);
 }
 
 .questions .question_type {

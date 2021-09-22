@@ -57,7 +57,7 @@
               </div>
             </div>
 
-            <iframe height="400" :src="proyecto.video"> </iframe>
+            <iframe height="400" :src="proyecto.video" alt="url del video"> </iframe>
 
             <div class="gap-40"></div>
 

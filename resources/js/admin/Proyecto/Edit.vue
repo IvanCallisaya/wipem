@@ -195,6 +195,7 @@ export default {
         subcategoria_id: 0,
         plan_id: 0,
         destacado: false,
+        slug: "",
       },
       imagenes: [],
       sponsors: [],
@@ -236,6 +237,7 @@ export default {
       });
     },
     guardar() {
+      this.proyecto.slug = this.convertToSlug(this.proyecto.nombre);
       var self = this;
       let formData = new FormData();
       this.proyecto.sponsor_ids = Array.from(
@@ -266,6 +268,7 @@ export default {
         formData.set("foto_principal", this.image);
       }
       formData.set("nombre", this.proyecto.nombre);
+      formData.set("id", this.proyecto.id);
       formData.set("video", this.proyecto.video);
       formData.set("objetivo", this.proyecto.objetivo);
       formData.set("descripcion", this.proyecto.descripcion);
@@ -274,6 +277,7 @@ export default {
       formData.set("subcategoria_id", this.proyecto.subcategoria_id);
       formData.set("plan_id", this.proyecto.plan_id);
       formData.set("destacado", Number(this.proyecto.destacado));
+      formData.set("slug", this.proyecto.slug);
       for (var p of formData) {
         let name = p[0];
         let value = p[1];

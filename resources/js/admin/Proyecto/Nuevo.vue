@@ -209,6 +209,7 @@ export default {
         plan_id: 0,
         ong_id: 0,
         destacado: false,
+        slug: "",
       },
       imagenes: [],
       ongs: [],
@@ -246,6 +247,7 @@ export default {
       console.log(formData);
     },
     guardar() {
+      this.proyecto.slug = this.convertToSlug(this.proyecto.nombre);
       var self = this;
       let formData = new FormData();
       this.proyecto.sponsor_ids = Array.from(
@@ -267,7 +269,6 @@ export default {
         }
       }
       formData.set("plan_id", this.proyecto.plan_id);
-
       formData.set("foto_principal", this.image);
       formData.set("nombre", this.proyecto.nombre);
       formData.set("video", this.proyecto.video);
@@ -277,6 +278,7 @@ export default {
       formData.set("resumen_principal", this.proyecto.resumen_principal);
       formData.set("subcategoria_id", this.proyecto.subcategoria_id);
       formData.set("ong_id", this.proyecto.ong_id);
+      formData.set("slug", this.proyecto.slug);
       formData.set("destacado", Number(this.proyecto.destacado));
       for (var p of formData) {
         let name = p[0];
@@ -294,7 +296,7 @@ export default {
           self.$refs.files.value = "";
           self.imagenes = [];
           swal("Exito!", "Usuario creado correctamente", "success");
-          window.open("/admin#/proyectos","_self");
+          window.open("/admin#/proyectos", "_self");
         })
         .catch((err) => {
           console.log(err);

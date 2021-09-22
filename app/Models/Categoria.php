@@ -13,6 +13,7 @@ class Categoria extends Model
         'nombre',
         'descripcion',
         'logo',
+        'slug',
     ];
     protected $hidden = ['created_at', 'updated_at'];
 

@@ -66,7 +66,9 @@
                           {{ errores.descripcion[0] }}
                         </span>
                       </div>
-                      <button @click="upload()" class="btn btn-success">Guardar</button>
+                      <button @click="upload()" class="btn btn-success">
+                        Guardar
+                      </button>
                       <button @click="cerrarModal()" class="btn btn-secondary">
                         Cancelar
                       </button>
@@ -145,6 +147,7 @@ export default {
         nombre: "",
         descripcion: "",
         logo: "",
+        slug: "",
       },
       id: 0,
       modificar: true,
@@ -171,9 +174,9 @@ export default {
       formData.set("image", this.image);
       console.log(formData);
       axios.post("/uploadCategoria", formData).then((res) => {
-        if (res.data ==1) {
-          this.categoria.logo =="";
-        }else {
+        if (res.data == 1) {
+          this.categoria.logo == "";
+        } else {
           this.categoria.logo = res.data;
         }
         this.guardar();
@@ -214,6 +217,7 @@ export default {
       });
     },
     guardar() {
+      this.categoria.slug = this.convertToSlug(this.categoria.nombre);
       if (this.modificar) {
         let url = "/admin/categorias/" + this.id;
         axios
@@ -224,8 +228,7 @@ export default {
             this.cerrarModal();
             swal("Exito!", "Usuario editado correctamente", "success");
           })
-          .catch((e) => {
-          });
+          .catch((e) => {});
       } else {
         let url = "/admin/categorias/";
         axios
@@ -240,6 +243,7 @@ export default {
           });
       }
     },
+
     getErrores(errors) {
       this.errores = errors;
     },

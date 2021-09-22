@@ -21,7 +21,9 @@ class ProyectoController extends Controller
     public function index()
     {
         $proyectos = Proyecto::get();
-        $proyectos->load('proyecto_sponsor');
+        foreach ($proyectos as $proyecto) {
+            $proyecto->proyecto_sponsor= ProyectoSponsor::where('proyecto_id', $proyecto->id)->get();
+        }
         return $proyectos;
     }
 
@@ -34,44 +36,47 @@ class ProyectoController extends Controller
      */
     public function store(ProyectoRequest $request)
     {
-        $ruta= Storage::disk('do')->put('proyectos', $request->file('foto_principal') , 'public');
-        if ($request->hasFile('files')) {
-            $pictures = [];
-            foreach ($request->file('files') as $file) {
-                $rutas= Storage::disk('do')->put('proyectos', $file , 'public');
-                $pictures[] = $rutas;
-            }
-            if ($request->plan_id ==0) {
-                $request->plan_id =null;
-            }
-            $proyecto = Proyecto::create([
-                'fotos' => json_encode($pictures),
-                'foto_principal' => $ruta,
-                'nombre' => $request->nombre,
-                'video' => $request->video,
-                'objetivo' => $request->objetivo,
-                'descripcion' => $request->descripcion,
-                'fecha_final' => $request->fecha_final,
-                'resumen_principal' => $request->resumen_principal,
-                'subcategoria_id' => $request->subcategoria_id,
-                'plan_id' => $request->plan_id ,
-                'ong_id' => $request->ong_id,
-                'destacado' => $request->destacado,
-
-            ]);
-            if($request->sponsor_ids<>0){
-                foreach ($proyecto->proyecto_sponsor as $sponsor) {
-                    $sponsorAntiguo = ProyectoSponsor::find($sponsor->id);
-                    $sponsorAntiguo->delete();
+        try {
+            $ruta= Storage::disk('do')->put('proyectos', $request->file('foto_principal') , 'public');
+            if ($request->hasFile('files')) {
+                $pictures = [];
+                foreach ($request->file('files') as $file) {
+                    $rutas= Storage::disk('do')->put('proyectos', $file , 'public');
+                    $pictures[] = $rutas;
                 }
-                foreach ($request->sponsor_ids as $sponsor_id) {
-                    ProyectoSponsor::create([
-                        'sponsor_id' => $sponsor_id,
-                        'proyecto_id' => $proyecto->id,
-                    ]);
+                if ($request->plan_id ==0) {
+                    $request->plan_id =null;
+                }
+                Proyecto::create([
+                    'fotos' => json_encode($pictures),
+                    'foto_principal' => $ruta,
+                    'nombre' => $request->nombre,
+                    'video' => $request->video,
+                    'objetivo' => $request->objetivo,
+                    'descripcion' => $request->descripcion,
+                    'fecha_final' => $request->fecha_final,
+                    'resumen_principal' => $request->resumen_principal,
+                    'subcategoria_id' => $request->subcategoria_id,
+                    'plan_id' => $request->plan_id ,
+                    'ong_id' => $request->ong_id,
+                    'destacado' => $request->destacado,
+                    'slug' => $request->slug,
+                ]);
+                $proyecto = Proyecto::latest()->first();
+                if($request->sponsor_ids<>0){
+                    foreach ($request->sponsor_ids as $sponsor_id) {
+                        ProyectoSponsor::create([
+                            'sponsor_id' => $sponsor_id,
+                            'proyecto_id' => $proyecto->id,
+                        ]);
+                    }
                 }
             }
+            return $proyecto;
+        } catch (\Throwable $th) {
+            return $th;
         }
+
     }
 
 
@@ -95,15 +100,15 @@ class ProyectoController extends Controller
     }
     public function actualizar(Request $request,  $data)
     {
-        $proyecto = Proyecto::find($data);
-        $proyecto->load('proyecto_sponsor');
+        $proyecto = Proyecto::where('id', $request->id)->first();
+        $proyectos= ProyectoSponsor::where('proyecto_id', $proyecto->id)->get();
         if ($request->foto_principal <>"") {
             Storage::disk('do')->delete($proyecto->foto_principal);
             $ruta= Storage::disk('do')->put('proyectos', $request->file('foto_principal') , 'public');
             $proyecto->foto_principal = $ruta;
         }
         if($request->sponsor_ids<>0){
-            foreach ($proyecto->proyecto_sponsor as $sponsor) {
+            foreach ($proyectos as $sponsor) {
                 $sponsorAntiguo = ProyectoSponsor::find($sponsor->id);
                 $sponsorAntiguo->delete();
             }
@@ -114,8 +119,9 @@ class ProyectoController extends Controller
                 ]);
             }
         }
-        $proyecto->fotos = json_decode($proyecto->fotos);
+        
         if ($request->hasFile('files')) {
+            $proyecto->fotos = json_decode($proyecto->fotos);
             foreach ($proyecto->fotos as $file) {
                 Storage::disk('do')->delete($file);
             }
@@ -137,10 +143,11 @@ class ProyectoController extends Controller
         $proyecto->fecha_final = $request->fecha_final;
         $proyecto->resumen_principal = $request->resumen_principal;
         $proyecto->destacado = $request->destacado;
+        $proyecto->slug = $request->slug;
         
         if(!$proyecto->update())
             new \Exception('No se ha podido modificar la Carrera en la base de datos. Identificador Nº '.$data);
-        return $request;
+        return $proyecto;
     }
     /**
      * Remove the specified resource from storage.
@@ -177,9 +184,9 @@ class ProyectoController extends Controller
     public function obtenerPaginado($id)
     {
         if ($id == 0) {
-            $proyectos = Proyecto::orderBy('created_at', 'desc')->paginate(9);
+            $proyectos = Proyecto::orderBy('created_at', 'desc')->paginate(3);
         } else {
-            $proyectos = Proyecto::orderBy('created_at', 'desc')->where('subcategoria_id', $id)->paginate(9);
+            $proyectos = Proyecto::orderBy('created_at', 'desc')->where('subcategoria_id', $id)->paginate(3);
         }
         return $proyectos;
     }

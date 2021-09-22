@@ -16,6 +16,7 @@ class Subcategoria extends Model
         'descripcion',
         'logo',
         'categoria_id',
+        'slug',
     ];
     protected $hidden = ['created_at', 'updated_at'];
 

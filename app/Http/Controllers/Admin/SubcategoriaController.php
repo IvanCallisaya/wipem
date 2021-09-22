@@ -66,6 +66,7 @@ class SubcategoriaController extends Controller
         }
         $subcategoria->nombre = $request['nombre'];
         $subcategoria->descripcion = $request['descripcion'];
+        $subcategoria->slug = $request['slug'];
         if(!$subcategoria->update())
             new \Exception('No se ha podido modificar la Carrera en la base de datos. Identificador Nº '.$data);
         return $subcategoria;

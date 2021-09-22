@@ -4,15 +4,13 @@
       <div :key="componentKey">
         <div class="col-md-2 col-lg-2 sidebar cause-sidebar">
           <div class="row m0 sideNav widget-category">
-            <h4 @click="getProyectos(0)" class="widget-title">categorias</h4>
+            <h4 @click="getProyectos(0)" class="widget-title text-center">categorias</h4>
             <ul class="nav">
               <li
                 v-for="(subcategoria, index) in subcategorias"
                 :key="index"
                 :class="{ active: actual == subcategoria.id }"
-              >
-                <a
-                  @click="
+                                  @click="
                     getProyectos(
                       subcategoria.id,
                       0,
@@ -20,6 +18,15 @@
                       subcategoria.nombre
                     )
                   "
+              >
+                <img
+                :src="
+                  'https://wipem.sfo3.digitaloceanspaces.com/' +
+                  subcategoria.logo
+                "
+              />
+                <a
+
                 >
                   {{ subcategoria.nombre }}
                 </a>
@@ -59,7 +66,7 @@
                 <div class="">
                   <div class="recaudado col-md-6 col-xs-6 p-0">
                     <h6>recaudado</h6>
-                    <h4>20</h4>
+                    <h4>0</h4>
                   </div>
                   <div class="objetivo col-md-6 col-xs-6 p-0">
                     <h6>objetivo</h6>
@@ -138,7 +145,7 @@ export default {
       actual: 0,
       componentKey: 0,
       proyectos: [],
-      porcentaje: 50,
+      porcentaje: 0,
       percentage: 0,
       categorias: [],
       subcategorias: [],
@@ -162,7 +169,7 @@ export default {
         this.actual = 0;
       }
       console.log(this.slugAnt + " " + slug);
-      if (this.slugAnt !== "" && this.slugAnt == slug) {
+      if (this.slugAnt !== "" && this.slugAnt !== slug) {
         history.pushState({}, null, "/causas/" + this.slugAnt);
         this.nombreAct = nombre;
       } else if (slug == "") {

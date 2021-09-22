@@ -73,11 +73,11 @@
           <div class="col-md-4 col-sm-4">
             <div class="widget about">
               <a href="/"><img class="f-logo img-responsive" src="{{asset('images/logo-oficial.png')}}" alt=""></a>
-              <p>¡WIPEM es una plataforma que te conecta con causas y proyectos de todo tipo!<br> <br>
+              <p>WIPEM es una plataforma que te conecta con causas y proyectos de todo tipo<br> <br>
 
-                Identifica la causa o proyecto que más te motive y y tengas la posibilidad de apoyar<br> <br>
+                Elige la Causa o el Proyecto que más te motive y que quieras Apoyar<br> <br>
 
-                ¡Cada boliviano cuenta!<br> <br>
+                ¡Cada Boliviano Cuenta!<br> <br>
               </p>
             </div>
           </div>
@@ -93,13 +93,13 @@
               <div class="fc-icon">
                 <i class="fa fa-phone"></i>
               </div>
-              <p>78046687 / 69128218 / 770337370</p>
+              <p> <a href= "https://wa.me/59178046687">78046687</a> / <a href= "https://wa.me/59169128218">69128218</a> / <a href= "https://wa.me/591770337370">770337370</a> </p>
             </div>
             <div class="f-contact">
               <div class="fc-icon">
                 <i class="fa fa-envelope"></i>
               </div>
-              <p>wipembolivia@gmail.com</p>
+              <a href= "mailto:wipembolivia@gmail.com"><p>wipembolivia@gmail.com</p></a>
             </div>
           </div>
           <div class="col-md-1 col-sm-1">

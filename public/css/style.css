@@ -213,19 +213,17 @@ p {
     padding: 150px 0;
     position: relative;
     background: rgba(0, 0, 0, 0.2);
-    background-size: cover !important;
+    background-size: contain !important;
 }
 
 .hs-inner-galeria {
     margin-left: auto;
     margin-right: auto;
-    min-height: 450px;
-    max-height: 600px;
-    padding: 150px 0;
+    min-height: 470px;
 
+    padding: 150px 0;
     position: relative;
-    background: rgba(0, 0, 0, 0.2);
-    background-size: cover !important;
+    background-size: contain !important;
 }
 
 .imagen-influencer {
@@ -356,7 +354,16 @@ p {
     text-transform: uppercase;
 }
 
-.f-inner .categoria:hover {
+.f-inner .subcategoria {
+    color: #222222;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 0;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.f-inner .subcategoria:hover {
     color: #52cee6;
     cursor: pointer;
 }
@@ -1470,9 +1477,13 @@ blockquote {
     text-transform: uppercase;
     width: 180px;
 }
+
+.sideNav li {
+    display: flex;
+}
 @media (max-width: 1199px) {
     .sideNav {
-        padding: 20px;
+        padding: 5px;
     }
 }
 @media (max-width: 991px) {
@@ -1507,9 +1518,9 @@ blockquote {
 .sideNav ul li a {
     padding: 10px;
 }
-.sideNav ul li a:hover {
+.sideNav ul li {
     cursor: pointer;
-    background: #52cee6;
+
     color: #fff;
 }
 
@@ -1844,6 +1855,11 @@ blockquote {
 }
 
 .pie-formulario ul li {
+    display: inline-block;
+    padding-left: 20px;
+}
+
+.categoria-formulario ul li {
     display: inline-block;
     padding-left: 20px;
 }

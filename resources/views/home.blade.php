@@ -9,7 +9,7 @@
   <div class="clearfix"></div>
   <div class="features">
 
-    <div class="container pie-formulario">
+    <div class="container categoria-formulario">
       <categorias />
     </div>
 

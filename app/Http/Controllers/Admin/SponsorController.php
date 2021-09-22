@@ -8,6 +8,7 @@ use App\Models\Sponsor;
 
 use App\Http\Requests\SponsorRequest;
 use App\Http\Controllers\Controller;
+use App\Models\ProyectoSponsor;
 use Illuminate\Support\Facades\Storage;
         
 
@@ -72,6 +73,12 @@ class SponsorController extends Controller
     {
         $sponsor = Sponsor::find($id);
         Storage::disk('do')->delete($sponsor->logo);
+        
+        $sponsor->proyecto_sponsor= ProyectoSponsor::where('proyecto_id', $sponsor->id)->get();
+        foreach ($sponsor->proyecto_sponsor as $sponsor) {
+            $sponsorAntiguo = ProyectoSponsor::find($sponsor->id);
+            $sponsorAntiguo->delete();
+        }
         $sponsor->delete();
     }
 }

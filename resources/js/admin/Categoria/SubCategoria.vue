@@ -143,6 +143,7 @@ export default {
         descripcion: "",
         logo: "",
         categoria_id: this.$route.params.id,
+        slug: "",
       },
       id: 0,
       modificar: true,
@@ -169,9 +170,9 @@ export default {
       formData.set("image", this.image);
       console.log(formData);
       axios.post("/uploadCategoria", formData).then((res) => {
-        if (res.data ==1) {
-          this.categoria.logo =="";
-        }else {
+        if (res.data == 1) {
+          this.categoria.logo == "";
+        } else {
           this.categoria.logo = res.data;
         }
         this.guardar();
@@ -213,6 +214,8 @@ export default {
       });
     },
     guardar() {
+      this.categoria.slug = this.convertToSlug(this.categoria.nombre);
+      console.log(this.categoria.slug);
       if (this.modificar) {
         let url = "/admin/subcategorias/" + this.id;
         axios

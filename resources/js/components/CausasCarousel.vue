@@ -55,7 +55,7 @@ export default {
   data() {
     return {
       percentage: 0,
-      porcentaje: 68,
+      porcentaje: 0,
       proyectos: [],
       slickOptions: {
         dots: true,

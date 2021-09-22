@@ -35,7 +35,7 @@
             />
           </div>
           <div class="f-inner">
-            <a class="categoria" @click="causas(subcategoria.id)">
+            <a class="subcategoria" @click="causas(subcategoria.id)">
               {{ subcategoria.nombre }}
             </a>
           </div>
