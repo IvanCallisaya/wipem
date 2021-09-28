@@ -30,7 +30,8 @@ class Proyecto extends Model
 
     public function proyecto_sponsor(){
       return $this->hasMany(ProyectoSponsor::class,'proyecto_id');
-  }
+    }
+    
   public function getRouteKeyName()
   {
       return 'slug';

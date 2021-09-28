@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row f-inner">
-      <h5 class="text-center">CATEGORÍAS</h5>
+      <h5 class="text-center">CROWDFUNDING Y FUNDRAISING EN BOLIVIA</h5>
 
       <div class="col-md-12 text-center">
         <ul>

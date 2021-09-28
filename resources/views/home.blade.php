@@ -19,7 +19,7 @@
       <div class="container">
         <div class="heading-3 gap-50">
           <div class="row sectionTitle text-center">
-            <h5>CAUSAS DESTACADAS</h5>
+            <h5>PROYECTOS SOCIALES DESTACADOS</h5>
 
             <causa-carrusel />
           </div>
@@ -37,13 +37,14 @@
 
       <div class="container-fluid mt-20">
         <div class="heading-3 gap-50">
-          <h5 class="text-center">INFLUENCERS</h5>
+          <h5 class="text-center">EMBAJADORES</h5>
         </div>
         <influencer />
       </div>
 
 
     </div>
+
 
 
   </div>

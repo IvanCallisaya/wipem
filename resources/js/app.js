@@ -30,6 +30,10 @@ import VueMeta from 'vue-meta'
 import VueRouter from 'vue-router'
 
 import VueCountryCode from "vue-country-code-select";
+import VueSocialSharing from 'vue-social-sharing'
+
+Vue.use(VueSocialSharing);
+
 Vue.use(VueCountryCode);
 
 Vue.use(VueRouter);
@@ -112,6 +116,7 @@ Vue.component('causas', require('./components/Causas.vue').default);
 Vue.component('proyecto', require('./components/Proyecto.vue').default);
 Vue.component('influencer', require('./components/Influencer.vue').default);
 Vue.component('registrar', require('./components/Registrar.vue').default);
+Vue.component('whatsapp', require('./components/Whatsapp.vue').default);
 
 
 const router = new VueRouter({

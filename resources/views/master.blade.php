@@ -5,8 +5,6 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
 
   <title>WIPEM</title>
   <link rel="shortcut icon" type="image/jpg" href="{{asset('images/logo-wipem.png')}}" />
@@ -20,6 +18,7 @@
 
 <body>
 
+
   <div id="app">
     <header class="header">
       <div class="top-bar">
@@ -30,13 +29,12 @@
             </div>
             <div class="col-sm-30">
               <ul>
-                <li><a href="/">Inicio</a></li>
                 <li><a href="/causas/todas">Causas</a></li>
-                <li><a href="/">Contacto</a></li>
-                <li><a href="/">Sobre Nosotros</a></li>
-
+                <li><a href="/">¿Qué es Wipem?</a></li>
+                <li><a href="/">Blog</a></li>
+              </ul>
+              <ul class="nav-login">
                 @if (Route::has('login'))
-
                 @auth
                 <li>
                   <a href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -47,15 +45,9 @@
                     </form>
                   </a>
                 </li>
-
                 @else
                 <li><a href="{{ route('login') }}">Iniciar Sesión</a></li>
-
-                @if (Route::has('register'))
-                <li><a href="/registrarse">Registrarse</a></li>
-                @endif
                 @endauth
-
                 @endif
               </ul>
             </div>
@@ -93,13 +85,15 @@
               <div class="fc-icon">
                 <i class="fa fa-phone"></i>
               </div>
-              <p> <a href= "https://wa.me/59178046687">78046687</a> / <a href= "https://wa.me/59169128218">69128218</a> / <a href= "https://wa.me/591770337370">770337370</a> </p>
+              <p> <a href="https://wa.me/59178046687">78046687</a> / <a href="https://wa.me/59169128218">69128218</a> / <a href="https://wa.me/591770337370">770337370</a> </p>
             </div>
             <div class="f-contact">
               <div class="fc-icon">
                 <i class="fa fa-envelope"></i>
               </div>
-              <a href= "mailto:wipembolivia@gmail.com"><p>wipembolivia@gmail.com</p></a>
+              <a href="mailto:wipembolivia@gmail.com">
+                <p>wipembolivia@gmail.com</p>
+              </a>
             </div>
           </div>
           <div class="col-md-1 col-sm-1">
@@ -129,12 +123,14 @@
         </div>
       </div>
     </footer>
+    <whatsapp />
   </div>
+
   </div>
 
   <script src="{{ asset('js/app.js') }}"></script>
   <script src="{{asset('js/bootstrap.min.js') }}"></script>
-  <script src="{{asset('js/jquery.min.js') }}"></script>
+  <script src="{{asset('js/jquery-2.1.4.min.js') }}"></script>
   <script src="{{asset('js/main.js') }}"></script>
   <script src="{{asset('vendors/waypoint/waypoints.min.js') }}"></script>
   <script src="{{asset('vendors/couterup/jquery.counterup.min.js') }}"></script>

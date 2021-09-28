@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Proyecto;
 use App\Models\ProyectoSponsor;
+use App\Models\Subcategoria;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProyectoRequest;
 use App\Http\Controllers\Controller;
@@ -84,6 +85,7 @@ class ProyectoController extends Controller
     {
         $proyecto = Proyecto::find($project);
         $proyecto->proyecto_sponsor= ProyectoSponsor::where('proyecto_id', $proyecto->id)->get();
+        $proyecto->subcategoria= Subcategoria::where('id', $proyecto->subcategoria_id)->get();
         return $proyecto;
     }
 
@@ -177,6 +179,8 @@ class ProyectoController extends Controller
         $proyecto = Proyecto::find($id);
         
         $proyecto->fotos = json_decode($proyecto->fotos);
+        $proyecto->proyecto_sponsor= ProyectoSponsor::where('proyecto_id', $proyecto->id)->get();
+        $proyecto->subcategoria= Subcategoria::where('id', $proyecto->subcategoria_id)->first();;
         return view('proyecto', compact('proyecto'));
     }
 
@@ -184,9 +188,9 @@ class ProyectoController extends Controller
     public function obtenerPaginado($id)
     {
         if ($id == 0) {
-            $proyectos = Proyecto::orderBy('created_at', 'desc')->paginate(3);
+            $proyectos = Proyecto::orderBy('created_at', 'desc')->paginate(9);
         } else {
-            $proyectos = Proyecto::orderBy('created_at', 'desc')->where('subcategoria_id', $id)->paginate(3);
+            $proyectos = Proyecto::orderBy('created_at', 'desc')->where('subcategoria_id', $id)->paginate(9);
         }
         return $proyectos;
     }

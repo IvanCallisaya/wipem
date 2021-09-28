@@ -28,7 +28,7 @@
             <div class="">
               <div class="recaudado col-md-6 col-xs-6 p-0">
                 <h6>recaudado</h6>
-                <h4>20</h4>
+                <h4>0</h4>
               </div>
               <div class="objetivo col-md-6 col-xs-6 p-0">
                 <h6>objetivo</h6>
@@ -47,7 +47,7 @@ import "slick-carousel/slick/slick.css";
 export default {
   metaInfo() {
     return {
-      title: "Inicio | Wipem",
+      title: "Wipem | Crowdfunding y Fundraising en Bolivia",
       meta: [],
     };
   },

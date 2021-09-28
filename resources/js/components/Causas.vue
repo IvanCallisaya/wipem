@@ -133,7 +133,7 @@ import $ from "jquery";
 export default {
   metaInfo() {
     return {
-      title: "Proyectos de " + this.nombreAct + " | Wipem",
+      title: "Proyectos " + this.nombreAct + " | Wipem",
       meta: [],
     };
   },
@@ -171,13 +171,13 @@ export default {
       console.log(this.slugAnt + " " + slug);
       if (this.slugAnt !== "" && this.slugAnt !== slug) {
         history.pushState({}, null, "/causas/" + this.slugAnt);
-        this.nombreAct = nombre;
+        this.nombreAct = "de "+ nombre;
       } else if (slug == "") {
         history.pushState({}, null, "/causas/" + "todas");
-        this.nombreAct = "todas";
+        this.nombreAct = "Sociales en Bolivia";
       } else {
         history.pushState({}, null, "/causas/" + slug);
-        this.nombreAct = nombre;
+        this.nombreAct = "de " + nombre;
       }
       pagi = pagi || "/causa/" + id;
 

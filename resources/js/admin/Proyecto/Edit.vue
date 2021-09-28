@@ -2,7 +2,7 @@
   <div class="container">
     <h5>Editar Proyecto</h5>
 
-    <form id="formId" @submit.prevent="guardar">
+    <form id="formId" >
       <div class="my-2">
         <label for="nombre">Nombre</label>
         <input
