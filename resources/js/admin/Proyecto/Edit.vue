@@ -2,7 +2,7 @@
   <div class="container">
     <h5>Editar Proyecto</h5>
 
-    <form id="formId">
+    <form id="formId" @submit.prevent="guardar">
       <div class="my-2">
         <label for="nombre">Nombre</label>
         <input
@@ -164,7 +164,7 @@
           </p>
         </div>
       </div>
-      <button @click="guardar()" class="btn btn-success">Guardar</button>
+      <button class="btn btn-success">Guardar</button>
       <router-link to="/proyectos" class="btn btn-secondary"
         >Cancelar</router-link
       >
@@ -298,7 +298,7 @@ export default {
           self.$refs.files.value = "";
           self.imagenes = [];
           swal("Exito!", "Proyecto editado correctamente", "success");
-          // window.open("/admin#/proyectos", "_self");
+          window.open("/admin#/proyectos", "_self");
         })
         .catch((err) => {
           console.log(err);

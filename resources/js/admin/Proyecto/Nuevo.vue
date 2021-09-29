@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h5>Crear Nuevo Proyecto</h5>
-    <form id="formId" >
+    <form id="formId" @submit.prevent="guardar">
       <div class="my-2">
         <label for="ong_id">Ong</label>
         <select
@@ -177,8 +177,10 @@
           </p>
         </div>
       </div>
-      <button @click="guardar()" class="btn btn-success">Guardar</button>
-      <button class="btn btn-secondary">Cancelar</button>
+      <button class="btn btn-success">Guardar</button>
+      <router-link to="/proyectos" class="btn btn-secondary"
+        >Cancelar</router-link
+      >
     </form>
     <pre> {{ proyecto }} </pre>
   </div>
