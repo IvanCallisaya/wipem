@@ -68,8 +68,30 @@
                             </div>
                         </div>
                     </form>
+
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="container pie-formulario col-md-12">
+        <div class="col-md-6 text-center">
+            <p>¿No tienes tienes una cuenta?</p>
+        </div>
+        <div class="col-md-6 text-center">
+            <a href="/registrarse">Registrarse</a>
+        </div>
+        <div class="col-md-12 text-center">
+            <p>Iniciar Sesión con</p>
+        </div>
+        <div class="col-md-12 text-center">
+            <ul>
+                <li>
+                    <a href=" {{ route('login.facebook') }} "><img src="images/icons/facebook.png" class="img-responsive" alt="" /></a>
+                </li>
+                <li>
+                    <a href=" {{ route('login.google') }} "><img src="images/icons/google.png" class="img-responsive" alt="" /></a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>

@@ -2,7 +2,7 @@
   <div class="container">
     <h5>Editar Proyecto</h5>
 
-    <form id="formId" >
+    <form id="formId">
       <div class="my-2">
         <label for="nombre">Nombre</label>
         <input
@@ -164,8 +164,10 @@
           </p>
         </div>
       </div>
-      <button class="btn btn-success">Guardar</button>
-      <button class="btn btn-secondary">Cancelar</button>
+      <button @click="guardar()" class="btn btn-success">Guardar</button>
+      <router-link to="/proyectos" class="btn btn-secondary"
+        >Cancelar</router-link
+      >
     </form>
     <pre> {{ proyecto }} </pre>
   </div>

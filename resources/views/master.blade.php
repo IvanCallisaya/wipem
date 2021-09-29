@@ -85,7 +85,7 @@
               <div class="fc-icon">
                 <i class="fa fa-phone"></i>
               </div>
-              <p> <a href="https://wa.me/59178046687">78046687</a> / <a href="https://wa.me/59169128218">69128218</a> / <a href="https://wa.me/591770337370">770337370</a> </p>
+              <p> <a href="https://wa.me/59178046687">78046687</a> / <a href="https://wa.me/59169128218">69128218</a> / <a href="https://wa.me/59177037370">770337370</a> </p>
             </div>
             <div class="f-contact">
               <div class="fc-icon">

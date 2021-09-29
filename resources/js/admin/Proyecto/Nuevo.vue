@@ -177,7 +177,7 @@
           </p>
         </div>
       </div>
-      <button class="btn btn-success">Guardar</button>
+      <button @click="guardar()" class="btn btn-success">Guardar</button>
       <button class="btn btn-secondary">Cancelar</button>
     </form>
     <pre> {{ proyecto }} </pre>
