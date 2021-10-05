@@ -2,7 +2,7 @@
 
 @section('content')
 <div id="app">
-  <div class="container-fluid gap-30 embed-responsive embed-responsive-16by9">
+  <div class="container-fluid gap-30">
     <imagenes />
   </div>
 
