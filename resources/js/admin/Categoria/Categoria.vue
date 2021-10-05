@@ -37,7 +37,7 @@
 
                   <!-- Modal body -->
                   <div class="modal-body">
-                    <form id="formId">
+                    <form id="formId" @submit.prevent="upload">
                       <input @change="handleOnChange" type="file" />
 
                       <div class="my-4">
@@ -69,9 +69,9 @@
                       <button @click="upload()" class="btn btn-success">
                         Guardar
                       </button>
-                      <button @click="cerrarModal()" class="btn btn-secondary">
+                      <a @click="cerrarModal()" class="btn btn-secondary text-white">
                         Cancelar
-                      </button>
+                      </a>
                     </form>
                   </div>
                 </div>

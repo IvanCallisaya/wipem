@@ -18,7 +18,7 @@
                 <th>Imagen</th>
                 <th>Nombre</th>
                 <th>Resumen Principal</th>
-                <th>Correo Institucional</th>
+                <th>Objetivo</th>
                 <th>Destacado</th>
                 <th>Fecha final</th>
                 <th>Acciones</th>

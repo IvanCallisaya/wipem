@@ -56,10 +56,17 @@
                 </div>
               </div>
             </div>
-
-            <iframe height="400" :src="proyecto.video" alt="url del video">
-            </iframe>
-
+            <div class="col-md-12 col-xs-12">
+              <div class="embed-responsive embed-responsive-16by9">
+                <iframe
+                  style="border-radius: 9px"
+                  :src="proyecto.video"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            </div>
             <div class="gap-40"></div>
 
             <p v-html="proyecto.descripcion"></p>
@@ -103,7 +110,7 @@
           <Slick ref="slick" :options="slickOptions">
             <div v-for="(imagen, index) in proyecto.fotos" :key="index">
               <div
-                class="hs-inner-galeria"
+                class="hs-inner-galeria embed-responsive embed-responsive-4by3"
                 v-bind:style="{
                   backgroundImage:
                     'url(https://wipem.sfo3.digitaloceanspaces.com/' +
@@ -120,31 +127,42 @@
     <!-- Buttons, Copy this to your Page Article -->
     <div class="container compartir heading-3 gap-30">
       <div class="text-center share-buttons-row">
-        <h5 class=" text-uppercase">Compartir:</h5>
+        <h5 class="text-uppercase">Compartir:</h5>
         <!--Facebook's Button -->
         <ShareNetwork
           network="facebook"
           v-bind:title="this.proyecto.nombre"
           v-bind:description="this.proyecto.resumen_principal"
-          v-bind:quote="this.proyecto.nombre +'\n' + this.proyecto.resumen_principal"
-          v-bind:url="'https://wipem.com.bo/proyecto/'+ this.proyecto.slug"
-          v-bind:image="'https://wipem.com.bo/proyecto/'+ proyecto.foto"
+          v-bind:quote="
+            this.proyecto.nombre + '\n' + this.proyecto.resumen_principal
+          "
+          v-bind:url="'https://wipem.com.bo/proyecto/' + this.proyecto.slug"
+          v-bind:image="'https://wipem.com.bo/proyecto/' + proyecto.foto"
           v-bind:hashtags="'wipem, hola'"
-          >
-          <div  class="share-fb"> </div>
+        >
+          <div class="share-fb"></div>
         </ShareNetwork>
         <ShareNetwork
           network="twitter"
-          v-bind:title="this.proyecto.nombre +'\n' + this.proyecto.resumen_principal"
+          v-bind:title="
+            this.proyecto.nombre + '\n' + this.proyecto.resumen_principal
+          "
           v-bind:description="this.proyecto.resumen_principal"
-          v-bind:quote="this.proyecto.nombre +'\n' + this.proyecto.resumen_principal"
-          v-bind:url="'https://wipem.com.bo/proyecto/'+ this.proyecto.slug"
-          v-bind:image="'https://wipem.com.bo/proyecto/'+ proyecto.foto"
-          v-bind:hashtags="'wipem,' + this.proyecto.slug +',' + this.proyecto.subcategoria.slug"
-          >
-          <div  class="share-twitter"> </div>
+          v-bind:quote="
+            this.proyecto.nombre + '\n' + this.proyecto.resumen_principal
+          "
+          v-bind:url="'https://wipem.com.bo/proyecto/' + this.proyecto.slug"
+          v-bind:image="'https://wipem.com.bo/proyecto/' + proyecto.foto"
+          v-bind:hashtags="
+            'wipem,' +
+            this.proyecto.slug +
+            ',' +
+            this.proyecto.subcategoria.slug
+          "
+        >
+          <div class="share-twitter"></div>
         </ShareNetwork>
-    
+
         <!-- <div @click="compartirFacebook()" class="share-fb"></div> -->
         <!--Twitter's Button -->
         <!-- <div @click="compartirTwitter()" class="share-twitter"></div> -->
@@ -153,13 +171,14 @@
           network="whatsapp"
           v-bind:title="this.proyecto.nombre"
           v-bind:description="this.proyecto.resumen_principal"
-          v-bind:quote="this.proyecto.nombre +'\n' + this.proyecto.resumen_principal"
-          v-bind:url="'https://wipem.com.bo/proyecto/'+ this.proyecto.slug"
-          v-bind:image="'https://wipem.com.bo/proyecto/'+ proyecto.foto"
+          v-bind:quote="
+            this.proyecto.nombre + '\n' + this.proyecto.resumen_principal
+          "
+          v-bind:url="'https://wipem.com.bo/proyecto/' + this.proyecto.slug"
+          v-bind:image="'https://wipem.com.bo/proyecto/' + proyecto.foto"
           v-bind:hashtags="'wipem,' + this.proyecto.slug"
-
-          >
-          <div  class="share-whatsapp"> <img src="/images/whatsapp.png" /></div>
+        >
+          <div class="share-whatsapp"><img src="/images/whatsapp.png" /></div>
         </ShareNetwork>
         <!-- <div @click="compartirWhatsapp()" class="share-whatsapp">
           <img src="/images/whatsapp.png" />
@@ -168,12 +187,14 @@
           network="linkedin"
           v-bind:title="this.proyecto.nombre"
           v-bind:description="this.proyecto.resumen_principal"
-          v-bind:quote="this.proyecto.nombre +'\n' + this.proyecto.resumen_principal"
-          v-bind:url="'https://wipem.com.bo/proyecto/'+ this.proyecto.slug"
-          v-bind:image="'https://wipem.com.bo/proyecto/'+ proyecto.foto"
+          v-bind:quote="
+            this.proyecto.nombre + '\n' + this.proyecto.resumen_principal
+          "
+          v-bind:url="'https://wipem.com.bo/proyecto/' + this.proyecto.slug"
+          v-bind:image="'https://wipem.com.bo/proyecto/' + proyecto.foto"
           v-bind:hashtags="'wipem,' + this.proyecto.slug"
-          >
-          <div  class="share-linkedin"> </div>
+        >
+          <div class="share-linkedin"></div>
         </ShareNetwork>
         <!--Linkedin's Button -->
         <!-- <div @click="compartirLinkedin()" class="share-linkedin"></div> -->
@@ -182,13 +203,17 @@
         <ShareNetwork
           network="tumblr"
           v-bind:title="this.proyecto.nombre"
-          v-bind:description="this.proyecto.nombre +'\n' + this.proyecto.resumen_principal"
-          v-bind:quote="this.proyecto.nombre +'\n' + this.proyecto.resumen_principal"
-          v-bind:url="'https://wipem.com.bo/proyecto/'+ this.proyecto.slug"
-          v-bind:image="'https://wipem.com.bo/proyecto/'+ proyecto.foto"
+          v-bind:description="
+            this.proyecto.nombre + '\n' + this.proyecto.resumen_principal
+          "
+          v-bind:quote="
+            this.proyecto.nombre + '\n' + this.proyecto.resumen_principal
+          "
+          v-bind:url="'https://wipem.com.bo/proyecto/' + this.proyecto.slug"
+          v-bind:image="'https://wipem.com.bo/proyecto/' + proyecto.foto"
           v-bind:hashtags="'wipem,' + this.proyecto.slug"
-          >
-          <div  class="share-tumblr"> </div>
+        >
+          <div class="share-tumblr"></div>
         </ShareNetwork>
       </div>
     </div>
@@ -257,11 +282,11 @@ export default {
   data() {
     return {
       overriddenNetworks: {
-          "custom": {
-            "sharer": "https://mycustomdomain.com",
-            "type": "popup"
-          },
+        custom: {
+          sharer: "https://mycustomdomain.com",
+          type: "popup",
         },
+      },
       empresas: [],
       ong: {},
       imagenes: [],

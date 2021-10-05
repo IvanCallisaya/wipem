@@ -67,9 +67,9 @@
                         </span>
                       </div>
                       <button class="btn btn-success">Guardar</button>
-                      <button @click="cerrarModal()" class="btn btn-secondary">
+                      <a @click="cerrarModal()" class="btn btn-secondary text-white">
                         Cancelar
-                      </button>
+                      </a>
                     </form>
                   </div>
                 </div>

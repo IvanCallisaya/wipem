@@ -36,7 +36,7 @@
                   </div>
                   <!-- Modal body -->
                   <div class="modal-body">
-                    <form id="formId">
+                    <form id="formId" @submit.prevent="upload">
                       <input @change="handleOnChange" type="file" />
                       <div class="my-2">
                         <label for="nombre">Nombre</label>
@@ -196,10 +196,10 @@
                         </span>
                       </div>
 
-                      <button @click="upload()" class="btn btn-success">Guardar</button>
-                      <button @click="cerrarModal()" class="btn btn-secondary">
+                      <button class="btn btn-success">Guardar</button>
+                      <a @click="cerrarModal()" class="btn btn-secondary text-white">
                         Cancelar
-                      </button>
+                      </a>
                     </form>
                   </div>
                 </div>
@@ -340,7 +340,7 @@ export default {
             .delete(url)
             .then((res) => {
               this.getOngs();
-              swal("Exito!", "Usuario eliminado correctamente", "success");
+              swal("Exito!", "Ong eliminada correctamente", "success");
             })
             .catch((error) => {
               console.log(error);
@@ -358,7 +358,7 @@ export default {
             console.log(res);
             this.getOngs();
             this.cerrarModal();
-            swal("Exito!", "Usuario editado correctamente", "success");
+            swal("Exito!", "Ong editada correctamente", "success");
           })
           .catch((e) => {
             this.errores = e.response.data.errors;
@@ -371,6 +371,7 @@ export default {
             this.id = "";
             this.getOngs();
             this.cerrarModal();
+            swal("Exito!", "Ong creado correctamente", "success");
           })
           .catch((e) => {
             this.errores = e.response.data.errors;

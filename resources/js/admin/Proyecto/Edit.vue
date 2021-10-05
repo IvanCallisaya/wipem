@@ -51,8 +51,9 @@
       <div class="my-2">
         <label for="subcategoria_id">Subcategoria</label>
         <select
+          id="categoria-select"
+          class="select2-blue"
           v-model="proyecto.subcategoria_id"
-          class="form-control form-control-lg form-control-solid"
         >
           <option
             v-for="subcategoria in this.subcategorias"
@@ -240,6 +241,7 @@ export default {
     },
     guardar() {
       this.proyecto.slug = this.convertToSlug(this.proyecto.nombre);
+      this.proyecto.subcategoria_id = $("#categoria-select").val();
       var self = this;
       let formData = new FormData();
       this.proyecto.sponsor_ids = Array.from(
@@ -343,7 +345,7 @@ export default {
     },
   },
   mounted() {
-    console.log(this.$route.params.id);
+    const self = this;
     this.getProyecto();
     this.getPlanes();
     $(document).ready(function () {
@@ -351,6 +353,15 @@ export default {
         theme: "classic",
         width: "100%",
       });
+    });
+    $("#categoria-select").select2({
+      theme: "classic",
+      width: "100%",
+    });
+    $("#categoria-select").on("select2:select", (e) => {
+      var data = e.params.data;
+      self.proyecto.subcategoria_id = data.id;
+      console.log(self.proyecto.subcategoria_id);
     });
   },
 };

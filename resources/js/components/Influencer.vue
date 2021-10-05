@@ -57,6 +57,13 @@ export default {
               slidesToScroll: 2,
             },
           },
+          {
+            breakpoint: 490,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+            },
+          },
           // You can unslick at a given breakpoint now by adding:
           // settings: "unslick"
           // instead of a settings object
@@ -96,7 +103,7 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
-  border-radius:20px;
+  border-radius: 20px;
   top: 50%;
   transform: translateY(-50%);
 }

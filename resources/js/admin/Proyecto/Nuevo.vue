@@ -4,10 +4,7 @@
     <form id="formId" @submit.prevent="guardar">
       <div class="my-2">
         <label for="ong_id">Ong</label>
-        <select
-          v-model="proyecto.ong_id"
-          class="form-control form-control-lg form-control-solid"
-        >
+        <select id="ong-select" class="select2-blue" v-model="proyecto.ong_id">
           <option v-for="ong in this.ongs" :value="ong.id" :key="ong.id">
             {{ ong.nombre }}
           </option>
@@ -65,8 +62,9 @@
       <div class="my-2">
         <label for="subcategoria_id">Subcategoria</label>
         <select
+          id="categoria-select"
+          class="select2-blue"
           v-model="proyecto.subcategoria_id"
-          class="form-control form-control-lg form-control-solid"
         >
           <option
             v-for="subcategoria in this.subcategorias"
@@ -245,11 +243,14 @@ export default {
     },
     upload(e) {
       const formData = new FormData();
-
       console.log(formData);
     },
     guardar() {
       this.proyecto.slug = this.convertToSlug(this.proyecto.nombre);
+      this.proyecto.ong_id = $("#ong-select").val();
+      this.proyecto.subcategoria_id = $("#categoria-select").val();
+      console.log(this.proyecto.ong_id);
+      console.log(this.proyecto.subcategoria_id);
       var self = this;
       let formData = new FormData();
       this.proyecto.sponsor_ids = Array.from(
@@ -298,7 +299,7 @@ export default {
           self.$refs.files.value = "";
           self.imagenes = [];
           swal("Exito!", "Usuario creado correctamente", "success");
-          window.open("/admin#/proyectos", "_self");
+          // window.open("/admin#/proyectos", "_self");
         })
         .catch((err) => {
           console.log(err);
@@ -348,10 +349,29 @@ export default {
   },
   mounted() {
     this.getOngs();
+    const self = this;
     $(document).ready(function () {
       $("#js-multiple").select2({
         theme: "classic",
         width: "100%",
+      });
+      $("#ong-select").select2({
+        theme: "classic",
+        width: "100%",
+      });
+      $("#categoria-select").select2({
+        theme: "classic",
+        width: "100%",
+      });
+      $("#categoria-select").on("select2:select", (e) => {
+        var data = e.params.data;
+        self.proyecto.subcategoria_id = data.id;
+        console.log(self.proyecto.subcategoria_id);
+      });
+      $("#ong-select").on("select2:select", (e) => {
+        var data = e.params.data;
+        self.proyecto.ong_id = data.id;
+        console.log(self.proyecto.ong_id);
       });
       // $(".js-basico").select2({
       //   theme: "classic",
