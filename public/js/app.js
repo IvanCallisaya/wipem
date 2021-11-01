@@ -4676,7 +4676,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -4715,6 +4714,7 @@ __webpack_require__.r(__webpack_exports__);
       celular: "",
       monto: "",
       moneda: "",
+      idPago: "",
       idUsuario: 0,
       empresas: [],
       ong: {},
@@ -4741,7 +4741,6 @@ __webpack_require__.r(__webpack_exports__);
       axios.get(url).then(function (res) {
         _this.ong = res.data;
       });
-      this.proyecto.recaudado = "100.000";
       var objetivo = this.reverseFormatNumber(this.proyecto.objetivo, "de");
       var recaudado = this.reverseFormatNumber(this.proyecto.recaudado, "de");
       console.log(objetivo);
@@ -4789,6 +4788,7 @@ __webpack_require__.r(__webpack_exports__);
 
         if (this.modificar) {
           this.tituloModal = "Donar";
+          this.idPago = uuid.v1();
           this.email = "";
           this.celular = "";
           this.monto = "";

@@ -149,6 +149,7 @@
   <script src="{{asset('vendors/waypoint/waypoints.min.js') }}"></script>
   <script src="{{asset('vendors/couterup/jquery.counterup.min.js') }}"></script>
   <script src="{{asset('js/theme.js') }}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/node-uuid/1.4.7/uuid.min.js"></script>
 
 </body>
 

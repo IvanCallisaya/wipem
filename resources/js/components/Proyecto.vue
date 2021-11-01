@@ -297,7 +297,6 @@
     </form>
   </div>
 </template>
-
 <script>
 import Slick from "vue-slick";
 import "slick-carousel/slick/slick.css";
@@ -329,6 +328,7 @@ export default {
       celular: "",
       monto: "",
       moneda: "",
+      idPago: "",
       idUsuario: 0,
       empresas: [],
       ong: {},
@@ -354,7 +354,7 @@ export default {
       axios.get(url).then((res) => {
         this.ong = res.data;
       });
-      this.proyecto.recaudado = "100.000";
+
       let objetivo = this.reverseFormatNumber(this.proyecto.objetivo, "de");
       let recaudado = this.reverseFormatNumber(this.proyecto.recaudado, "de");
 
@@ -425,6 +425,7 @@ export default {
         this.modal = 1;
         if (this.modificar) {
           this.tituloModal = "Donar";
+          this.idPago = uuid.v1();
           this.email = "";
           this.celular = "";
           this.monto = "";
