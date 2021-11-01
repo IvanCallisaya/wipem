@@ -283,6 +283,8 @@ export default {
       formData.set("ong_id", this.proyecto.ong_id);
       formData.set("slug", this.proyecto.slug);
       formData.set("destacado", Number(this.proyecto.destacado));
+      formData.set("destacado", "0.00");
+
       for (var p of formData) {
         let name = p[0];
         let value = p[1];

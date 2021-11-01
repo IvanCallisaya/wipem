@@ -1,12 +1,96 @@
 <template>
   <div>
     <div class="container">
-      <div class="heading-3 gap-50">
+      <div class="heading-3">
         <h5 class="text-center text-uppercase">{{ proyecto.nombre }}</h5>
       </div>
+      <div class="container">
+        <div class="modal" :class="{ mostrar: modal }">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">{{ tituloModal }}</h4>
+                <button
+                  @click="cerrarModal()"
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                >
+                  &times;
+                </button>
+              </div>
+              <div class="modal-body">
+                <form id="FormCliente">
+                  <div class="my-4">
+                    <label for=""> Proyecto: </label>
+                    <input
+                      type="text"
+                      name="Proyecto"
+                      :value="proyecto.slug"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="my-4">
+                    <label for=""> Email: </label>
+                    <input
+                      type="text"
+                      name="Email"
+                      :value="email"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="my-4">
+                    <label for=""> Celular: </label>
+                    <input
+                      type="number"
+                      name="Celular"
+                      :value="celular"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="my-4">
+                    <label for=""> Monto: </label>
+                    <input
+                      type="number"
+                      name="Monto"
+                      value="1"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="my-4">
+                    <label for=""> MonedaVenta: </label>
+                    <select name="MonedaVenta" id="" class="form-control">
+                      <option value="2">Bs</option>
+                      <option value="1">$u$</option>
+                    </select>
+                  </div>
+                </form>
+              </div>
 
+              <div class="modal-footer">
+                <button
+                  @click="cerrarModal()"
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Cancelar
+                </button>
+                <button
+                  @click="pagar()"
+                  type="button"
+                  class="btn btn-success"
+                  data-dismiss="modal"
+                >
+                  Pagar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="row justify-content-md-center">
-        <div class="col-md-12 col-lg-12">
+        <div class="col-md-12 col-lg-12 gap-30">
           <div class="donation-causes dc-single">
             <div class="col-md-7 col-lg-8 col-sm-7 col-xs-5 group">
               <div>
@@ -17,21 +101,22 @@
                         <div
                           class="progress-bar"
                           role="progressbar"
-                          aria-valuenow=""
+                          aria-valuenow="5000"
                           aria-valuemin="0"
                           aria-valuemax="100"
+                          :style="{ width: porcentaje + '%' }"
                         >
                           <div class="percentage">
-                            <span class="counter"></span>%
+                            <span class="counter">{{ porcentaje }}</span
+                            >%
                           </div>
                         </div>
                       </div>
                     </div>
-
                     <div class="fund_raises style2 row m0">
                       <div class="col-xs-6 amount_box_raised">
                         <h6>recaudado</h6>
-                        <h3>0</h3>
+                        <h3>{{ proyecto.recaudado }}</h3>
                       </div>
                       <div class="col-xs-6 amount_box_goal">
                         <h6>objetivo</h6>
@@ -40,7 +125,6 @@
                     </div>
                   </div>
                 </div>
-
                 <div
                   class="
                     col-lg-3 col-md-3 col-sm-3 col-xs-5
@@ -49,7 +133,7 @@
                   "
                 >
                   <div class="row m0 widget widget-category">
-                    <a href="#donate_box" class="btn-primary_cause"
+                    <a @click="abrirModal()" class="btn-primary_cause"
                       >DONE AHORA</a
                     >
                   </div>
@@ -67,14 +151,13 @@
                 ></iframe>
               </div>
             </div>
-            <div class="gap-40"></div>
-
-            <p v-html="proyecto.descripcion"></p>
           </div>
         </div>
       </div>
     </div>
-
+    <div class="container parrafo_container">
+      <p class="parrafo" v-html="proyecto.descripcion"></p>
+    </div>
     <div class="container">
       <div class="row footer_sidebar">
         <div class="widget widget-about col-sm-6 col-md-4">
@@ -85,7 +168,6 @@
             />
           </div>
         </div>
-
         <div class="widget widget-contact col-sm-6 col-md-4">
           <h6 class="label label-default widget-title">MISIÓN</h6>
           <address>
@@ -100,7 +182,6 @@
         </div>
       </div>
     </div>
-
     <div class="container galeria_container">
       <div class="heading-3 gap-50">
         <h5 class="text-center">GALERÍA</h5>
@@ -123,12 +204,9 @@
         </div>
       </div>
     </div>
-
-    <!-- Buttons, Copy this to your Page Article -->
     <div class="container compartir heading-3 gap-30">
       <div class="text-center share-buttons-row">
         <h5 class="text-uppercase">Compartir:</h5>
-        <!--Facebook's Button -->
         <ShareNetwork
           network="facebook"
           v-bind:title="this.proyecto.nombre"
@@ -162,11 +240,6 @@
         >
           <div class="share-twitter"></div>
         </ShareNetwork>
-
-        <!-- <div @click="compartirFacebook()" class="share-fb"></div> -->
-        <!--Twitter's Button -->
-        <!-- <div @click="compartirTwitter()" class="share-twitter"></div> -->
-        <!--Facebook's Button -->
         <ShareNetwork
           network="whatsapp"
           v-bind:title="this.proyecto.nombre"
@@ -180,9 +253,6 @@
         >
           <div class="share-whatsapp"><img src="/images/whatsapp.png" /></div>
         </ShareNetwork>
-        <!-- <div @click="compartirWhatsapp()" class="share-whatsapp">
-          <img src="/images/whatsapp.png" />
-        </div> -->
         <ShareNetwork
           network="linkedin"
           v-bind:title="this.proyecto.nombre"
@@ -196,10 +266,6 @@
         >
           <div class="share-linkedin"></div>
         </ShareNetwork>
-        <!--Linkedin's Button -->
-        <!-- <div @click="compartirLinkedin()" class="share-linkedin"></div> -->
-        <!--Tumblr's Button -->
-        <!-- <div @click="compartirTumblr()" class="share-tumblr"></div> -->
         <ShareNetwork
           network="tumblr"
           v-bind:title="this.proyecto.nombre"
@@ -217,11 +283,22 @@
         </ShareNetwork>
       </div>
     </div>
+    <form
+      method="post"
+      id="FormPagoFacilCheckout"
+      style="display: none"
+      action="https://checkout.pagofacil.com.bo/es/pay"
+      enctype="multipart/form-data"
+      class="form"
+    >
+      <input name="tcParametros" id="tcParametros" type="text" value="" />
+      <input name="tcCommerceID" id="tcCommerceID" type="text" value="" />
+      <input type="submit" class="btn btn-primary" id="btnpagar" value="" />
+    </form>
   </div>
 </template>
 
 <script>
-import $ from "jquery";
 import Slick from "vue-slick";
 import "slick-carousel/slick/slick.css";
 export default {
@@ -233,46 +310,6 @@ export default {
         { name: "author", content: this.ong.nombre },
         { property: "og:local", content: "es_ES" },
         { property: "og:type", content: "website" },
-        { property: "og:title", content: this.proyecto.nombre },
-        {
-          property: "og:description",
-          content: this.proyecto.resumen_principal,
-        },
-        {
-          property: "og:url",
-          content: "https://wipem.com.bo/proyecto/" + this.proyecto.slug,
-        },
-        { property: "og:site_name", content: "wipem.com.bo" },
-        {
-          property: "article:publisher",
-          content: "[https://www.facebook.com/USERNAME]",
-        },
-        {
-          property: "og:image",
-          content:
-            "https://wipem.sfo3.digitaloceanspaces.com/" +
-            this.proyecto.foto_principal,
-        },
-
-        { name: "twitter:title", content: this.proyecto.nombre },
-        {
-          name: "twitter:description",
-          content: this.proyecto.resumen_principal,
-        },
-        {
-          name: "twitter:image",
-          content:
-            "https://wipem.sfo3.digitaloceanspaces.com/" +
-            this.proyecto.foto_principal,
-        },
-        { name: "twitter:site", content: "@[TWITTER_USERNAME]" },
-        { name: "twitter:creator", content: "@[TWITTER_USERNAME]" },
-        { name: "twitter:via", content: "@[TWITTER_USERNAME]" },
-        { name: "twitter:card", content: "photo" },
-        {
-          name: "twitter:url",
-          content: "https://wipem.com.bo/proyecto/" + this.proyecto.slug,
-        },
       ],
     };
   },
@@ -287,9 +324,17 @@ export default {
           type: "popup",
         },
       },
+      tituloModal: "",
+      email: "",
+      celular: "",
+      monto: "",
+      moneda: "",
+      idUsuario: 0,
       empresas: [],
       ong: {},
       imagenes: [],
+      porcentaje: 0,
+      modal: 0,
       article: encodeURIComponent(window.location.href),
       slickOptions: {
         arrows: false,
@@ -305,9 +350,30 @@ export default {
   methods: {
     getEmpresas: function () {
       var url = "ongs/" + this.proyecto.ong_id;
+
       axios.get(url).then((res) => {
         this.ong = res.data;
       });
+      this.proyecto.recaudado = "100.000";
+      let objetivo = this.reverseFormatNumber(this.proyecto.objetivo, "de");
+      let recaudado = this.reverseFormatNumber(this.proyecto.recaudado, "de");
+
+      console.log(objetivo);
+      console.log(recaudado);
+      if (recaudado !== 0) {
+        this.porcentaje = (recaudado * 100) / objetivo;
+      } else {
+        this.porcentaje = 0;
+      }
+      this.porcentaje = Math.round(this.porcentaje);
+      console.log(this.porcentaje);
+    },
+    reverseFormatNumber: function (val, locale) {
+      var group = new Intl.NumberFormat(locale).format(1111).replace(/1/g, "");
+      var decimal = new Intl.NumberFormat(locale).format(1.1).replace(/1/g, "");
+      var reversedVal = val.replace(new RegExp("\\" + group, "g"), "");
+      reversedVal = reversedVal.replace(new RegExp("\\" + decimal, "g"), ".");
+      return Number.isNaN(reversedVal) ? 0 : reversedVal;
     },
     compartirFacebook: function () {
       this.open_window(
@@ -352,9 +418,82 @@ export default {
         "height=320, width=640, toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, directories=no, status=no"
       );
     },
+    abrirModal() {
+      if (this.email == "") {
+        alert("Debe registrarse en el sistema por favor");
+      } else {
+        this.modal = 1;
+        if (this.modificar) {
+          this.tituloModal = "Donar";
+          this.email = "";
+          this.celular = "";
+          this.monto = "";
+          this.moneda = "";
+        }
+      }
+    },
+    cerrarModal() {
+      this.modal = 0;
+    },
+    pagar() {
+      // se manda los datos del FormCliente ara que realize la encriptacion y devuelva
+      //los datos para el FormPagoFacil
+      // aqui se obtiene todo el Formulario del cliente en la variable loFormularioCliente
+      var goFormularioCliente = $("#FormCliente").serialize();
+      console.log(goFormularioCliente);
+      // esta es la url que se mandaran los
+      var lcUrlajax = "PagoFacilCheckoutEncript";
+
+      //////esta parte es aplicado solo para proyecto hechos en laravel
+      // ya que pide u token para pode r llamar a una ruta
+      $.ajaxSetup({
+        headers: {
+          "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+      });
+      $.ajax({
+        url: lcUrlajax,
+        data: { goFormularioCliente },
+        type: "POST",
+        dataType: "json",
+        beforeSend: function () {
+          //console.log(goFormularioCliente);
+        },
+        success: function (response) {
+          //console.log(goFormularioCliente);
+          console.log("Exito");
+          console.log(response);
+
+          $("#tcParametros").val(response.tcParametros);
+          $("#tcCommerceID").val(response.tcCommerceID);
+          $("#btnpagar").click();
+        },
+        error: function (data) {
+          console.log("Error");
+          console.log(data.responseText);
+        },
+      });
+    },
+    obtener() {
+      axios.get(`usuario/${this.email}`).then((res) => {
+        this.idUsuario = res.data.id;
+        this.donador();
+      });
+    },
+    donador() {
+      axios.get(`donadores/${this.idUsuario}`).then((res) => {
+        this.celular = res.data.celular.substr(
+          res.data.celular.indexOf(" ") + 1
+        );
+        this.donador.celular = this.codigo + " " + this.donador.celular;
+      });
+    },
   },
   mounted() {
     this.getEmpresas();
+    this.email = this.$userId;
+    this.obtener();
   },
+  PrepararParametros() {},
 };
 </script>

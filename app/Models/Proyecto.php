@@ -23,7 +23,7 @@ class Proyecto extends Model
         'ong_id',
         'destacado',
         'slug',
-        
+        'recaudado',
     ];
 
     protected $hidden = ['created_at', 'updated_at'];

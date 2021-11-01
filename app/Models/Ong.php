@@ -22,6 +22,8 @@ class Ong extends Model
         'vision',
         'logo',
         'cuenta_banco',
+        'banco',
+        'tipo_cuenta',
     ];
     protected $hidden = ['created_at', 'updated_at'];
 }

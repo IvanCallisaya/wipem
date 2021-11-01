@@ -47,9 +47,6 @@
                           id="nombre"
                           placeholder="Nombre de la ong"
                         />
-                        <span class="text-danger" v-if="errores.nombre">
-                          {{ errores.nombre[0] }}
-                        </span>
                       </div>
                       <div class="my-2">
                         <label for="ciudad">ciudad</label>
@@ -70,9 +67,6 @@
                           <option value="Chuquisaca">Chuquisaca</option>
                           <option value="Tarija">Tarija</option>
                         </select>
-                        <span class="text-danger" v-if="errores.ciudad">
-                          {{ errores.ciudad[0] }}
-                        </span>
                       </div>
                       <div class="my-2">
                         <label for="nit">Nit</label>
@@ -83,9 +77,6 @@
                           id="nit"
                           placeholder="nit de la ong"
                         />
-                        <span class="text-danger" v-if="errores.nombre">
-                          {{ errores.nombre[0] }}
-                        </span>
                       </div>
                       <div class="my-2">
                         <label for="direccion">Direccion</label>
@@ -96,9 +87,6 @@
                           id="direccion"
                           placeholder="Direccion de la ong"
                         />
-                        <span class="text-danger" v-if="errores.nombre">
-                          {{ errores.nombre[0] }}
-                        </span>
                       </div>
                       <div class="my-2">
                         <label for="correo_institucional"
@@ -111,9 +99,6 @@
                           id="correo_institucional"
                           placeholder="Correo Institucional de la ong"
                         />
-                        <span class="text-danger" v-if="errores.nombre">
-                          {{ errores.nombre[0] }}
-                        </span>
                       </div>
                       <div class="my-2">
                         <label for="telefono">Telefono</label>
@@ -124,9 +109,6 @@
                           id="telefono"
                           placeholder="Telefono de la ong"
                         />
-                        <span class="text-danger" v-if="errores.nombre">
-                          {{ errores.nombre[0] }}
-                        </span>
                       </div>
                       <div class="my-2">
                         <label for="representante">Representante</label>
@@ -137,9 +119,6 @@
                           id="representante"
                           placeholder="Representante de la ong"
                         />
-                        <span class="text-danger" v-if="errores.nombre">
-                          {{ errores.nombre[0] }}
-                        </span>
                       </div>
                       <div class="my-2">
                         <label for="correo_representante"
@@ -152,9 +131,6 @@
                           id="correo_representante"
                           placeholder="Correo Representante de la ong"
                         />
-                        <span class="text-danger" v-if="errores.nombre">
-                          {{ errores.nombre[0] }}
-                        </span>
                       </div>
                       <div class="my-2">
                         <label for="mision">Mision</label>
@@ -165,9 +141,6 @@
                           id="mision"
                           placeholder="Mision de la ong"
                         />
-                        <span class="text-danger" v-if="errores.nombre">
-                          {{ errores.nombre[0] }}
-                        </span>
                       </div>
                       <div class="my-2">
                         <label for="vision">Vision</label>
@@ -178,9 +151,16 @@
                           id="vision"
                           placeholder="Vision de la ong"
                         />
-                        <span class="text-danger" v-if="errores.nombre">
-                          {{ errores.nombre[0] }}
-                        </span>
+                      </div>
+                      <div class="my-2">
+                        <label for="cuenta_banco">banco</label>
+                        <input
+                          v-model="ong.banco"
+                          type="text"
+                          class="form-control"
+                          id="banco"
+                          placeholder="banco de la ong"
+                        />
                       </div>
                       <div class="my-2">
                         <label for="cuenta_banco">cuenta_banco</label>
@@ -191,13 +171,34 @@
                           id="cuenta_banco"
                           placeholder="cuenta_banco de la ong"
                         />
-                        <span class="text-danger" v-if="errores.nombre">
-                          {{ errores.nombre[0] }}
-                        </span>
                       </div>
-
+                      <div class="my-2">
+                        <label for="ciudad">Tipo de Cuenta</label>
+                        <select
+                          v-model="ong.tipo_cuenta"
+                          class="
+                            form-control form-control-lg form-control-solid
+                          "
+                        >
+                          <option value="">
+                            Selecciones un tipo de cuenta...
+                          </option>
+                          <option value="Corriente">Corriente</option>
+                          <option value="Ahorro">Ahorro</option>
+                          <option value="Préstamo">Préstamo</option>
+                          <option value="Tarjeta de crédito">
+                            Tarjeta de crédito
+                          </option>
+                          <option value="Billetera móvil">
+                            Billetera móvil
+                          </option>
+                        </select>
+                      </div>
                       <button class="btn btn-success">Guardar</button>
-                      <a @click="cerrarModal()" class="btn btn-secondary text-white">
+                      <a
+                        @click="cerrarModal()"
+                        class="btn btn-secondary text-white"
+                      >
                         Cancelar
                       </a>
                     </form>
@@ -280,6 +281,8 @@ export default {
         vision: "",
         logo: "",
         cuenta_banco: "",
+        banco: "",
+        tipo_cuenta: "",
       },
       id: 0,
       modificar: true,
@@ -287,7 +290,7 @@ export default {
       tituloModal: "",
       ongs: [],
       errores: {},
-      image:"",
+      image: "",
     };
   },
   methods: {
@@ -308,9 +311,9 @@ export default {
       console.log(formData);
       axios.post("/uploadOng", formData).then((res) => {
         console.log(res.data);
-        if (res.data ==1) {
-          this.ong.logo =="";
-        }else {
+        if (res.data == 1) {
+          this.ong.logo == "";
+        } else {
           this.ong.logo = res.data;
         }
         this.guardar();

@@ -422,12 +422,6 @@ p {
     color: #1c57a1;
 }
 
-.donation-causes p {
-    margin: 10px 0 0;
-    line-height: 24px;
-    font-size: 14px;
-}
-
 .donation-causes .group {
     padding-top: 25px;
 }
@@ -974,12 +968,8 @@ a.button:hover {
     }
 }
 
-.donation-causes.dc-single p {
-    margin: 30px 0 0;
-    color: #666666;
-    font-size: 15px;
-    line-height: 28px;
-    letter-spacing: 0.03em;
+.parrafo_container {
+    max-width: 800px;
 }
 
 blockquote {
@@ -2035,7 +2025,7 @@ Created by Alejandro Palacios https://github.com/AlexSoicalap
 }
 
 .share-fb {
-    margin-left: 50px;
+    margin-left: 10px;
     background-color: #2d609b;
     background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTI2LjY2NyAwaC0yMS4zMzRjLTIuOTQ1IDAtNS4zMzMgMi4zODgtNS4zMzMgNS4zMzR2MjEuMzMyYzAgMi45NDYgMi4zODcgNS4zMzQgNS4zMzMgNS4zMzRoMTAuNjY3di0xNGgtNHYtNGg0di0zYzAtMi43NjEgMi4yMzktNSA1LTVoNXY0aC01Yy0wLjU1MiAwLTEgMC40NDgtMSAxdjNoNS41bC0xIDRoLTQuNXYxNGg2LjY2N2MyLjk0NSAwIDUuMzMzLTIuMzg4IDUuMzMzLTUuMzM0di0yMS4zMzJjMC0yLjk0Ni0yLjM4Ny01LjMzNC01LjMzMy01LjMzNHoiPjwvcGF0aD48L3N2Zz4=);
 }

@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\ImagesCausasController;
 use App\Http\Controllers\Admin\DonadorController;
 use App\Http\Controllers\Admin\ImagesProyectoController;
 use App\Http\Controllers\UploadController;
+use App\Http\Controllers\Donador\PagoFacilCheckoutClient;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -35,6 +36,8 @@ Route::get('/', [HomController::class, 'index'])->name('home');
 Route::get('causas/{id}', [HomController::class, 'causas']);
 Route::get('registrarse', [HomController::class, 'registrar']);
 Route::get('usuario/{email}',[HomController::class, 'usuario']);
+Route::get('proyecto/usuario/{email}',[HomController::class, 'usuario']);
+Route::get('proyecto/donadores/{id}',[DonadorController::class, 'show']);
 Route::get('proyecto/{id}',[ProyectoController::class, 'ver'])->name('proyecto');
 
 
@@ -64,11 +67,11 @@ Route::namespace('')->prefix('admin')
     
   });
   // Google Login
-  Route::get('/login/google', [App\Http\Controllers\Auth\LoginController::class, 'redirectToGoogle'])->name('login.google');
-  Route::get('/login/google/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleGoogleCallback']);
+  // Route::get('/login/google', [App\Http\Controllers\Auth\LoginController::class, 'redirectToGoogle'])->name('login.google');
+  // Route::get('/login/google/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleGoogleCallback']);
   // Facebook Login
-  Route::get('/login/facebook', [App\Http\Controllers\Auth\LoginController::class, 'redirectToFacebook'])->name('login.facebook');
-  Route::get('/login/facebook/callback', [App\Http\Auth\Controllers\LoginController::class, 'handleFacebookCallback']);
+  // Route::get('/login/facebook', [App\Http\Controllers\Auth\LoginController::class, 'redirectToFacebook'])->name('login.facebook');
+  // Route::get('/login/facebook/callback', [App\Http\Auth\Controllers\LoginController::class, 'handleFacebookCallback']);
   
   Route::apiResource('/donadores', DonadorController::class );
   Route::post('uploadCategoria', [UploadController::class, 'handle']);
@@ -86,7 +89,13 @@ Route::namespace('')->prefix('admin')
   Route::get('categorias', [CategoriaController::class, 'index']);
   Route::get('proyecto/ongs/{id}', [OngController::class, 'show']);
   
-  
+  // esta ruta es la vista inicial, que muestra un formulario basico para datos del cliente
+
+Route::get('PagoFacilCheckout', [PagoFacilCheckoutClient::class, 'inicio']);
+
+//esta ruta recibe los parametros del formulario inicial del cliente y pasa a encriptar los datos antes de enviarlos para ser procesados en PagoFacil Bolivia
+Route::post('PagoFacilCheckoutEncript', [PagoFacilCheckoutClient::class, 'Encript']);
+Route::post('proyecto/PagoFacilCheckoutEncript', [PagoFacilCheckoutClient::class, 'Encript']);
   
 
   

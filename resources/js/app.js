@@ -39,7 +39,13 @@ Vue.use(VueCountryCode);
 Vue.use(VueRouter);
 Vue.use(VueFroala);
 Vue.use(LoadScript);
-Vue.use(VueMeta)
+Vue.use(VueMeta);
+
+if ( document.querySelector("meta[name='user-id']").getAttribute('content') ==null) {
+    Vue.prototype.$userId = "";
+}else {
+    Vue.prototype.$userId = document.querySelector("meta[name='user-id']").getAttribute('content');
+}
 
 Vue.mixin({
     methods: {

@@ -3,7 +3,7 @@
 @section('content')
 
 <div id="app">
-  <div class="home-slider-1 gap-30">
+  <div class="container-fluid gap-30">
     <div class="home-slider">
       <imagenes-causas />
     </div>

@@ -5,6 +5,8 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
+
 
   <title>WIPEM</title>
   <link rel="shortcut icon" type="image/jpg" href="{{asset('images/logo-wipem.png')}}" />
@@ -13,6 +15,13 @@
   <link rel="stylesheet" href="{{asset('font-awesome/css/font-awesome.min.css') }}" />
   <link rel="stylesheet" href="{{asset('css/style.css') }}" />
   <link rel="stylesheet" href="{{asset('css/theme.css') }}">
+  @if (Auth::user() !== null)
+  @auth
+  <meta name="user-id" content="{{ Auth::user()->email }}">
+  @endauth
+  @else
+  <meta name="user-id" content="">
+  @endif
   <link href="https://fonts.cdnfonts.com/css/baloo-thambi-2" rel="stylesheet">
 
 
@@ -45,8 +54,10 @@
                     </form>
                   </a>
                 </li>
+                <li><a href="">{{ Auth::user()->name }}</a></li>
                 @else
                 <li><a href="{{ route('login') }}">Iniciar Sesión</a></li>
+
                 @endauth
                 @endif
               </ul>
@@ -106,7 +117,7 @@
                   <a href="https://www.instagram.com/wipembolivia/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                 </li>
                 <li>
-                  <a href=""><i class="fa fa-youtube-play"></i></a>
+                  <a href="https://www.youtube.com/channel/UCPF8GJpqlggdkdYt4NFvzzA"><i class="fa fa-youtube-play"></i></a>
                 </li>
               </ul>
             </div>
@@ -128,9 +139,12 @@
 
   </div>
 
-  <script src="{{ asset('js/app.js') }}"></script>
-  <script src="{{asset('js/bootstrap.min.js') }}"></script>
+  <!-- <script src="{{ asset('js/app.js') }}"></script> -->
+  <script src="{{ mix('js/manifest.js') }}" defer></script>
+  <script src="{{ mix('js/vendor.js') }}" defer></script>
+  <script src="{{ mix('js/app.js') }}" defer></script>
   <script src="{{asset('js/jquery-2.1.4.min.js') }}"></script>
+  <script src="{{asset('js/bootstrap.min.js') }}"></script>
   <script src="{{asset('js/main.js') }}"></script>
   <script src="{{asset('vendors/waypoint/waypoints.min.js') }}"></script>
   <script src="{{asset('vendors/couterup/jquery.counterup.min.js') }}"></script>

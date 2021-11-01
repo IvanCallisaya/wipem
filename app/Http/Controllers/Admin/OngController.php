@@ -67,6 +67,8 @@ class OngController extends Controller
         $ong->mision = $request['mision'];
         $ong->vision = $request['vision'];
         $ong->cuenta_banco = $request['cuenta_banco'];
+        $ong->banco = $request['banco'];
+        $ong->tipo_cuenta = $request['tipo_cuenta'];
         if(!$ong->update())
             new \Exception('No se ha podido modificar la Carrera en la base de datos. Identificador Nº '.$data);
         return $request;

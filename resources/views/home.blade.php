@@ -20,7 +20,6 @@
         <div class="heading-3 gap-50">
           <div class="row sectionTitle text-center">
             <h5>PROYECTOS SOCIALES DESTACADOS</h5>
-
             <causa-carrusel />
           </div>
 
