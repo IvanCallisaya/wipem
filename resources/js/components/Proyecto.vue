@@ -486,15 +486,15 @@ export default {
         this.celular = res.data.celular.substr(
           res.data.celular.indexOf(" ") + 1
         );
-        this.donador.celular = this.codigo + " " + this.donador.celular;
+        this.celular = this.codigo + " " + this.donador.celular;
       });
     },
   },
   mounted() {
     this.getEmpresas();
     this.email = this.$userId;
+    console.log(this.$userId);
     this.obtener();
   },
-  PrepararParametros() {},
 };
 </script>

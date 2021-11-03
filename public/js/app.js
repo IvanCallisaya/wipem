@@ -4851,16 +4851,16 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get("donadores/".concat(this.idUsuario)).then(function (res) {
         _this3.celular = res.data.celular.substr(res.data.celular.indexOf(" ") + 1);
-        _this3.donador.celular = _this3.codigo + " " + _this3.donador.celular;
+        _this3.celular = _this3.codigo + " " + _this3.donador.celular;
       });
     }
   },
   mounted: function mounted() {
     this.getEmpresas();
     this.email = this.$userId;
+    console.log(this.$userId);
     this.obtener();
-  },
-  PrepararParametros: function PrepararParametros() {}
+  }
 });
 
 /***/ }),
