@@ -12,6 +12,13 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <link rel="stylesheet" href="../css/app.css">
+  @if (Auth::user() !== null)
+  @auth
+  <meta name="user-id" content="{{ Auth::user()->email }}">
+  @endauth
+  @else
+  <meta name="user-id" content="">
+  @endif
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
