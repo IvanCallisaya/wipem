@@ -36,6 +36,10 @@ class HomeController extends Controller
     {
         return view('registrar');
     }
+    public function pagado()
+    {
+        return view('return');
+    }
     public function usuario($email) 
     {
         // return User::get()->where('email',$email);

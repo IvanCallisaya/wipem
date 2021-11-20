@@ -24,6 +24,7 @@ class Proyecto extends Model
         'destacado',
         'slug',
         'recaudado',
+        'estado',
     ];
 
     protected $hidden = ['created_at', 'updated_at'];

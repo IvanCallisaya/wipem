@@ -42,6 +42,7 @@
                 <td>
                   <p class="bg-success" v-if="proyecto.destacado">Destacado</p>
                   <p class="bg-danger" v-else>No destacado</p>
+                  <p>{{ proyecto.estado }}</p>
                 </td>
                 <td>{{ proyecto.fecha_final }}</td>
                 <td>

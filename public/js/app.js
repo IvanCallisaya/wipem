@@ -1611,6 +1611,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1629,7 +1639,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         foto_principal: "",
         resumen_principal: "",
         fotos: ""
-      }, _defineProperty(_proyecto, "foto_principal", ""), _defineProperty(_proyecto, "imagenes", []), _defineProperty(_proyecto, "sponsor_ids", []), _defineProperty(_proyecto, "subcategoria_id", 0), _defineProperty(_proyecto, "plan_id", 0), _defineProperty(_proyecto, "destacado", false), _defineProperty(_proyecto, "slug", ""), _proyecto),
+      }, _defineProperty(_proyecto, "foto_principal", ""), _defineProperty(_proyecto, "imagenes", []), _defineProperty(_proyecto, "sponsor_ids", []), _defineProperty(_proyecto, "subcategoria_id", 0), _defineProperty(_proyecto, "plan_id", 0), _defineProperty(_proyecto, "destacado", false), _defineProperty(_proyecto, "slug", ""), _defineProperty(_proyecto, "estado", ""), _proyecto),
       imagenes: [],
       sponsors: [],
       planes: [],
@@ -1704,6 +1714,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       formData.set("plan_id", this.proyecto.plan_id);
       formData.set("destacado", Number(this.proyecto.destacado));
       formData.set("slug", this.proyecto.slug);
+      formData.set("estado", this.proyecto.estado);
 
       var _iterator = _createForOfIteratorHelper(formData),
           _step;
@@ -2006,14 +2017,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -2037,7 +2040,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         plan_id: 0,
         ong_id: 0,
         destacado: false,
-        slug: ""
+        slug: "",
+        estado: ""
       },
       imagenes: [],
       ongs: [],
@@ -2098,7 +2102,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       formData.set("ong_id", this.proyecto.ong_id);
       formData.set("slug", this.proyecto.slug);
       formData.set("destacado", Number(this.proyecto.destacado));
-      formData.set("destacado", "0.00");
+      formData.set("recaudado", "0.00");
 
       var _iterator = _createForOfIteratorHelper(formData),
           _step;
@@ -2232,6 +2236,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
 //
 //
 //
@@ -4676,6 +4681,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -4708,6 +4723,18 @@ __webpack_require__.r(__webpack_exports__);
           sharer: "https://mycustomdomain.com",
           type: "popup"
         }
+      },
+      pago_id: 0,
+      pago: {
+        donador_id: 0,
+        proyecto_id: 0,
+        estado: "",
+        monto: 1,
+        moneda: "Bs",
+        fecha: "",
+        metodo_pago: " ",
+        fecha_confirmacion: "",
+        fecha_pago: ""
       },
       tituloModal: "",
       email: "",
@@ -4840,6 +4867,7 @@ __webpack_require__.r(__webpack_exports__);
     obtener: function obtener() {
       var _this2 = this;
 
+      this.pago.proyecto_id = this.proyecto.id;
       axios.get("usuario/".concat(this.email)).then(function (res) {
         _this2.idUsuario = res.data.id;
 
@@ -4851,7 +4879,23 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get("donadores/".concat(this.idUsuario)).then(function (res) {
         _this3.celular = res.data.celular.substr(res.data.celular.indexOf(" ") + 1);
+        _this3.pago.donador_id = res.data.id;
         _this3.celular = _this3.codigo + " " + _this3.donador.celular;
+      });
+    },
+    donar: function donar() {
+      var _this4 = this;
+
+      this.pago.estado = "1";
+      var today = new Date();
+      this.pago.fecha = "".concat(today.getFullYear(), "-").concat(today.getMonth() + 1, "-").concat(today.getDate());
+      var url = "/pago_proyecto";
+      axios.post(url, this.pago).then(function (res) {
+        _this4.pago_id = res.data.id;
+
+        _this4.pagar();
+      })["catch"](function (e) {
+        _this4.errores = e.response.data.errors;
       });
     }
   },
@@ -10245,6 +10289,57 @@ var render = function() {
             : _vm._e()
         ]),
         _vm._v(" "),
+        _c("div", { staticClass: "my-2" }, [
+          _c("label", { attrs: { for: "resumen_principal" } }, [
+            _vm._v("Estado")
+          ]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.proyecto.plan_id,
+                  expression: "proyecto.plan_id"
+                }
+              ],
+              staticClass: "form-control form-control-lg form-control-solid",
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.proyecto,
+                    "plan_id",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { value: "Santa Cruz" } }, [
+                _vm._v("activo")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "La Paz" } }, [
+                _vm._v("inactivo")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "Cochabamba" } }, [
+                _vm._v("completado")
+              ])
+            ]
+          )
+        ]),
+        _vm._v(" "),
         _c(
           "div",
           { staticClass: "my-2" },
@@ -10433,46 +10528,6 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "my-2" }, [
           _c("label", { attrs: { for: "plan_id" } }, [_vm._v("Plan")]),
-          _vm._v(" "),
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.proyecto.plan_id,
-                  expression: "proyecto.plan_id"
-                }
-              ],
-              staticClass: "form-control form-control-lg form-control-solid",
-              on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.$set(
-                    _vm.proyecto,
-                    "plan_id",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
-                }
-              }
-            },
-            _vm._l(this.planes, function(plan) {
-              return _c(
-                "option",
-                { key: plan.id, domProps: { value: plan.id } },
-                [_vm._v("\n          " + _vm._s(plan.nombre) + "\n        ")]
-              )
-            }),
-            0
-          ),
           _vm._v(" "),
           _vm.errores.video
             ? _c("span", { staticClass: "text-danger" }, [
@@ -10938,7 +10993,9 @@ var render = function() {
                           ])
                         : _c("p", { staticClass: "bg-danger" }, [
                             _vm._v("No destacado")
-                          ])
+                          ]),
+                      _vm._v(" "),
+                      _c("p", [_vm._v(_vm._s(proyecto.estado))])
                     ]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(proyecto.fecha_final))]),
@@ -12830,7 +12887,7 @@ var render = function() {
                     _c("input", {
                       staticClass: "form-control",
                       attrs: { type: "text", name: "Proyecto" },
-                      domProps: { value: _vm.proyecto.slug }
+                      domProps: { value: _vm.pago_id }
                     })
                   ]),
                   _vm._v(" "),
@@ -12854,9 +12911,45 @@ var render = function() {
                     })
                   ]),
                   _vm._v(" "),
-                  _vm._m(0),
+                  _c("div", { staticClass: "my-4" }, [
+                    _c("label", { attrs: { for: "" } }, [_vm._v(" Monto: ")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.pago.monto,
+                          expression: "pago.monto"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "number", name: "Monto", value: "1" },
+                      domProps: { value: _vm.pago.monto },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.pago, "monto", $event.target.value)
+                        }
+                      }
+                    })
+                  ]),
                   _vm._v(" "),
-                  _vm._m(1)
+                  _c("div", { staticClass: "my-4" }, [
+                    _c("label", { attrs: { for: "" } }, [
+                      _vm._v(" Proyecto: ")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: { type: "text", name: "slug" },
+                      domProps: { value: _vm.proyecto.slug }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(0)
                 ])
               ]),
               _vm._v(" "),
@@ -12882,11 +12975,11 @@ var render = function() {
                     attrs: { type: "button", "data-dismiss": "modal" },
                     on: {
                       click: function($event) {
-                        return _vm.pagar()
+                        return _vm.donar()
                       }
                     }
                   },
-                  [_vm._v("\n                Pagar\n              ")]
+                  [_vm._v("\n                Donar\n              ")]
                 )
               ])
             ])
@@ -13067,7 +13160,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "container galeria_container" }, [
-      _vm._m(2),
+      _vm._m(1),
       _vm._v(" "),
       _c("div", { staticClass: "influencer-slider" }, [
         _vm.proyecto !== null
@@ -13207,23 +13300,10 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _vm._m(3)
+    _vm._m(2)
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "my-4" }, [
-      _c("label", { attrs: { for: "" } }, [_vm._v(" Monto: ")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "number", name: "Monto", value: "1" }
-      })
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -13234,11 +13314,7 @@ var staticRenderFns = [
       _c(
         "select",
         { staticClass: "form-control", attrs: { name: "MonedaVenta", id: "" } },
-        [
-          _c("option", { attrs: { value: "2" } }, [_vm._v("Bs")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "1" } }, [_vm._v("$u$")])
-        ]
+        [_c("option", { attrs: { value: "2" } }, [_vm._v("Bs")])]
       )
     ])
   },

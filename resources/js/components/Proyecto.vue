@@ -26,7 +26,7 @@
                     <input
                       type="text"
                       name="Proyecto"
-                      :value="proyecto.slug"
+                      :value="pago_id"
                       class="form-control"
                     />
                   </div>
@@ -51,6 +51,7 @@
                   <div class="my-4">
                     <label for=""> Monto: </label>
                     <input
+                      v-model="pago.monto"
                       type="number"
                       name="Monto"
                       value="1"
@@ -58,10 +59,19 @@
                     />
                   </div>
                   <div class="my-4">
+                    <label for=""> Proyecto: </label>
+
+                    <input
+                      type="text"
+                      name="slug"
+                      :value="proyecto.slug"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="my-4">
                     <label for=""> MonedaVenta: </label>
                     <select name="MonedaVenta" id="" class="form-control">
                       <option value="2">Bs</option>
-                      <option value="1">$u$</option>
                     </select>
                   </div>
                 </form>
@@ -77,12 +87,12 @@
                   Cancelar
                 </button>
                 <button
-                  @click="pagar()"
+                  @click="donar()"
                   type="button"
                   class="btn btn-success"
                   data-dismiss="modal"
                 >
-                  Pagar
+                  Donar
                 </button>
               </div>
             </div>
@@ -323,6 +333,18 @@ export default {
           type: "popup",
         },
       },
+      pago_id: 0,
+      pago: {
+        donador_id: 0,
+        proyecto_id: 0,
+        estado: "",
+        monto: 1,
+        moneda: "Bs",
+        fecha: "",
+        metodo_pago: " ",
+        fecha_confirmacion: "",
+        fecha_pago: "",
+      },
       tituloModal: "",
       email: "",
       celular: "",
@@ -476,6 +498,7 @@ export default {
       });
     },
     obtener() {
+      this.pago.proyecto_id = this.proyecto.id;
       axios.get(`usuario/${this.email}`).then((res) => {
         this.idUsuario = res.data.id;
         this.donador();
@@ -486,10 +509,29 @@ export default {
         this.celular = res.data.celular.substr(
           res.data.celular.indexOf(" ") + 1
         );
+        this.pago.donador_id = res.data.id;
         this.celular = this.codigo + " " + this.donador.celular;
       });
     },
+    donar() {
+      this.pago.estado = "1";
+      var today = new Date();
+      this.pago.fecha = `${today.getFullYear()}-${
+        today.getMonth() + 1
+      }-${today.getDate()}`;
+      let url = "/pago_proyecto";
+      axios
+        .post(url, this.pago)
+        .then((res) => {
+          this.pago_id = res.data.id;
+          this.pagar();
+        })
+        .catch((e) => {
+          this.errores = e.response.data.errors;
+        });
+    },
   },
+
   mounted() {
     this.getEmpresas();
     this.email = this.$userId;

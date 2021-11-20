@@ -138,7 +138,17 @@
           {{ errores.nombre[0] }}
         </span>
       </div>
-
+      <div class="my-2">
+        <label for="resumen_principal">Estado</label>
+        <select
+          v-model="proyecto.plan_id"
+          class="form-control form-control-lg form-control-solid"
+        >
+          <option value="Santa Cruz">activo</option>
+          <option value="La Paz">inactivo</option>
+          <option value="Cochabamba">completado</option>
+        </select>
+      </div>
       <div class="my-2">
         <label for="descripcion">Descripcion</label>
         <froala
@@ -199,6 +209,7 @@ export default {
         plan_id: 0,
         destacado: false,
         slug: "",
+        estado: "",
       },
       imagenes: [],
       sponsors: [],
@@ -282,6 +293,7 @@ export default {
       formData.set("plan_id", this.proyecto.plan_id);
       formData.set("destacado", Number(this.proyecto.destacado));
       formData.set("slug", this.proyecto.slug);
+      formData.set("estado", this.proyecto.estado);
       for (var p of formData) {
         let name = p[0];
         let value = p[1];

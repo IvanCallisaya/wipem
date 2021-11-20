@@ -15,8 +15,10 @@ use App\Http\Controllers\Admin\DonadorController;
 use App\Http\Controllers\Admin\ImagesProyectoController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\Donador\PagoFacilCheckoutClient;
-
+use App\Http\Controllers\Donador\PagoProyectoController;
+use App\Http\Controllers\Donador\PagoFacilCallback;
 use Illuminate\Support\Facades\Auth;
+use PagoFacilCallback as GlobalPagoFacilCallback;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +41,9 @@ Route::get('usuario/{email}',[HomController::class, 'usuario']);
 Route::get('proyecto/usuario/{email}',[HomController::class, 'usuario']);
 Route::get('proyecto/donadores/{id}',[DonadorController::class, 'show']);
 Route::get('proyecto/{id}',[ProyectoController::class, 'ver'])->name('proyecto');
+
+Route::get('PagoRealizado', [HomController::class, 'pagado']);
+Route::post('CallBack', [PagoFacilCallback::class, 'UrlCallback']);
 
 
 
@@ -90,12 +95,11 @@ Route::namespace('')->prefix('admin')
   Route::get('proyecto/ongs/{id}', [OngController::class, 'show']);
   
   // esta ruta es la vista inicial, que muestra un formulario basico para datos del cliente
-
-Route::get('PagoFacilCheckout', [PagoFacilCheckoutClient::class, 'inicio']);
-
-//esta ruta recibe los parametros del formulario inicial del cliente y pasa a encriptar los datos antes de enviarlos para ser procesados en PagoFacil Bolivia
-Route::post('PagoFacilCheckoutEncript', [PagoFacilCheckoutClient::class, 'Encript']);
-Route::post('proyecto/PagoFacilCheckoutEncript', [PagoFacilCheckoutClient::class, 'Encript']);
   
+  Route::get('PagoFacilCheckout', [PagoFacilCheckoutClient::class, 'inicio']);
 
+  //esta ruta recibe los parametros del formulario inicial del cliente y pasa a encriptar los datos antes de enviarlos para ser procesados en PagoFacil Bolivia
+  Route::post('PagoFacilCheckoutEncript', [PagoFacilCheckoutClient::class, 'Encript']);
+  Route::post('proyecto/PagoFacilCheckoutEncript', [PagoFacilCheckoutClient::class, 'Encript']);
   
+  Route::apiResource('pago_proyecto', PagoProyectoController::class );

@@ -62,6 +62,7 @@ class ProyectoController extends Controller
                     'ong_id' => $request->ong_id,
                     'destacado' => $request->destacado,
                     'slug' => $request->slug,
+                    'slug' => 'activo',
                 ]);
                 $proyecto = Proyecto::latest()->first();
                 if($request->sponsor_ids<>0){
@@ -146,6 +147,7 @@ class ProyectoController extends Controller
         $proyecto->resumen_principal = $request->resumen_principal;
         $proyecto->destacado = $request->destacado;
         $proyecto->slug = $request->slug;
+        $proyecto->estado = $request->estado;
         
         if(!$proyecto->update())
             new \Exception('No se ha podido modificar la Carrera en la base de datos. Identificador Nº '.$data);

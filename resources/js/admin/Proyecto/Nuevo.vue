@@ -29,14 +29,6 @@
       </div>
       <div class="my-2">
         <label for="plan_id">Plan</label>
-        <select
-          v-model="proyecto.plan_id"
-          class="form-control form-control-lg form-control-solid"
-        >
-          <option v-for="plan in this.planes" :value="plan.id" :key="plan.id">
-            {{ plan.nombre }}
-          </option>
-        </select>
 
         <span class="text-danger" v-if="errores.video">
           {{ errores.video[0] }}
@@ -210,6 +202,7 @@ export default {
         ong_id: 0,
         destacado: false,
         slug: "",
+        estado: "",
       },
       imagenes: [],
       ongs: [],
@@ -283,7 +276,7 @@ export default {
       formData.set("ong_id", this.proyecto.ong_id);
       formData.set("slug", this.proyecto.slug);
       formData.set("destacado", Number(this.proyecto.destacado));
-      formData.set("destacado", "0.00");
+      formData.set("recaudado", "0.00");
 
       for (var p of formData) {
         let name = p[0];
