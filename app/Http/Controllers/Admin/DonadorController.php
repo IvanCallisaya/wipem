@@ -38,8 +38,8 @@ class DonadorController extends Controller
 
     public function show($id)
     {
-        $donador =Donador::findOrFail($id);
-        $donador->load('user');
+        $donador= Donador::where('user_id', $id)->first();
+        
         return $donador;
         
     }

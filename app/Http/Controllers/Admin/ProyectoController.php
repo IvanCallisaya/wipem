@@ -182,7 +182,7 @@ class ProyectoController extends Controller
         
         $proyecto->fotos = json_decode($proyecto->fotos);
         $proyecto->proyecto_sponsor= ProyectoSponsor::where('proyecto_id', $proyecto->id)->get();
-        $proyecto->subcategoria= Subcategoria::where('id', $proyecto->subcategoria_id)->first();;
+        $proyecto->subcategoria= Subcategoria::where('id', $proyecto->subcategoria_id)->first();
         return view('proyecto', compact('proyecto'));
     }
 

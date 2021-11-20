@@ -4811,6 +4811,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.email == "") {
         alert("Debe registrarse en el sistema por favor");
       } else {
+        this.donar();
         this.modal = 1;
 
         if (this.modificar) {
@@ -4869,6 +4870,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.pago.proyecto_id = this.proyecto.id;
       axios.get("usuario/".concat(this.email)).then(function (res) {
+        console.log(res.data);
         _this2.idUsuario = res.data.id;
 
         _this2.donador();
@@ -4878,9 +4880,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       axios.get("donadores/".concat(this.idUsuario)).then(function (res) {
+        console.log(res.data);
         _this3.celular = res.data.celular.substr(res.data.celular.indexOf(" ") + 1);
-        _this3.pago.donador_id = res.data.id;
-        _this3.celular = _this3.codigo + " " + _this3.donador.celular;
+        _this3.pago.donador_id = res.data.id; // this.celular = this.codigo + " " + this.donador.celular;
       });
     },
     donar: function donar() {
@@ -4891,9 +4893,7 @@ __webpack_require__.r(__webpack_exports__);
       this.pago.fecha = "".concat(today.getFullYear(), "-").concat(today.getMonth() + 1, "-").concat(today.getDate());
       var url = "/pago_proyecto";
       axios.post(url, this.pago).then(function (res) {
-        _this4.pago_id = res.data.id;
-
-        _this4.pagar();
+        _this4.pago_id = res.data.id; // this.pagar();
       })["catch"](function (e) {
         _this4.errores = e.response.data.errors;
       });
@@ -12975,7 +12975,7 @@ var render = function() {
                     attrs: { type: "button", "data-dismiss": "modal" },
                     on: {
                       click: function($event) {
-                        return _vm.donar()
+                        return _vm.pagar()
                       }
                     }
                   },

@@ -87,7 +87,7 @@
                   Cancelar
                 </button>
                 <button
-                  @click="donar()"
+                  @click="pagar()"
                   type="button"
                   class="btn btn-success"
                   data-dismiss="modal"
@@ -444,6 +444,7 @@ export default {
       if (this.email == "") {
         alert("Debe registrarse en el sistema por favor");
       } else {
+        this.donar();
         this.modal = 1;
         if (this.modificar) {
           this.tituloModal = "Donar";
@@ -500,17 +501,19 @@ export default {
     obtener() {
       this.pago.proyecto_id = this.proyecto.id;
       axios.get(`usuario/${this.email}`).then((res) => {
+        console.log(res.data);
         this.idUsuario = res.data.id;
         this.donador();
       });
     },
     donador() {
       axios.get(`donadores/${this.idUsuario}`).then((res) => {
+        console.log(res.data);
         this.celular = res.data.celular.substr(
           res.data.celular.indexOf(" ") + 1
         );
         this.pago.donador_id = res.data.id;
-        this.celular = this.codigo + " " + this.donador.celular;
+        // this.celular = this.codigo + " " + this.donador.celular;
       });
     },
     donar() {
@@ -524,7 +527,7 @@ export default {
         .post(url, this.pago)
         .then((res) => {
           this.pago_id = res.data.id;
-          this.pagar();
+          // this.pagar();
         })
         .catch((e) => {
           this.errores = e.response.data.errors;

@@ -26,8 +26,8 @@ class PagoFacilCheckoutClient extends Controller
          //  aqui vendra el listado de productos que viene en la compra , 
          //en caso de que no tenga , solo se colocara el producto   a vender 
          //es un arrar de objetos el cual se le aplica un json_encode(Propio de php)
-		 $laProduct_Detalle=array( 
-            "proyecto"=>$loFormDatos['slug'] ,
+		 $laProduct_Detalle=array(
+            "Producto"=>$loFormDatos['slug'] ,
             );
         $lcParametro3= json_encode($laProduct_Detalle);
 
