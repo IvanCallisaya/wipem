@@ -4691,6 +4691,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -4718,6 +4719,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ["proyecto"],
   data: function data() {
     return {
+      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
       overriddenNetworks: {
         custom: {
           sharer: "https://mycustomdomain.com",
@@ -12879,6 +12881,11 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("form", { attrs: { id: "FormCliente" } }, [
+                  _c("input", {
+                    attrs: { type: "hidden", name: "_token" },
+                    domProps: { value: _vm.csrf }
+                  }),
+                  _vm._v(" "),
                   _c("div", { staticClass: "my-4" }, [
                     _c("label", { attrs: { for: "" } }, [
                       _vm._v(" Proyecto: ")

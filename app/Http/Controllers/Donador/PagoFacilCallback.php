@@ -22,7 +22,7 @@ public function UrlCallback()
     {
       //aqui verifica si existe la venta
       // el Mapi es un modelo que verifica si existe esa venta en la base de datos
-      $laVentaObtenida = $this->Mapi->obtenerVenta($Venta);
+      $laVentaObtenida = $this->obtenerVenta($Venta);
       if(count($laVentaObtenida)<=0){
         $arreglo = array( 'error' =>1 , 'message' => 'No se encuentra la venta' , 'values' => FALSE );
         $ingreso = FALSE;
@@ -31,7 +31,7 @@ public function UrlCallback()
       $metodopagoobtenido=$this->verificarmetodopago($MetodoPago);
       if(count($metodopagoobtenido) <=0)
       {
-        $arreglo=array( 'error' =>1 , 'message' => 'No se encuentra la venta' , 'values' => FALSE );
+        $arreglo=array( 'error' =>1 , 'message' => 'No se encuentra el metodo' , 'values' => FALSE );
       
       }
       if($ingreso == TRUE) 

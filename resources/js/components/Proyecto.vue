@@ -21,6 +21,7 @@
               </div>
               <div class="modal-body">
                 <form id="FormCliente">
+                  <input type="hidden" name="_token" v-bind:value="csrf" />
                   <div class="my-4">
                     <label for=""> Proyecto: </label>
                     <input
@@ -327,6 +328,9 @@ export default {
 
   data() {
     return {
+      csrf: document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute("content"),
       overriddenNetworks: {
         custom: {
           sharer: "https://mycustomdomain.com",
